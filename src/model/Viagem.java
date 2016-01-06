@@ -7,7 +7,7 @@ public class Viagem {
 	
 	// CONSTRUCTOR
 	public Viagem(ArrayList<Percurso> plano_de_viagem) {
-		this.plano_de_viagem = plano_de_viagem;
+		setPlanoDeViagem(plano_de_viagem);
 	}
 
 	// (BEGIN) GETTERS & SETTERS
