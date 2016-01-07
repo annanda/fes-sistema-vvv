@@ -17,7 +17,7 @@ public class Pessoa {
 		return nome;
 	}
 
-	protected void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -25,7 +25,7 @@ public class Pessoa {
 		return endereco;
 	}
 
-	protected void setEndereco(String endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
