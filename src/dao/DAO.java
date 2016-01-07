@@ -1,12 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DAO {
-	private Connection connection;
-	private Statement statement;
+	protected Connection connection;
+	protected Statement statement;
+	protected ResultSet result_set;
 
 	protected void connect() {
 		connection = ConnectionFactory.createConnection();
