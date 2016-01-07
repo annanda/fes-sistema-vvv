@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Viagem {
+	protected int id;
 	private String nome_do_pacote;
 	private ArrayList<Percurso> plano_de_viagem;
 

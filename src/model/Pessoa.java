@@ -1,6 +1,7 @@
 package model;
 
 public class Pessoa {
+	protected int id;
 	protected String nome;
 	protected String endereco;
 	private int codigo;

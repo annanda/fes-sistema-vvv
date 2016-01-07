@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class Modal {
+	protected int id;
 	private String tipo;
 	private String codigo;
 	private String companhia;

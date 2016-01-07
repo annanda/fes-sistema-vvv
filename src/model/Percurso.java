@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Percurso {
+	protected int id;
 	private Date hora_partida;
 	private int horas_duracao_percurso;
 	private int codigo_aeroporto;

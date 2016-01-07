@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Reserva {
+	protected int id;
 	private String codigo;
 	private Date data_da_reserva;
 	private boolean status;

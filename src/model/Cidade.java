@@ -1,6 +1,7 @@
 package model;
 
 public class Cidade {
+	protected int id;
 	private String nome;
 	private String identificador;
 	private String codigo;

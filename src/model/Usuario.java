@@ -1,6 +1,7 @@
 package model;
 
 public class Usuario extends Pessoa {
+	protected int id;
 	private String email;
 	private String senha;
 	private int nivel_permissao;

@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class Passageiro extends Pessoa {
+	protected int id;
 	private String cpf;
 	private String telefone;
 	private String profissao;

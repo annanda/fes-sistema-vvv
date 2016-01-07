@@ -1,6 +1,7 @@
 package model;
 
 public class Ticket {
+	protected int id;
 	private int numero;
 	private String id_localizador;
 

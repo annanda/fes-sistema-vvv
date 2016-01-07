@@ -1,6 +1,7 @@
 package model;
 
 public class PontoDeVenda {
+	protected int id;
 	private String nome;
 	private String endereco;
 	private String telefone;
