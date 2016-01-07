@@ -1,38 +1,24 @@
 package model;
 
+import java.util.Date;
+
 public class Passageiro extends Pessoa {
 	private String cpf;
 	private String telefone;
 	private String profissao;
+	private Date data_de_nascimento;
+	private Passageiro responsavel;
 
-	// (BEGIN) CONSTRUCTORS
-	/*
-	 * Constructor Pattern
-	 */
+	// CONSTRUCTOR
 	public Passageiro(String nome, String endereco, int codigo, String cpf,
-			String telefone, String profissao) {
+			String telefone, String profissao, Date data_de_nascimento, Passageiro responsavel) {
 		super(nome, endereco, codigo);
 		this.cpf = cpf;
 		setTelefone(telefone);
 		setProfissao(profissao);
+		this.data_de_nascimento = data_de_nascimento;
+		setResponsavel(responsavel);
 	}
-	
-	/*
-	 * This constructor handles all arguments as String types and treat each of
-	 * them to successfully instantiate a Pessoa object. It's useful when
-	 * getting values from java swing
-	 */
-	public Passageiro(String nome, String endereco, String codigo, String cpf,
-			String telefone, String profissao) {
-		// super call...
-		super(nome, endereco, codigo);
-		// no treatment needed...
-		// instantiating...
-		this.cpf = cpf;
-		setTelefone(telefone);
-		setProfissao(profissao);
-	}
-	// (END) CONSTRUCTORS
 
 	// (BEGIN) GETTERS & SETTERS
 	public String getCpf() {
@@ -42,6 +28,7 @@ public class Passageiro extends Pessoa {
 	public String getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -49,8 +36,21 @@ public class Passageiro extends Pessoa {
 	public String getProfissao() {
 		return profissao;
 	}
+
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
+	}
+
+	public Date getDataDeNascimento() {
+		return data_de_nascimento;
+	}
+
+	public Passageiro getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(Passageiro responsavel) {
+		this.responsavel = responsavel;
 	}
 	// (END) GETTERS & SETTERS
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Percurso {
 	private Date hora_partida;
-	private int horas_duracao_viagem;
+	private int horas_duracao_percurso;
 	private int codigo_aeroporto;
 	private Cidade partida;
 	private Cidade destino;
@@ -19,7 +19,7 @@ public class Percurso {
 	 */
 	public Percurso(Date hora_partida, int horas_duracao_viagem, int codigo_aeroporto) {
 		this.hora_partida = hora_partida;
-		this.horas_duracao_viagem = horas_duracao_viagem;
+		this.horas_duracao_percurso = horas_duracao_viagem;
 		this.codigo_aeroporto = codigo_aeroporto;
 	}
 	
@@ -37,7 +37,7 @@ public class Percurso {
 		
 		// instantiating...
 		this.hora_partida = date_hora_partida;
-		this.horas_duracao_viagem = int_horas_duracao_viagem;
+		this.horas_duracao_percurso = int_horas_duracao_viagem;
 		this.codigo_aeroporto = int_codigo_aeroporto;
 	}
 	// (END) CONSTRUCTORS
@@ -48,7 +48,7 @@ public class Percurso {
 	}
 	
 	public int getHorasDuracaoViagem() {
-		return horas_duracao_viagem;
+		return horas_duracao_percurso;
 	}
 	
 	public int getCodigoAeroporto() {
@@ -69,7 +69,7 @@ public class Percurso {
 		Date hora_chegada;
 		
 		cdate.setTime(hora_partida);
-		cdate.add(Calendar.HOUR, horas_duracao_viagem);
+		cdate.add(Calendar.HOUR, horas_duracao_percurso);
 		hora_chegada = cdate.getTime();
 		
 		return hora_chegada;

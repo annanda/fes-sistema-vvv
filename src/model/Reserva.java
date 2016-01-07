@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Reserva {
 	private String codigo;
-	private Date data;
+	private Date data_da_reserva;
 	private boolean status;
 	private float valor;
 	private String tipo_pagamento;
@@ -20,7 +20,7 @@ public class Reserva {
 	public Reserva(String codigo, Date data, boolean status, float valor,
 			String tipo_pagamento, int qtd_parcelas) {
 		this.codigo = codigo;
-		this.data = data;
+		this.data_da_reserva = data;
 		setStatus(status);
 		setValor(valor);
 		setTipoPagamento(tipo_pagamento);
@@ -42,7 +42,7 @@ public class Reserva {
 
 		// instantiating...
 		this.codigo = codigo;
-		this.data = date_data;
+		this.data_da_reserva = date_data;
 		setStatus(boolean_status);
 		setValor(float_valor);
 		setTipoPagamento(tipo_pagamento);
@@ -57,7 +57,7 @@ public class Reserva {
 	}
 
 	public Date getData() {
-		return data;
+		return data_da_reserva;
 	}
 
 	public boolean getStatus() {
