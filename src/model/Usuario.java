@@ -39,6 +39,22 @@ public class Usuario extends Pessoa {
 	public void setNivelPermissao(int nivel_permissao) {
 		this.nivel_permissao = nivel_permissao;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getParentId() {
+		return super.getId();
+	}
+	
+	public void setParentId(int id) {
+		super.setId(id);
+	}
 	// (END) GETTERS & SETTERS
 	
 	protected void fazerReserva(Reserva reserva) {

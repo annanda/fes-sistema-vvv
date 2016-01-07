@@ -33,5 +33,13 @@ public class Pessoa {
 	public int getCodigo() {
 		return codigo;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	// (END) GETTERS & SETTERS
 }

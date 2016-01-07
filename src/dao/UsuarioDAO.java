@@ -1,11 +1,19 @@
 package dao;
 
+import java.sql.SQLException;
+
 import model.Usuario;
 
 public class UsuarioDAO extends DAO {
 	public void cadastrarUsuario(Usuario novo_usuario) {
+		String sql_query = "INSERT INTO Usuario VALUES('";
 		connect();
-		// TODO: Cadastrar o objeto passado
+		try {
+			result_set = statement.executeQuery(sql_query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		disconnect();
 	}
 

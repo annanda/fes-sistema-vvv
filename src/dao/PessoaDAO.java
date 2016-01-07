@@ -21,4 +21,9 @@ public class PessoaDAO extends DAO {
 		// TODO: Alterar o objeto no banco de acordo com o passado
 		disconnect();
 	}
+
+	public int getId(Pessoa nova_pessoa) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
