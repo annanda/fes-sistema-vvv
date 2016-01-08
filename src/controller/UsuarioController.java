@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dao.PessoaDAO;
 import dao.UsuarioDAO;
@@ -21,8 +22,7 @@ public class UsuarioController {
 			Usuario novo_usuario = new Usuario(nome, endereco, int_codigo,
 					email, senha, int_nivel_permissao);
 
-			// sending it to its respectively DAO class to finally insert it
-			// into BD
+			// sending it to DAO class to finally insert it into BD
 			PessoaDAO pessoa_dao = new PessoaDAO();
 
 			// trying to insert a new Pessoa (if it doesn't exist before)
@@ -40,20 +40,17 @@ public class UsuarioController {
 	public static ArrayList<Usuario> listarUsuarios(String nome_consultado,
 			String endereco_consultado, String codigo_consultado,
 			String email_consultado) {
-		// TODO: Pensar melhor nisso aqui e fazer o que for necessario no
-		// UsuarioDAO
-		// if all parameters are empty...
-		if (Controller.isNullOrEmpty(nome_consultado)
-				&& Controller.isNullOrEmpty(endereco_consultado)
-				&& Controller.isNullOrEmpty(codigo_consultado)
-				&& Controller.isNullOrEmpty(email_consultado)) {
-			// ... lists all Usuarios
-		} else {
-			// using parameters as filters
+		// setting up the filters...
+		HashMap<String, String> conditions = new HashMap<String, String>();
+		conditions.put("nome", nome_consultado);
+		conditions.put("endereco", endereco_consultado);
+		conditions.put("codigo", codigo_consultado);
+		conditions.put("email", email_consultado);
 
-		}
+		// sending it to DAO class to finally insert it into BD
+		UsuarioDAO usuario_dao = new UsuarioDAO();
 
-		return null;
+		return usuario_dao.listarUsuarios(conditions);
 	}
 
 	public static void alterarUsuario(String novo_nome, String novo_endereco,
