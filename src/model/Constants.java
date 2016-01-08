@@ -16,4 +16,10 @@ public final class Constants {
 	 */
 	public static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(
 			DateFormat.SHORT, Locale.getDefault());
+
+	public static final String COMMA = ", ";
+
+	public static final String SEMICOLON = ";";
+
+	public static final String SINGLE_QUOTE = "'";
 }

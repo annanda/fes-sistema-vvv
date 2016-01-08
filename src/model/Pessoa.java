@@ -6,12 +6,29 @@ public class Pessoa {
 	protected String endereco;
 	private int codigo;
 
-	// CONSTRUCTOR
+	// (BEGIN) CONSTRUCTORS
+	/*
+	 * For logic purpose
+	 */
 	public Pessoa(String nome, String endereco, int codigo) {
+		// Setting non-specified attributes...
+		setId(0);
+		
 		setNome(nome);
 		setEndereco(endereco);
 		this.codigo = codigo;
 	}
+	
+	/*
+	 * For database returns
+	 */
+	public Pessoa(int id, String nome, String endereco, int codigo) {
+		setId(id);
+		setNome(nome);
+		setEndereco(endereco);
+		this.codigo = codigo;
+	}
+	// (END) CONSTRUCTORS
 
 	// (BEGIN) GETTERS & SETTERS
 	public String getNome() {
