@@ -25,8 +25,10 @@ public class UsuarioController {
 			// into BD
 			PessoaDAO pessoa_dao = new PessoaDAO();
 
+			// trying to insert a new Pessoa (if it doesn't exist before)
 			if ((pessoa_dao.getPessoaByCodigo(int_codigo)) == null) {
-				pessoa_dao.cadastrarPessoa((Pessoa) novo_usuario);
+				novo_usuario.setParentId(pessoa_dao
+						.cadastrarPessoa((Pessoa) novo_usuario));
 			}
 			usuario_dao.cadastrarUsuario(novo_usuario);
 		} else {

@@ -10,10 +10,12 @@ public class PessoaDAO extends DAO {
 		return null;
 	}
 
-	public void cadastrarPessoa(Pessoa nova_pessoa) {
+	public int cadastrarPessoa(Pessoa nova_pessoa) {
+		int id = 0;
 		connect();
 		// TODO: Cadastrar o objeto passado
 		disconnect();
+		return id;
 	}
 
 	public void alterarPessoa(Pessoa pessoa_modificada) {
