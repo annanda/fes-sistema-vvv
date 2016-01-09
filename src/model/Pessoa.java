@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+
 public class Pessoa {
 	protected int id;
 	protected String nome;
@@ -12,22 +14,23 @@ public class Pessoa {
 	 */
 	public Pessoa(String nome, String endereco, int codigo) {
 		// Setting non-specified attributes...
-		setId(0);
-		
+		this.id = 0;
+
 		setNome(nome);
 		setEndereco(endereco);
 		this.codigo = codigo;
 	}
-	
+
 	/*
 	 * For database returns
 	 */
 	public Pessoa(int id, String nome, String endereco, int codigo) {
-		setId(id);
+		this.id = id;
 		setNome(nome);
 		setEndereco(endereco);
 		this.codigo = codigo;
 	}
+
 	// (END) CONSTRUCTORS
 
 	// (BEGIN) GETTERS & SETTERS
@@ -50,13 +53,25 @@ public class Pessoa {
 	public int getCodigo() {
 		return codigo;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	// (END) GETTERS & SETTERS
+
+	/*
+	 * Turns your object into a HashMap object with all columns (attributes)
+	 * (except for its own id) names as keys of type String and their values as
+	 * values also of type String
+	 */
+	public HashMap<String, String> toHashMap() {
+		HashMap<String, String> pessoa = new HashMap<String, String>();
+
+		pessoa.put("nome", this.getNome());
+		pessoa.put("endereco", this.getEndereco());
+		pessoa.put("codigo", "" + this.getCodigo());
+
+		return pessoa;
+	}
 }

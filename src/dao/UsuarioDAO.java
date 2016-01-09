@@ -10,10 +10,9 @@ import model.Usuario;
 public class UsuarioDAO extends DAO {
 	private String tabela = "usuarios";
 
-	public int cadastrarUsuario(Usuario novo_usuario) {
-		int id = 0;
+	public void cadastrarUsuario(Usuario novo_usuario) {
 		String email = novo_usuario.getEmail();
-		// INSERT INTO usuarios VALUES('int codigo', 'String email', 'String
+		// INSERT INTO usuarios VALUES('int id_pessoa', 'String email', 'String
 		// senha', 'int nivel_permissao');
 		String sql_query = insertFactory(
 				tabela,
@@ -23,18 +22,11 @@ public class UsuarioDAO extends DAO {
 		connect();
 		try {
 			statement.executeQuery(sql_query);
-			sql_query = selectFactory(tabela, new String[] { "id" },
-					"email = '" + email + Constants.SINGLE_QUOTE);
-			result_set = statement.executeQuery(sql_query);
-			result_set.first();
-			id = result_set.getInt("id_usuario");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		disconnect();
-
-		return id;
 	}
 
 	public ArrayList<Usuario> listarUsuarios(HashMap<String, String> conditions) {
@@ -82,14 +74,17 @@ public class UsuarioDAO extends DAO {
 		connect();
 		try {
 			result_set = statement.executeQuery(sql_query);
-			result_set.first();
-			usuario_encontrado = new Usuario(result_set.getInt("id_usuario"),
-					result_set.getInt("id_pessoa"),
-					result_set.getString("nome"),
-					result_set.getString("endereco"),
-					result_set.getInt("codigo"), result_set.getString("email"),
-					result_set.getString("senha"),
-					result_set.getInt("nivel_permissao"));
+			if (result_set.first()) {
+				usuario_encontrado = new Usuario(
+						result_set.getInt("id_usuario"),
+						result_set.getInt("id_pessoa"),
+						result_set.getString("nome"),
+						result_set.getString("endereco"),
+						result_set.getInt("codigo"),
+						result_set.getString("email"),
+						result_set.getString("senha"),
+						result_set.getInt("nivel_permissao"));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,14 +107,17 @@ public class UsuarioDAO extends DAO {
 		connect();
 		try {
 			result_set = statement.executeQuery(sql_query);
-			result_set.first();
-			usuario_encontrado = new Usuario(result_set.getInt("id_usuario"),
-					result_set.getInt("id_pessoa"),
-					result_set.getString("nome"),
-					result_set.getString("endereco"),
-					result_set.getInt("codigo"), result_set.getString("email"),
-					result_set.getString("senha"),
-					result_set.getInt("nivel_permissao"));
+			if (result_set.first()) {
+				usuario_encontrado = new Usuario(
+						result_set.getInt("id_usuario"),
+						result_set.getInt("id_pessoa"),
+						result_set.getString("nome"),
+						result_set.getString("endereco"),
+						result_set.getInt("codigo"),
+						result_set.getString("email"),
+						result_set.getString("senha"),
+						result_set.getInt("nivel_permissao"));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -142,14 +140,17 @@ public class UsuarioDAO extends DAO {
 		connect();
 		try {
 			result_set = statement.executeQuery(sql_query);
-			result_set.first();
-			usuario_encontrado = new Usuario(result_set.getInt("id_usuario"),
-					result_set.getInt("id_pessoa"),
-					result_set.getString("nome"),
-					result_set.getString("endereco"),
-					result_set.getInt("codigo"), result_set.getString("email"),
-					result_set.getString("senha"),
-					result_set.getInt("nivel_permissao"));
+			if (result_set.first()) {
+				usuario_encontrado = new Usuario(
+						result_set.getInt("id_usuario"),
+						result_set.getInt("id_pessoa"),
+						result_set.getString("nome"),
+						result_set.getString("endereco"),
+						result_set.getInt("codigo"),
+						result_set.getString("email"),
+						result_set.getString("senha"),
+						result_set.getInt("nivel_permissao"));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

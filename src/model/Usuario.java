@@ -16,8 +16,8 @@ public class Usuario extends Pessoa {
 			String senha, int nivel_permissao) {
 		super(nome, endereco, codigo);
 		// Setting non-specified attributes...
-		setId(0);
-		setParentId(0);
+		this.id = 0;
+		super.id = 0;
 
 		setEmail(email);
 		setSenha(senha);
@@ -30,7 +30,7 @@ public class Usuario extends Pessoa {
 	public Usuario(int id_usuario, int id_pessoa, String nome, String endereco,
 			int codigo, String email, String senha, int nivel_permissao) {
 		super(id_pessoa, nome, endereco, codigo);
-		setId(id_usuario);
+		this.id = id_usuario;
 		setEmail(email);
 		setSenha(senha);
 		setNivelPermissao(nivel_permissao);
@@ -67,16 +67,8 @@ public class Usuario extends Pessoa {
 		return this.id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getParentId() {
 		return super.getId();
-	}
-
-	public void setParentId(int id) {
-		super.setId(id);
 	}
 
 	// (END) GETTERS & SETTERS
