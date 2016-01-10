@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map;
 
 import model.Constants;
 
@@ -54,22 +55,19 @@ public class DAO {
 	 */
 	protected String updateFactory(String tabela,
 			HashMap<String, String> coluna_valor, String conditions) {
-		Object[] colunas = coluna_valor.keySet().toArray();
-		int count = colunas.length;
 		String query = "UPDATE " + tabela + " SET ";
 
-		for (Object coluna : colunas) {
-			query += coluna + " = '" + coluna_valor.get(coluna)
-					+ Constants.SINGLE_QUOTE;
+		boolean first = true;
+		for (Map.Entry<String, String> entry : coluna_valor.entrySet()) {
+			if (first)
+				first = false;
+			else
+				query += Constants.COMMA;
 
-			if (count != 1) {
-				query += " WHERE " + conditions + Constants.COMMA;
-			} else {
-				query += Constants.SEMICOLON;
-			}
-
-			count--;
+			query += entry.getKey() + " = " + Constants.SINGLE_QUOTE
+					+ entry.getValue() + Constants.SINGLE_QUOTE;
 		}
+		query += " WHERE " + conditions + Constants.SEMICOLON;
 
 		System.out.println(query);
 
@@ -115,7 +113,7 @@ public class DAO {
 	 */
 	protected String insertFactory(String tabela, String[] valores) {
 		int count = valores.length;
-		String query = "INSERT INTO " + tabela + " VALUES('";
+		String query = "INSERT INTO " + tabela + " VALUES(0, '";
 
 		for (String valor : valores) {
 			query += valor;
