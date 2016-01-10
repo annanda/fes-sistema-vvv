@@ -21,7 +21,7 @@ public class UsuarioDAO extends DAO {
 						"" + novo_usuario.getNivelPermissao() });
 		connect();
 		try {
-			statement.executeQuery(sql_query);
+			statement.executeUpdate(sql_query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,7 +183,7 @@ public class UsuarioDAO extends DAO {
 
 		connect();
 		try {
-			statement.executeQuery(sql_query);
+			statement.executeUpdate(sql_query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

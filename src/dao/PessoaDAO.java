@@ -20,8 +20,8 @@ public class PessoaDAO extends DAO {
 
 		connect();
 		try {
-			statement.executeQuery(sql_query);
-			sql_query = selectFactory(tabela, new String[] { "id" },
+			statement.executeUpdate(sql_query);
+			sql_query = selectFactory(tabela, new String[] { "id_pessoa" },
 					"codigo = " + codigo);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
@@ -93,7 +93,7 @@ public class PessoaDAO extends DAO {
 
 		connect();
 		try {
-			statement.executeQuery(sql_query);
+			statement.executeUpdate(sql_query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,7 +106,7 @@ public class PessoaDAO extends DAO {
 
 		connect();
 		try {
-			statement.executeQuery(sql_query);
+			statement.executeUpdate(sql_query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
