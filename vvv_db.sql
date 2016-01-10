@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.3.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 07-Jan-2016 às 20:56
--- Versão do servidor: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Host: localhost
+-- Generation Time: Jan 10, 2016 at 06:31 PM
+-- Server version: 10.1.10-MariaDB-log
+-- PHP Version: 7.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -25,26 +25,24 @@ USE `vvv_db`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cidades`
+-- Table structure for table `cidades`
 --
 
+DROP TABLE IF EXISTS `cidades`;
 CREATE TABLE `cidades` (
   `id_cidade` int(11) NOT NULL,
   `nome` varchar(63) COLLATE utf8_unicode_ci NOT NULL,
   `identificador` char(3) COLLATE utf8_unicode_ci NOT NULL,
-  `codigo` int(11) NOT NULL
+  `codigo` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `cidades`:
---
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `modais`
+-- Table structure for table `modais`
 --
 
+DROP TABLE IF EXISTS `modais`;
 CREATE TABLE `modais` (
   `id_modal` int(11) NOT NULL,
   `id_percurso` int(11) DEFAULT NULL,
@@ -59,20 +57,13 @@ CREATE TABLE `modais` (
   `data_manutencao` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `modais`:
---   `id_percurso`
---       `percursos` -> `id_percurso`
---   `id_percurso`
---       `percursos` -> `id_percurso`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `passageiros`
+-- Table structure for table `passageiros`
 --
 
+DROP TABLE IF EXISTS `passageiros`;
 CREATE TABLE `passageiros` (
   `id_passageiro` int(11) NOT NULL,
   `id_pessoa` int(11) NOT NULL,
@@ -83,87 +74,59 @@ CREATE TABLE `passageiros` (
   `data_de_nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `passageiros`:
---   `id_passageiro_responsavel`
---       `passageiros` -> `id_passageiro`
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---   `id_passageiro_responsavel`
---       `passageiros` -> `id_passageiro`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `percursos`
+-- Table structure for table `percursos`
 --
 
+DROP TABLE IF EXISTS `percursos`;
 CREATE TABLE `percursos` (
   `id_percurso` int(11) NOT NULL,
   `id_cidade_partida` int(11) NOT NULL,
   `id_cidade_chegada` int(11) NOT NULL,
   `hora_partida` datetime NOT NULL,
   `horas_duracao` decimal(8,1) NOT NULL,
-  `codigo_aeroporto` int(11) DEFAULT NULL
+  `codigo_aeroporto` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `percursos`:
---   `id_cidade_chegada`
---       `cidades` -> `id_cidade`
---   `id_cidade_partida`
---       `cidades` -> `id_cidade`
---   `id_cidade_partida`
---       `cidades` -> `id_cidade`
---   `id_cidade_chegada`
---       `cidades` -> `id_cidade`
---
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pessoas`
+-- Table structure for table `pessoas`
 --
 
+DROP TABLE IF EXISTS `pessoas`;
 CREATE TABLE `pessoas` (
   `id_pessoa` int(11) NOT NULL,
   `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `endereco` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `codigo` int(11) NOT NULL
+  `codigo` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `pessoas`:
---
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pontos_de_venda`
+-- Table structure for table `pontos_de_venda`
 --
 
+DROP TABLE IF EXISTS `pontos_de_venda`;
 CREATE TABLE `pontos_de_venda` (
   `id_ponto_de_venda` int(11) NOT NULL,
   `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `endereco` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `telefone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `codigo` int(11) NOT NULL,
+  `codigo` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `cnpj` char(14) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `pontos_de_venda`:
---
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `reservas`
+-- Table structure for table `reservas`
 --
 
+DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE `reservas` (
   `id_reserva` int(11) NOT NULL,
   `id_pessoa` int(11) NOT NULL,
@@ -176,24 +139,13 @@ CREATE TABLE `reservas` (
   `qtd_parcelas` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `reservas`:
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---   `id_viagem`
---       `viagens` -> `id_viagem`
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---   `id_viagem`
---       `viagens` -> `id_viagem`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tickets`
+-- Table structure for table `tickets`
 --
 
+DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id_ticket` int(11) NOT NULL,
   `id_reserva` int(11) NOT NULL,
@@ -202,24 +154,13 @@ CREATE TABLE `tickets` (
   `id_localizador` varchar(15) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `tickets`:
---   `id_percurso`
---       `percursos` -> `id_percurso`
---   `id_reserva`
---       `reservas` -> `id_reserva`
---   `id_reserva`
---       `reservas` -> `id_reserva`
---   `id_percurso`
---       `percursos` -> `id_percurso`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Table structure for table `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `id_pessoa` int(11) NOT NULL,
@@ -228,52 +169,30 @@ CREATE TABLE `usuarios` (
   `nivel_permissao` tinyint(3) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `usuarios`:
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---   `id_pessoa`
---       `pessoas` -> `id_pessoa`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `viagens`
+-- Table structure for table `viagens`
 --
 
+DROP TABLE IF EXISTS `viagens`;
 CREATE TABLE `viagens` (
   `id_viagem` int(11) NOT NULL,
   `nome_do_pacote` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `viagens`:
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `viagens_percursos`
+-- Table structure for table `viagens_percursos`
 --
 
+DROP TABLE IF EXISTS `viagens_percursos`;
 CREATE TABLE `viagens_percursos` (
   `id_viagem_percurso` int(11) NOT NULL,
   `id_viagem` int(11) NOT NULL,
   `id_percurso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `viagens_percursos`:
---   `id_percurso`
---       `percursos` -> `id_percurso`
---   `id_viagem`
---       `viagens` -> `id_viagem`
---   `id_viagem`
---       `viagens` -> `id_viagem`
---   `id_percurso`
---       `percursos` -> `id_percurso`
---
 
 --
 -- Indexes for dumped tables
@@ -429,47 +348,47 @@ ALTER TABLE `viagens_percursos`
 --
 
 --
--- Limitadores para a tabela `modais`
+-- Constraints for table `modais`
 --
 ALTER TABLE `modais`
   ADD CONSTRAINT `modais_ibfk_1` FOREIGN KEY (`id_percurso`) REFERENCES `percursos` (`id_percurso`) ON DELETE SET NULL;
 
 --
--- Limitadores para a tabela `passageiros`
+-- Constraints for table `passageiros`
 --
 ALTER TABLE `passageiros`
   ADD CONSTRAINT `passageiros_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoas` (`id_pessoa`) ON DELETE CASCADE,
   ADD CONSTRAINT `passageiros_ibfk_2` FOREIGN KEY (`id_passageiro_responsavel`) REFERENCES `passageiros` (`id_passageiro`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `percursos`
+-- Constraints for table `percursos`
 --
 ALTER TABLE `percursos`
   ADD CONSTRAINT `percursos_ibfk_1` FOREIGN KEY (`id_cidade_partida`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE,
   ADD CONSTRAINT `percursos_ibfk_2` FOREIGN KEY (`id_cidade_chegada`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `reservas`
+-- Constraints for table `reservas`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoas` (`id_pessoa`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_viagem`) REFERENCES `viagens` (`id_viagem`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `tickets`
+-- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) ON DELETE CASCADE,
   ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`id_percurso`) REFERENCES `percursos` (`id_percurso`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `usuarios`
+-- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoas` (`id_pessoa`) ON DELETE CASCADE;
 
 --
--- Limitadores para a tabela `viagens_percursos`
+-- Constraints for table `viagens_percursos`
 --
 ALTER TABLE `viagens_percursos`
   ADD CONSTRAINT `viagens_percursos_ibfk_1` FOREIGN KEY (`id_viagem`) REFERENCES `viagens` (`id_viagem`) ON DELETE CASCADE,
