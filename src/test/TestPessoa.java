@@ -1,10 +1,9 @@
 package test;
 
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
-
-import org.junit.Test;
 
 import controller.PessoaController;
 import model.Pessoa;
@@ -37,7 +36,7 @@ public class TestPessoa {
 		int id = 0;
 		try {
 			id = PessoaController.cadastrarPessoa("test", "test", "test");
-			PessoaController.alterarPessoa(id, "asdf", "asdf", "asdf");			
+			PessoaController.alterarPessoa(id, "asdf", "asdf", "asdf");
 		} catch (Exception e) {
 			fail();
 		} finally {
@@ -47,7 +46,7 @@ public class TestPessoa {
 	}
 
 	@Test
-	public  void deletarPessoa() {
+	public void deletarPessoa() {
 		try {
 			int id = PessoaController.cadastrarPessoa("test", "test", "test");
 			PessoaController.deletarPessoa(id);

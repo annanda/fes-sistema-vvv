@@ -48,6 +48,7 @@ public class Cidade {
 	public String getCodigo() {
 		return codigo;
 	}
+
 	// (END) GETTERS & SETTERS
 
 	/*
