@@ -7,17 +7,20 @@ import dao.CidadeDAO;
 import model.Cidade;
 
 public class CidadeController {
-	public static void cadastrarCidade(String nome, String identificador,
+	public static int cadastrarCidade(String nome, String identificador,
 			String codigo) {
+		int id = 0;
 		CidadeDAO cidade_dao = new CidadeDAO();
 		Cidade nova_cidade;
 
 		if ((nova_cidade = cidade_dao.getCidadeByCodigo(codigo)) == null) {
 			nova_cidade = new Cidade(nome, identificador, codigo);
-			cidade_dao.cadastrarCidade(nova_cidade);
+			id = cidade_dao.cadastrarCidade(nova_cidade);
 		} else {
 			System.out.println("Codigo de cidade ja cadastrado no sistema");
 		}
+
+		return id;
 	}
 
 	public static ArrayList<Cidade> listarCidades(String nome_consultado,

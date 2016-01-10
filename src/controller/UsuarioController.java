@@ -7,8 +7,9 @@ import dao.UsuarioDAO;
 import model.Usuario;
 
 public class UsuarioController {
-	public static void cadastrarUsuario(String nome, String endereco,
+	public static int cadastrarUsuario(String nome, String endereco,
 			String codigo, String email, String senha, String nivel_permissao) {
+		int id = 0;
 		UsuarioDAO usuario_dao = new UsuarioDAO();
 
 		// testing if email is unique...
@@ -25,10 +26,12 @@ public class UsuarioController {
 					codigo, email, senha, int_nivel_permissao);
 
 			// sending it to DAO class to finally insert it into BD
-			usuario_dao.cadastrarUsuario(novo_usuario);
+			id = usuario_dao.cadastrarUsuario(novo_usuario);
 		} else {
 			System.out.println("Email ja cadastrado. Usuario pode ja estar cadastrado no sistema");
 		}
+		
+		return id;
 	}
 
 	public static ArrayList<Usuario> listarUsuarios(String nome_consultado,

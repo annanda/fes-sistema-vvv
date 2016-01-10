@@ -10,7 +10,8 @@ import model.Usuario;
 public class UsuarioDAO extends DAO {
 	private String tabela = "usuarios";
 
-	public void cadastrarUsuario(Usuario novo_usuario) {
+	public int cadastrarUsuario(Usuario novo_usuario) {
+		int id = 0;
 		String email = novo_usuario.getEmail();
 		// INSERT INTO usuarios VALUES('int id_pessoa', 'String email', 'String
 		// senha', 'int nivel_permissao');
@@ -22,11 +23,19 @@ public class UsuarioDAO extends DAO {
 		connect();
 		try {
 			statement.executeUpdate(sql_query);
+			sql_query = selectFactory(tabela, new String[] { "id_usuario" },
+					"email = '" + novo_usuario.getEmail() + Constants.SINGLE_QUOTE);
+			result_set = statement.executeQuery(sql_query);
+			if (result_set.first()) {
+				id = result_set.getInt("id_pessoa");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		disconnect();
+
+		return id;
 	}
 
 	public ArrayList<Usuario> listarUsuarios(HashMap<String, String> conditions) {
