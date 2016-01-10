@@ -40,9 +40,8 @@ public class PessoaDAO extends DAO {
 	}
 
 	public ArrayList<Pessoa> listarPessoas(HashMap<String, String> conditions) {
-		String sql_query = selectFactory(
-				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
-				new String[] { "usu.*", "pes.*" }, likeFactory(conditions));
+		String sql_query = selectFactory(tabela,
+				new String[] { Constants.ASTERISK }, likeFactory(conditions));
 		ArrayList<Pessoa> pessoas_encontradas = new ArrayList<Pessoa>();
 
 		connect();
@@ -52,7 +51,7 @@ public class PessoaDAO extends DAO {
 				pessoas_encontradas.add(new Pessoa(
 						result_set.getInt("id_pessoa"),
 						result_set.getString("nome"),
-						result_set.getString("email"),
+						result_set.getString("endereco"),
 						result_set.getString("codigo")));
 			}
 		} catch (SQLException e) {
