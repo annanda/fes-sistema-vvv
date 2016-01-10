@@ -12,7 +12,6 @@ public class PassageiroController {
 			String codigo, String cpf, String telefone, String profissao,
 			String data_de_nascimento, String responsavel) {
 		// treating non-String arguments...
-		int int_codigo = Integer.parseInt(codigo);
 		Passageiro passageiro_responsavel = stringToPassageiro(responsavel);
 		Date date_data_de_nascimento = null;
 		try {
@@ -23,7 +22,7 @@ public class PassageiroController {
 		}
 
 		// instantiating the new object...
-		Passageiro novo_passageiro = new Passageiro(nome, endereco, int_codigo,
+		Passageiro novo_passageiro = new Passageiro(nome, endereco, codigo,
 				cpf, telefone, profissao, date_data_de_nascimento, passageiro_responsavel);
 
 		// sending it to its respectively DAO class to finally insert it into BD

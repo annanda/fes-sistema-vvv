@@ -11,7 +11,7 @@ public class Passageiro extends Pessoa {
 	private Passageiro responsavel;
 
 	// CONSTRUCTOR
-	public Passageiro(String nome, String endereco, int codigo, String cpf,
+	public Passageiro(String nome, String endereco, String codigo, String cpf,
 			String telefone, String profissao, Date data_de_nascimento, Passageiro responsavel) {
 		super(nome, endereco, codigo);
 		this.cpf = cpf;

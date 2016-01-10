@@ -12,7 +12,7 @@ public class Usuario extends Pessoa {
 	/*
 	 * For logic purpose
 	 */
-	public Usuario(String nome, String endereco, int codigo, String email,
+	public Usuario(String nome, String endereco, String codigo, String email,
 			String senha, int nivel_permissao) {
 		super(nome, endereco, codigo);
 		// Setting non-specified attributes...
@@ -28,7 +28,7 @@ public class Usuario extends Pessoa {
 	 * For database returns
 	 */
 	public Usuario(int id_usuario, int id_pessoa, String nome, String endereco,
-			int codigo, String email, String senha, int nivel_permissao) {
+			String codigo, String email, String senha, int nivel_permissao) {
 		super(id_pessoa, nome, endereco, codigo);
 		this.id = id_usuario;
 		setEmail(email);

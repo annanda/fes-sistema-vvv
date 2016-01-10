@@ -11,10 +11,10 @@ public class PessoaController {
 			String codigo) {
 		PessoaDAO pessoa_dao = new PessoaDAO();
 		Pessoa nova_pessoa;
-		int id, int_codigo = Integer.parseInt(codigo);
+		int id;
 
-		if ((nova_pessoa = pessoa_dao.getPessoaByCodigo(int_codigo)) == null) {
-			nova_pessoa = new Pessoa(nome, endereco, int_codigo);
+		if ((nova_pessoa = pessoa_dao.getPessoaByCodigo(codigo)) == null) {
+			nova_pessoa = new Pessoa(nome, endereco, codigo);
 			id = pessoa_dao.cadastrarPessoa(nova_pessoa);
 		} else {
 			id = nova_pessoa.getId();
@@ -39,11 +39,10 @@ public class PessoaController {
 
 	public static void alterarPessoa(int id_pessoa, String novo_nome,
 			String novo_endereco, String novo_codigo) {
-		int int_novo_codigo = Integer.parseInt(novo_codigo);
 		PessoaDAO pessoa_dao = new PessoaDAO();
 
 		Pessoa pessoa_modificada = new Pessoa(id_pessoa, novo_nome,
-				novo_endereco, int_novo_codigo);
+				novo_endereco, novo_codigo);
 
 		pessoa_dao.alterarPessoa(pessoa_modificada);
 	}

@@ -6,13 +6,13 @@ public class Pessoa {
 	protected int id;
 	protected String nome;
 	protected String endereco;
-	private int codigo;
+	private String codigo;
 
 	// (BEGIN) CONSTRUCTORS
 	/*
 	 * For logic purpose
 	 */
-	public Pessoa(String nome, String endereco, int codigo) {
+	public Pessoa(String nome, String endereco, String codigo) {
 		// Setting non-specified attributes...
 		this.id = 0;
 
@@ -24,11 +24,9 @@ public class Pessoa {
 	/*
 	 * For database returns
 	 */
-	public Pessoa(int id, String nome, String endereco, int codigo) {
+	public Pessoa(int id, String nome, String endereco, String codigo) {
+		this(nome, endereco, codigo);
 		this.id = id;
-		setNome(nome);
-		setEndereco(endereco);
-		this.codigo = codigo;
 	}
 
 	// (END) CONSTRUCTORS
@@ -50,7 +48,7 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
@@ -70,7 +68,7 @@ public class Pessoa {
 
 		pessoa.put("nome", this.getNome());
 		pessoa.put("endereco", this.getEndereco());
-		pessoa.put("codigo", "" + this.getCodigo());
+		pessoa.put("codigo", this.getCodigo());
 
 		return pessoa;
 	}

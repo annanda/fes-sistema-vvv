@@ -34,8 +34,7 @@ public class UsuarioDAO extends DAO {
 		// usu.id_pessoa = pes.id_pessoa WHERE conditions.keys[i] LIKE
 		// '%conditions.values[i]%' AND ...;
 		String sql_query = selectFactory(
-				tabela
-						+ " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
 				new String[] { "usu.*", "pes.*" }, likeFactory(conditions));
 		ArrayList<Usuario> usuarios_encontrados = new ArrayList<Usuario>();
 
@@ -43,14 +42,15 @@ public class UsuarioDAO extends DAO {
 		try {
 			result_set = statement.executeQuery(sql_query);
 			while (result_set.next()) {
-				usuarios_encontrados.add(new Usuario(result_set
-						.getInt("id_usuario"), result_set.getInt("id_pessoa"),
-						result_set.getString("nome"), result_set
-								.getString("endereco"), result_set
-								.getInt("codigo"), result_set
-								.getString("email"), result_set
-								.getString("senha"), result_set
-								.getInt("nivel_permissao")));
+				usuarios_encontrados.add(new Usuario(
+						result_set.getInt("id_usuario"),
+						result_set.getInt("id_pessoa"),
+						result_set.getString("nome"),
+						result_set.getString("endereco"),
+						result_set.getString("codigo"),
+						result_set.getString("email"),
+						result_set.getString("senha"),
+						result_set.getInt("nivel_permissao")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -65,10 +65,9 @@ public class UsuarioDAO extends DAO {
 		// SELECT usu.*, pes.* FROM usuarios AS usu INNER JOIN pessoas AS pes ON
 		// usu.id_pessoa = pes.id_pessoa WHERE email = 'String email';
 		String sql_query = selectFactory(
-				tabela
-						+ " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
-				new String[] { "usu.*", "pes.*" }, "email = '" + email
-						+ Constants.SINGLE_QUOTE);
+				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				new String[] { "usu.*", "pes.*" },
+				"email = " + Constants.SINGLE_QUOTE + email + Constants.SINGLE_QUOTE);
 		Usuario usuario_encontrado = null;
 
 		connect();
@@ -80,7 +79,7 @@ public class UsuarioDAO extends DAO {
 						result_set.getInt("id_pessoa"),
 						result_set.getString("nome"),
 						result_set.getString("endereco"),
-						result_set.getInt("codigo"),
+						result_set.getString("codigo"),
 						result_set.getString("email"),
 						result_set.getString("senha"),
 						result_set.getInt("nivel_permissao"));
@@ -94,14 +93,13 @@ public class UsuarioDAO extends DAO {
 		return usuario_encontrado;
 	}
 
-	public Usuario getUsuarioByCodigo(int codigo) {
+	public Usuario getUsuarioByCodigo(String codigo) {
 		// SELECT usu.*, pes.* FROM usuarios AS usu INNER JOIN pessoas AS pes ON
 		// usu.id_pessoa = pes.id_pessoa WHERE codigo = 'int codigo';
 		String sql_query = selectFactory(
-				tabela
-						+ " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
-				new String[] { "usu.*", "pes.*" }, "codigo = '" + codigo
-						+ Constants.SINGLE_QUOTE);
+				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				new String[] { "usu.*", "pes.*" },
+				"codigo = " + Constants.SINGLE_QUOTE + codigo + Constants.SINGLE_QUOTE);
 		Usuario usuario_encontrado = null;
 
 		connect();
@@ -113,7 +111,7 @@ public class UsuarioDAO extends DAO {
 						result_set.getInt("id_pessoa"),
 						result_set.getString("nome"),
 						result_set.getString("endereco"),
-						result_set.getInt("codigo"),
+						result_set.getString("codigo"),
 						result_set.getString("email"),
 						result_set.getString("senha"),
 						result_set.getInt("nivel_permissao"));
@@ -131,10 +129,9 @@ public class UsuarioDAO extends DAO {
 		// SELECT usu.*, pes.* FROM usuarios AS usu INNER JOIN pessoas AS pes ON
 		// usu.id_pessoa = pes.id_pessoa WHERE id_usuario = 'int id';
 		String sql_query = selectFactory(
-				tabela
-						+ " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
-				new String[] { "usu.*", "pes.*" }, "id_usuario = '" + id
-						+ Constants.SINGLE_QUOTE);
+				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				new String[] { "usu.*", "pes.*" },
+				"id_usuario = " + Constants.SINGLE_QUOTE + id + Constants.SINGLE_QUOTE);
 		Usuario usuario_encontrado = null;
 
 		connect();
@@ -146,7 +143,7 @@ public class UsuarioDAO extends DAO {
 						result_set.getInt("id_pessoa"),
 						result_set.getString("nome"),
 						result_set.getString("endereco"),
-						result_set.getInt("codigo"),
+						result_set.getString("codigo"),
 						result_set.getString("email"),
 						result_set.getString("senha"),
 						result_set.getInt("nivel_permissao"));
@@ -165,8 +162,8 @@ public class UsuarioDAO extends DAO {
 		// email', senha = 'String senha', nivel_permissao = 'int
 		// nivel_permissao' WHERE id_usuario = int id_usuario;
 		String sql_query = updateFactory(tabela,
-				usuario_modificado.toHashMap(), "id_usuario = "
-						+ usuario_modificado.getId());
+				usuario_modificado.toHashMap(),
+				"id_usuario = " + usuario_modificado.getId());
 		connect();
 		try {
 			statement.executeUpdate(sql_query);
@@ -197,7 +194,7 @@ public class UsuarioDAO extends DAO {
 		// "thcmatias@gmail.com", "aeho", 3);
 		// ud.cadastrarUsuario(u);
 		// ud.getUsuarioByEmail("");
-		// ud.getUsuarioByCodigo(0);
+		// ud.getUsuarioByCodigo("0");
 		// ud.alterarUsuario(u);
 		// ud.getUsuarioById(0);
 		// ud.deletarUsuario(0);

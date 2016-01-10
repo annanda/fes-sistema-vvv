@@ -14,7 +14,6 @@ public class UsuarioController {
 		// testing if email is unique...
 		if ((usuario_dao.getUsuarioByEmail(email)) == null) {
 			// treating non-String arguments...
-			int int_codigo = Integer.parseInt(codigo);
 			int int_nivel_permissao = Integer.parseInt(nivel_permissao);
 
 			// trying to insert a new Pessoa (if it doesn't exist before)
@@ -23,13 +22,12 @@ public class UsuarioController {
 
 			// instantiating the new object...
 			Usuario novo_usuario = new Usuario(0, id_pessoa, nome, endereco,
-					int_codigo, email, senha, int_nivel_permissao);
+					codigo, email, senha, int_nivel_permissao);
 
 			// sending it to DAO class to finally insert it into BD
 			usuario_dao.cadastrarUsuario(novo_usuario);
 		} else {
-			System.out
-					.println("Email ja cadastrado. Usuario pode ja estar cadastrado no sistema");
+			System.out.println("Email ja cadastrado. Usuario pode ja estar cadastrado no sistema");
 		}
 	}
 
@@ -55,18 +53,17 @@ public class UsuarioController {
 		UsuarioDAO usuario_dao = new UsuarioDAO();
 
 		// treating non-String arguments...
-		int int_novo_codigo = Integer.parseInt(novo_codigo);
 		int int_novo_nivel_permissao = Integer.parseInt(novo_nivel_permissao);
 
 		// instantiating the modified object...
 		Usuario usuario_modificado = new Usuario(id_usuario, usuario_dao
 				.getUsuarioById(id_usuario).getParentId(), novo_nome,
-				novo_endereco, int_novo_codigo, novo_email, nova_senha,
+				novo_endereco, novo_codigo, novo_email, nova_senha,
 				int_novo_nivel_permissao);
 
 		PessoaController.alterarPessoa(usuario_modificado.getParentId(),
 				usuario_modificado.getNome(), usuario_modificado.getEndereco(),
-				"" + usuario_modificado.getCodigo());
+				usuario_modificado.getCodigo());
 
 		// sending it to DAO class to finally insert it into BD
 		usuario_dao.alterarUsuario(usuario_modificado);
