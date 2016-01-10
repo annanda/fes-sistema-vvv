@@ -56,8 +56,8 @@ public class DAO {
 	protected String updateFactory(String tabela,
 			HashMap<String, String> coluna_valor, String conditions) {
 		String query = "UPDATE " + tabela + " SET ";
-
 		boolean first = true;
+
 		for (Map.Entry<String, String> entry : coluna_valor.entrySet()) {
 			if (first)
 				first = false;

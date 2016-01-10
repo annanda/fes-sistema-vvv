@@ -37,8 +37,28 @@ public class PessoaDAO extends DAO {
 	}
 
 	public ArrayList<Pessoa> listarPessoas(HashMap<String, String> conditions) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql_query = selectFactory(
+				tabela
+						+ " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				new String[] { "usu.*", "pes.*" }, likeFactory(conditions));
+		ArrayList<Pessoa> pessoas_encontradas = new ArrayList<Pessoa>();
+
+		connect();
+		try {
+			result_set = statement.executeQuery(sql_query);
+			while (result_set.next()) {
+				pessoas_encontradas.add(new Pessoa(result_set
+						.getInt("id_pessoa"), result_set.getString("nome"),
+						result_set.getString("email"), result_set
+								.getInt("codigo")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect();
+
+		return pessoas_encontradas;
 	}
 
 	public Pessoa getPessoaByCodigo(int codigo) {
