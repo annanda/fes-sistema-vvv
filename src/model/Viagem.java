@@ -1,10 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Viagem {
-	protected int id;
+	private int id;
 	private String nome_do_pacote;
+	private int lotacao;
+	private Date data_partida;
+	private Date data_chegada;
 	private ArrayList<Percurso> plano_de_viagem;
 
 	// CONSTRUCTOR

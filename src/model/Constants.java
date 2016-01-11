@@ -1,7 +1,6 @@
 package model;
 
-import java.text.DateFormat;
-import java.util.Locale;
+import java.text.SimpleDateFormat;
 
 /*
  * This class shall only hold all constants from your project. To use them
@@ -14,14 +13,14 @@ public final class Constants {
 	 * Constant made to define the format of dates for this application. It's
 	 * defined as a 'short' mode and getting the default location from JVM.
 	 */
-	public static final DateFormat DATE_FORMAT = DateFormat.getDateInstance(
-			DateFormat.SHORT, Locale.getDefault());
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
 
 	public static final String COMMA = ", ";
 
 	public static final String SEMICOLON = ";";
 
 	public static final String SINGLE_QUOTE = "'";
-	
+
 	public static final String ASTERISK = "*";
 }

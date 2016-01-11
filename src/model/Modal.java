@@ -1,11 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class Modal {
 	private int id;
-	private int id_percurso;
+	private ArrayList<Percurso> percursos;
 	private String tipo;
 	private String codigo;
 	private String companhia;
@@ -20,13 +21,14 @@ public class Modal {
 	/*
 	 * Constructor Pattern
 	 */
-	public Modal(String tipo, String codigo, String companhia, int capacidade,
-			String modelo, int ano_fabricacao, boolean em_manutencao,
-			boolean em_uso, Date data_manutencao) {
+	public Modal(ArrayList<Percurso> percursos, String tipo, String codigo,
+			String companhia, int capacidade, String modelo,
+			int ano_fabricacao, boolean em_manutencao, boolean em_uso,
+			Date data_manutencao) {
 		// Setting non-specified attributes...
 		this.id = 0;
-		this.id_percurso = 0;
 
+		setPercursos(percursos);
 		this.tipo = tipo;
 		this.codigo = codigo;
 		setCompanhia(companhia);
@@ -41,12 +43,12 @@ public class Modal {
 	/*
 	 * For database returns
 	 */
-	public Modal(int id, int id_percurso, String tipo, String codigo,
-			String companhia, int capacidade, String modelo,
+	public Modal(int id, ArrayList<Percurso> percursos, String tipo,
+			String codigo, String companhia, int capacidade, String modelo,
 			int ano_fabricacao, boolean em_manutencao, boolean em_uso,
 			Date data_manutencao) {
 		this.id = id;
-		this.id_percurso = id_percurso;
+		setPercursos(percursos);
 		this.tipo = tipo;
 		this.codigo = codigo;
 		setCompanhia(companhia);
@@ -125,12 +127,12 @@ public class Modal {
 		return id;
 	}
 
-	public int getIdPercurso() {
-		return this.id_percurso;
+	public ArrayList<Percurso> getPercursos() {
+		return percursos;
 	}
 
-	public void setIdPercurso(int id_percurso) {
-		this.id_percurso = id_percurso;
+	public void setPercursos(ArrayList<Percurso> percursos) {
+		this.percursos = percursos;
 	}
 
 	// (END) GETTERS & SETTERS
@@ -142,8 +144,8 @@ public class Modal {
 	 */
 	public HashMap<String, String> toHashMap() {
 		HashMap<String, String> modal = new HashMap<String, String>();
+		Date data_manutencao = this.getDataManutencao();
 
-		modal.put("id_percurso", "" + this.getIdPercurso());
 		modal.put("tipo", this.getTipo());
 		modal.put("codigo", this.getCodigo());
 		modal.put("companhia", this.getCompanhia());
@@ -152,7 +154,8 @@ public class Modal {
 		modal.put("ano_fabricacao", "" + this.getAnoFabricacao());
 		modal.put("em_manutencao", "" + this.getEmManutencao());
 		modal.put("em_uso", "" + this.getEmUso());
-		modal.put("data_manutencao", this.getDataManutencao().toString());
+		modal.put("data_manutencao",
+				(data_manutencao != null) ? data_manutencao.toString() : null);
 
 		return modal;
 	}

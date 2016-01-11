@@ -36,6 +36,18 @@ public class CidadeController {
 
 		return cidade_dao.listarCidades(conditions);
 	}
+	
+	public static Cidade getCidadeByCodigo(String codigo) {
+		CidadeDAO cidade_dao = new CidadeDAO();
+
+		return cidade_dao.getCidadeByCodigo(codigo);
+	}
+
+	public static Cidade getCidadeById(int id) {
+		CidadeDAO cidade_dao = new CidadeDAO();
+
+		return cidade_dao.getCidadeById(id);
+	}
 
 	public static void alterarCidade(int id_cidade, String novo_nome,
 			String novo_identificador, String novo_codigo) {
