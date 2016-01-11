@@ -17,7 +17,6 @@ public class Usuario extends Pessoa {
 		super(nome, endereco, codigo);
 		// Setting non-specified attributes...
 		this.id = 0;
-		super.id = 0;
 
 		setEmail(email);
 		setSenha(senha);
