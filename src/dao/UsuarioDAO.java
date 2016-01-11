@@ -9,6 +9,7 @@ import model.Usuario;
 
 public class UsuarioDAO extends DAO {
 	private String tabela = "usuarios";
+	private String tabela_joined_pessoas = "usuarios AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa";
 
 	public int cadastrarUsuario(Usuario novo_usuario) {
 		int id = 0;
@@ -24,7 +25,7 @@ public class UsuarioDAO extends DAO {
 		try {
 			statement.executeUpdate(sql_query);
 			sql_query = selectFactory(tabela, new String[] { "id_usuario" },
-					"email = '" + novo_usuario.getEmail() + Constants.SINGLE_QUOTE);
+					"email = '" + email + Constants.SINGLE_QUOTE);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				id = result_set.getInt("id_usuario");
@@ -43,7 +44,7 @@ public class UsuarioDAO extends DAO {
 		// usu.id_pessoa = pes.id_pessoa WHERE conditions.keys[i] LIKE
 		// '%conditions.values[i]%' AND ...;
 		String sql_query = selectFactory(
-				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				tabela_joined_pessoas,
 				new String[] { "usu.*", "pes.*" }, likeFactory(conditions));
 		ArrayList<Usuario> usuarios_encontrados = new ArrayList<Usuario>();
 
@@ -74,7 +75,7 @@ public class UsuarioDAO extends DAO {
 		// SELECT usu.*, pes.* FROM usuarios AS usu INNER JOIN pessoas AS pes ON
 		// usu.id_pessoa = pes.id_pessoa WHERE email = 'String email';
 		String sql_query = selectFactory(
-				tabela + " AS usu INNER JOIN pessoas AS pes ON usu.id_pessoa = pes.id_pessoa",
+				tabela_joined_pessoas,
 				new String[] { "usu.*", "pes.*" },
 				"email = " + Constants.SINGLE_QUOTE + email + Constants.SINGLE_QUOTE);
 		Usuario usuario_encontrado = null;

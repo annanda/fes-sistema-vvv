@@ -18,14 +18,14 @@ public class CidadeDAO extends DAO {
 				new String[] {
 						nova_cidade.getNome(),
 						nova_cidade.getIdentificador(),
-						nova_cidade.getCodigo()
+						codigo
 				});
 
 		connect();
 		try {
 			statement.executeUpdate(sql_query);
 			sql_query = selectFactory(tabela, new String[] { "id_cidade" },
-					"codigo = " + Constants.SINGLE_QUOTE + codigo + Constants.SINGLE_QUOTE);
+					"codigo = '" + codigo + Constants.SINGLE_QUOTE);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				id = result_set.getInt("id_pessoa");
@@ -69,7 +69,7 @@ public class CidadeDAO extends DAO {
 		Cidade cidade_encontrada = null;
 		String sql_query = selectFactory(tabela,
 				new String[] { Constants.ASTERISK },
-				"codigo = " + Constants.SINGLE_QUOTE + codigo + Constants.SINGLE_QUOTE);
+				"codigo = '" + codigo + Constants.SINGLE_QUOTE);
 
 		connect();
 		try {

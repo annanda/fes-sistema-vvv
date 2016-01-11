@@ -12,20 +12,20 @@ public class PessoaDAO extends DAO {
 
 	public int cadastrarPessoa(Pessoa nova_pessoa) {
 		int id = 0;
+		String codigo = nova_pessoa.getCodigo();
 		String sql_query = insertFactory(
 				tabela,
 				new String[] {
 						nova_pessoa.getNome(),
 						nova_pessoa.getEndereco(),
-						nova_pessoa.getCodigo()
+						codigo
 				});
 
 		connect();
 		try {
 			statement.executeUpdate(sql_query);
 			sql_query = selectFactory(tabela, new String[] { "id_pessoa" },
-					"codigo = " + Constants.SINGLE_QUOTE +
-						nova_pessoa.getCodigo() + Constants.SINGLE_QUOTE);
+					"codigo = '" + codigo + Constants.SINGLE_QUOTE);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				id = result_set.getInt("id_pessoa");
@@ -67,7 +67,7 @@ public class PessoaDAO extends DAO {
 		Pessoa pessoa_encontrada = null;
 		String sql_query = selectFactory(tabela,
 				new String[] { Constants.ASTERISK },
-				"codigo = " + Constants.SINGLE_QUOTE + codigo + Constants.SINGLE_QUOTE);
+				"codigo = '" + codigo + Constants.SINGLE_QUOTE);
 
 		connect();
 		try {
