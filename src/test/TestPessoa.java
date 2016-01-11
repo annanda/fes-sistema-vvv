@@ -25,10 +25,11 @@ public class TestPessoa {
 
 	@Test
 	public void listarPessoas() {
-		PessoaController.cadastrarPessoa("test", "test", "test");
+		int id = PessoaController.cadastrarPessoa("test", "test", "test");
 		ArrayList<Pessoa> l = PessoaController.listarPessoas("test", "", "");
+		PessoaController.deletarPessoa(id);
 		assertNotNull(l);
-		assertTrue(l.size() > 0);
+		assertEquals(l.size(), 1);
 	}
 
 	@Test

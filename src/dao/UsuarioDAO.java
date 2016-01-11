@@ -27,7 +27,7 @@ public class UsuarioDAO extends DAO {
 					"email = '" + novo_usuario.getEmail() + Constants.SINGLE_QUOTE);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
-				id = result_set.getInt("id_pessoa");
+				id = result_set.getInt("id_usuario");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

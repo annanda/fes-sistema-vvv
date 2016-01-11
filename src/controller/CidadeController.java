@@ -28,7 +28,7 @@ public class CidadeController {
 		// setting up the filters...
 		HashMap<String, String> conditions = new HashMap<String, String>();
 		conditions.put("nome", nome_consultado);
-		conditions.put("endereco", identificador_consultado);
+		conditions.put("identificador", identificador_consultado);
 		conditions.put("codigo", codigo_consultado);
 
 		// sending it to DAO class to finally insert it into BD
