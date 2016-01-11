@@ -1,12 +1,11 @@
 package model;
 
-import static model.Constants.DATE_FORMAT;
-
-import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Modal {
-	protected int id;
+	private int id;
+	private int id_percurso;
 	private String tipo;
 	private String codigo;
 	private String companhia;
@@ -24,6 +23,10 @@ public class Modal {
 	public Modal(String tipo, String codigo, String companhia, int capacidade,
 			String modelo, int ano_fabricacao, boolean em_manutencao,
 			boolean em_uso, Date data_manutencao) {
+		// Setting non-specified attributes...
+		this.id = 0;
+		this.id_percurso = 0;
+
 		this.tipo = tipo;
 		this.codigo = codigo;
 		setCompanhia(companhia);
@@ -34,33 +37,27 @@ public class Modal {
 		setEmUso(em_uso);
 		setDataManutencao(data_manutencao);
 	}
-	
+
 	/*
-	 * This constructor handles all arguments as String types and treat each of
-	 * them to successfully instantiate a Modal object. It's useful when
-	 * getting values from java swing
+	 * For database returns
 	 */
-	public Modal(String tipo, String codigo, String companhia, String capacidade,
-			String modelo, String ano_fabricacao, String em_manutencao,
-			String em_uso, String data_manutencao) throws ParseException {
-		// treating...
-		int int_capacidade = Integer.parseInt(capacidade);
-		int int_ano_fabricacao = Integer.parseInt(ano_fabricacao);
-		boolean boolean_em_manutencao = Boolean.parseBoolean(em_manutencao);
-		boolean boolean_em_uso = Boolean.parseBoolean(em_uso);
-		Date date_data_manutencao = DATE_FORMAT.parse(data_manutencao);
-		
-		// instantiating...
+	public Modal(int id, int id_percurso, String tipo, String codigo,
+			String companhia, int capacidade, String modelo,
+			int ano_fabricacao, boolean em_manutencao, boolean em_uso,
+			Date data_manutencao) {
+		this.id = id;
+		this.id_percurso = id_percurso;
 		this.tipo = tipo;
 		this.codigo = codigo;
 		setCompanhia(companhia);
-		setCapacidade(int_capacidade);
+		setCapacidade(capacidade);
 		setModelo(modelo);
-		this.ano_fabricacao = int_ano_fabricacao;
-		setEmManutencao(boolean_em_manutencao);
-		setEmUso(boolean_em_uso);
-		setDataManutencao(date_data_manutencao);
+		this.ano_fabricacao = ano_fabricacao;
+		setEmManutencao(em_manutencao);
+		setEmUso(em_uso);
+		setDataManutencao(data_manutencao);
 	}
+
 	// (END) CONSTRUCTORS
 
 	// (BEGIN) GETTERS & SETTERS
@@ -75,6 +72,7 @@ public class Modal {
 	public String getCompanhia() {
 		return companhia;
 	}
+
 	public void setCompanhia(String companhia) {
 		this.companhia = companhia;
 	}
@@ -82,6 +80,7 @@ public class Modal {
 	public int getCapacidade() {
 		return capacidade;
 	}
+
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
@@ -89,6 +88,7 @@ public class Modal {
 	public String getModelo() {
 		return modelo;
 	}
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
@@ -100,6 +100,7 @@ public class Modal {
 	public boolean getEmManutencao() {
 		return em_manutencao;
 	}
+
 	public void setEmManutencao(boolean em_manutencao) {
 		this.em_manutencao = em_manutencao;
 	}
@@ -107,6 +108,7 @@ public class Modal {
 	public boolean getEmUso() {
 		return em_uso;
 	}
+
 	public void setEmUso(boolean em_uso) {
 		this.em_uso = em_uso;
 	}
@@ -114,8 +116,44 @@ public class Modal {
 	public Date getDataManutencao() {
 		return data_manutencao;
 	}
+
 	public void setDataManutencao(Date data_manutencao) {
 		this.data_manutencao = data_manutencao;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getIdPercurso() {
+		return this.id_percurso;
+	}
+
+	public void setIdPercurso(int id_percurso) {
+		this.id_percurso = id_percurso;
+	}
+
 	// (END) GETTERS & SETTERS
+
+	/*
+	 * Turns your object into a HashMap object with all columns (attributes)
+	 * (except for its own id) names as keys of type String and their values as
+	 * values also of type String
+	 */
+	public HashMap<String, String> toHashMap() {
+		HashMap<String, String> modal = new HashMap<String, String>();
+
+		modal.put("id_percurso", "" + this.getIdPercurso());
+		modal.put("tipo", this.getTipo());
+		modal.put("codigo", this.getCodigo());
+		modal.put("companhia", this.getCompanhia());
+		modal.put("capacidade", "" + this.getCapacidade());
+		modal.put("modelo", this.getModelo());
+		modal.put("ano_fabricacao", "" + this.getAnoFabricacao());
+		modal.put("em_manutencao", "" + this.getEmManutencao());
+		modal.put("em_uso", "" + this.getEmUso());
+		modal.put("data_manutencao", this.getDataManutencao().toString());
+
+		return modal;
+	}
 }
