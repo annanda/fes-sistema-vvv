@@ -13,14 +13,20 @@ public final class Constants {
 	 * Constant made to define the format of dates for this application. It's
 	 * defined as a 'short' mode and getting the default location from JVM.
 	 */
-	public static final SimpleDateFormat DATE_FORMAT =
-			new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
+
+	/*
+	 * Constant made to define the format of dates for this application.
+	 */
+	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
+			"yyyy-MM-dd");
 
 	public static final String COMMA = ", ";
 
 	public static final String SEMICOLON = ";";
 
 	public static final String SINGLE_QUOTE = "'";
-	
+
 	public static final String ASTERISK = "*";
 }

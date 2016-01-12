@@ -1,6 +1,6 @@
 package model;
 
-import static model.Constants.DATE_FORMAT;
+import static model.Constants.DATETIME_FORMAT;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +36,7 @@ public class Reserva {
 	public Reserva(String codigo, String data, String status, String valor,
 			String tipo_pagamento, String qtd_parcelas) throws ParseException {
 		// treating...
-		Date date_data = DATE_FORMAT.parse(data);
+		Date date_data = DATETIME_FORMAT.parse(data);
 		boolean boolean_status = Boolean.parseBoolean(status);
 		float float_valor = Float.parseFloat(valor);
 		int int_qtd_parcelas = Integer.parseInt(qtd_parcelas);

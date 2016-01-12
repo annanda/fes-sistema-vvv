@@ -95,7 +95,7 @@ public class Passageiro extends Pessoa {
 		passageiro.put("cpf", this.getCpf());
 		passageiro.put("telefone", this.getTelefone());
 		passageiro.put("profissao", this.getProfissao());
-		passageiro.put("data_de_nascimento", Constants.DATE_FORMAT.format(this.getDataDeNascimento()));
+		passageiro.put("data_de_nascimento", Constants.DATETIME_FORMAT.format(this.getDataDeNascimento()));
 
 		return passageiro;
 	}
