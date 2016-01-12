@@ -129,15 +129,16 @@ public class ModalDAO extends DAO {
 
 	public Modal getModalById(int id) {
 		Modal modal_encontrado = null;
+		String condition = "id_modal = " + id;
 		String sql_query = selectFactory(tabela,
-				new String[] { Constants.ASTERISK }, "id_modal = " + id);
+				new String[] { Constants.ASTERISK }, condition);
 
 		connect();
 		try {
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				String temp_sql_query = selectFactory(tabela_relacionamento,
-						new String[] { Constants.ASTERISK }, "id_modal = " + id);
+						new String[] { Constants.ASTERISK }, condition);
 				ResultSet temp_result_set = statement
 						.executeQuery(temp_sql_query);
 				ArrayList<Percurso> percursos = new ArrayList<Percurso>();
@@ -173,7 +174,19 @@ public class ModalDAO extends DAO {
 	}
 
 	public void deletarModal(int id) {
-		// TODO Auto-generated method stub
+		String condition = "id_modal = " + id;
+		String sql_query = deleteFactory(tabela, condition);
 
+		connect();
+		try {
+			statement.executeUpdate(sql_query);
+
+			sql_query = deleteFactory(tabela_relacionamento, condition);
+			statement.executeUpdate(sql_query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect();
 	}
 }
