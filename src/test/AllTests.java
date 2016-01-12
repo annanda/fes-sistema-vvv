@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestPessoa.class,
 	TestUsuario.class,
 	TestPassageiro.class,
-	TestCidade.class
+	TestCidade.class,
+	TestModal.class,
 })
 public class AllTests {
 
