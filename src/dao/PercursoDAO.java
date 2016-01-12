@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import model.Constants;
 import model.Percurso;
 
@@ -14,6 +16,7 @@ public class PercursoDAO extends DAO {
 		String sql_query = insertFactory(
 				tabela,
 				new String[] {
+						"" + novo_percurso.getModal().getId(),
 						"" + novo_percurso.getPartida().getId(),
 						"" + novo_percurso.getDestino().getId(),
 						Constants.DATETIME_FORMAT.format(novo_percurso
@@ -39,22 +42,49 @@ public class PercursoDAO extends DAO {
 		return id;
 	}
 
-	public ArrayList<Percurso> listarPercursos() {
+	public ArrayList<Percurso> listarPercursos(
+			HashMap<String, String> conditions) {
 		ArrayList<Percurso> percursos_encontrados = new ArrayList<Percurso>();
 		String sql_query = selectFactory(tabela,
-				new String[] { Constants.ASTERISK }, "");
+				new String[] { Constants.ASTERISK }, likeFactory(conditions));
 
 		connect();
 		try {
 			result_set = statement.executeQuery(sql_query);
 			while (result_set.next()) {
 				percursos_encontrados.add(new Percurso(result_set
-						.getInt("id_percurso"), result_set
-						.getDate("hora_partida"), result_set
-						.getInt("horas_duracao"), result_set
-						.getString("codigo_aeroporto"), result_set
-						.getInt("id_cidade_partida"), result_set
-						.getInt("id_cidade_chegada")));
+						.getInt("id_percurso"), result_set.getInt("id_modal"),
+						result_set.getDate("hora_partida"), result_set
+								.getInt("horas_duracao"), result_set
+								.getString("codigo_aeroporto"), result_set
+								.getInt("id_cidade_partida"), result_set
+								.getInt("id_cidade_chegada")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect();
+
+		return percursos_encontrados;
+	}
+
+	public ArrayList<Percurso> getPercursoByModal(int id_modal) {
+		ArrayList<Percurso> percursos_encontrados = new ArrayList<Percurso>();
+		String sql_query = selectFactory(tabela,
+				new String[] { Constants.ASTERISK }, "id_modal = " + id_modal);
+
+		connect();
+		try {
+			result_set = statement.executeQuery(sql_query);
+			while (result_set.next()) {
+				percursos_encontrados.add(new Percurso(result_set
+						.getInt("id_percurso"), result_set.getInt("id_modal"),
+						result_set.getDate("hora_partida"), result_set
+								.getInt("horas_duracao"), result_set
+								.getString("codigo_aeroporto"), result_set
+								.getInt("id_cidade_partida"), result_set
+								.getInt("id_cidade_chegada")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,6 +107,7 @@ public class PercursoDAO extends DAO {
 			if (result_set.first()) {
 				percurso_encontrado = new Percurso(
 						result_set.getInt("id_percurso"),
+						result_set.getInt("id_modal"),
 						result_set.getDate("hora_partida"),
 						result_set.getInt("horas_duracao"),
 						result_set.getString("codigo_aeroporto"),
@@ -103,6 +134,7 @@ public class PercursoDAO extends DAO {
 			if (result_set.first()) {
 				percurso_encontrado = new Percurso(
 						result_set.getInt("id_percurso"),
+						result_set.getInt("id_modal"),
 						result_set.getDate("hora_partida"),
 						result_set.getInt("horas_duracao"),
 						result_set.getString("codigo_aeroporto"),
@@ -120,6 +152,21 @@ public class PercursoDAO extends DAO {
 
 	public void deletarPercurso(int id) {
 		String sql_query = deleteFactory(tabela, "id_percurso = " + id);
+
+		connect();
+		try {
+			statement.executeUpdate(sql_query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect();
+	}
+
+	public void alterarPercurso(Percurso percurso_modificado) {
+		String sql_query = updateFactory(tabela,
+				percurso_modificado.toHashMap(), "id_percurso = "
+						+ percurso_modificado.getId());
 
 		connect();
 		try {

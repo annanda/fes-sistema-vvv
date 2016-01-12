@@ -6,9 +6,11 @@ import java.util.HashMap;
 
 import controller.CidadeController;
 import controller.Controller;
+import controller.ModalController;
 
 public class Percurso {
 	private int id;
+	private Modal modal;
 	private Date hora_partida;
 	private int horas_duracao_percurso;
 	private String codigo_aeroporto;
@@ -20,10 +22,11 @@ public class Percurso {
 	/*
 	 * Constructor Pattern
 	 */
-	public Percurso(Date hora_partida, int horas_duracao_percurso,
+	public Percurso(Modal modal, Date hora_partida, int horas_duracao_percurso,
 			String codigo_aeroporto, Cidade partida, Cidade destino) {
 		this.id = 0;
 
+		setModal(modal);
 		this.hora_partida = hora_partida;
 		this.horas_duracao_percurso = horas_duracao_percurso;
 		this.codigo_aeroporto = codigo_aeroporto;
@@ -33,10 +36,11 @@ public class Percurso {
 		this.codigo = this.toString();
 	}
 
-	public Percurso(int id, Date hora_partida, int horas_duracao_percurso,
-			String codigo_aeroporto, int id_cidade_partida,
-			int id_cidade_destino) {
+	public Percurso(int id, int id_modal, Date hora_partida,
+			int horas_duracao_percurso, String codigo_aeroporto,
+			int id_cidade_partida, int id_cidade_destino) {
 		this.id = id;
+		setModal(ModalController.getModalById(id_modal));
 		this.hora_partida = hora_partida;
 		this.horas_duracao_percurso = horas_duracao_percurso;
 		this.codigo_aeroporto = codigo_aeroporto;
@@ -77,6 +81,14 @@ public class Percurso {
 		return id;
 	}
 
+	public Modal getModal() {
+		return modal;
+	}
+
+	public void setModal(Modal modal) {
+		this.modal = modal;
+	}
+
 	// (END) GETTERS & SETTERS
 
 	/*
@@ -88,6 +100,7 @@ public class Percurso {
 		HashMap<String, String> percurso = new HashMap<String, String>();
 		Date hora_partida = this.getHoraPartida();
 
+		percurso.put("id_modal", "" + this.getModal().getId());
 		percurso.put("id_cidade_partida", "" + this.getPartida().getId());
 		percurso.put("id_cidade_chegada", "" + this.getDestino().getId());
 		percurso.put("hora_partida",

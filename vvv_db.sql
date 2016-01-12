@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jan-2016 às 00:40
+-- Generation Time: 12-Jan-2016 às 06:17
 -- Versão do servidor: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -67,31 +67,6 @@ CREATE TABLE `modais` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `modais_percursos`
---
-
-DROP TABLE IF EXISTS `modais_percursos`;
-CREATE TABLE `modais_percursos` (
-  `id_modal_percurso` int(11) NOT NULL,
-  `id_modal` int(11) NOT NULL,
-  `id_percurso` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `modais_percursos`:
---   `id_modal`
---       `modais` -> `id_modal`
---   `id_percurso`
---       `percursos` -> `id_percurso`
---   `id_modal`
---       `modais` -> `id_modal`
---   `id_percurso`
---       `percursos` -> `id_percurso`
---
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `passageiros`
 --
 
@@ -127,6 +102,7 @@ CREATE TABLE `passageiros` (
 DROP TABLE IF EXISTS `percursos`;
 CREATE TABLE `percursos` (
   `id_percurso` int(11) NOT NULL,
+  `id_modal` int(11) DEFAULT NULL,
   `id_cidade_partida` int(11) NOT NULL,
   `id_cidade_chegada` int(11) NOT NULL,
   `hora_partida` datetime NOT NULL,
@@ -141,6 +117,8 @@ CREATE TABLE `percursos` (
 --       `cidades` -> `id_cidade`
 --   `id_cidade_partida`
 --       `cidades` -> `id_cidade`
+--   `id_modal`
+--       `modais` -> `id_modal`
 --   `id_cidade_partida`
 --       `cidades` -> `id_cidade`
 --   `id_cidade_chegada`
@@ -329,14 +307,6 @@ ALTER TABLE `modais`
   ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
--- Indexes for table `modais_percursos`
---
-ALTER TABLE `modais_percursos`
-  ADD PRIMARY KEY (`id_modal_percurso`),
-  ADD KEY `id_modal` (`id_modal`),
-  ADD KEY `id_percurso` (`id_percurso`);
-
---
 -- Indexes for table `passageiros`
 --
 ALTER TABLE `passageiros`
@@ -351,7 +321,8 @@ ALTER TABLE `passageiros`
 ALTER TABLE `percursos`
   ADD PRIMARY KEY (`id_percurso`),
   ADD KEY `id_cidade_partida` (`id_cidade_partida`),
-  ADD KEY `id_cidade_chegada` (`id_cidade_chegada`);
+  ADD KEY `id_cidade_chegada` (`id_cidade_chegada`),
+  ADD KEY `id_modal` (`id_modal`);
 
 --
 -- Indexes for table `pessoas`
@@ -422,11 +393,6 @@ ALTER TABLE `cidades`
 ALTER TABLE `modais`
   MODIFY `id_modal` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `modais_percursos`
---
-ALTER TABLE `modais_percursos`
-  MODIFY `id_modal_percurso` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `passageiros`
 --
 ALTER TABLE `passageiros`
@@ -474,13 +440,6 @@ ALTER TABLE `viagens_percursos`
 --
 -- Constraints for dumped tables
 --
-
---
--- Limitadores para a tabela `modais_percursos`
---
-ALTER TABLE `modais_percursos`
-  ADD CONSTRAINT `modais_percursos_ibfk_1` FOREIGN KEY (`id_modal`) REFERENCES `modais` (`id_modal`) ON DELETE CASCADE,
-  ADD CONSTRAINT `modais_percursos_ibfk_2` FOREIGN KEY (`id_percurso`) REFERENCES `percursos` (`id_percurso`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `passageiros`

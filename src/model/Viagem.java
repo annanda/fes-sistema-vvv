@@ -11,11 +11,30 @@ public class Viagem {
 	private Date data_chegada;
 	private ArrayList<Percurso> plano_de_viagem;
 
-	// CONSTRUCTOR
+	// (BEGIN) CONSTRUCTOR
 	public Viagem(String nome_do_pacote, ArrayList<Percurso> plano_de_viagem) {
+		this.id = 0;
+
 		setNomeDoPacote(nome_do_pacote);
+		setLotacao(lotacao);
+		this.data_partida = this.plano_de_viagem.get(0).getHoraPartida();
+		this.data_chegada = this.plano_de_viagem.get(
+				this.plano_de_viagem.size() - 1).calcHoraChegada();
 		setPlanoDeViagem(plano_de_viagem);
 	}
+
+	public Viagem(int id, String nome_do_pacote, int lotacao,
+			Date data_partida, Date data_chegada,
+			ArrayList<Percurso> plano_de_viagem) {
+		this.id = id;
+		setNomeDoPacote(nome_do_pacote);
+		setLotacao(lotacao);
+		this.data_partida = data_partida;
+		this.data_chegada = data_chegada;
+		setPlanoDeViagem(plano_de_viagem);
+	}
+
+	// (END) CONSTRUCTOR
 
 	// (BEGIN) GETTERS & SETTERS
 	public String getNomeDoPacote() {
