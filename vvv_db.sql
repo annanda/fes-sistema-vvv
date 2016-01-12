@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jan-2016 às 06:17
+-- Generation Time: 12-Jan-2016 às 16:09
 -- Versão do servidor: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -123,6 +123,8 @@ CREATE TABLE `percursos` (
 --       `cidades` -> `id_cidade`
 --   `id_cidade_chegada`
 --       `cidades` -> `id_cidade`
+--   `id_modal`
+--       `modais` -> `id_modal`
 --
 
 -- --------------------------------------------------------
@@ -453,7 +455,8 @@ ALTER TABLE `passageiros`
 --
 ALTER TABLE `percursos`
   ADD CONSTRAINT `percursos_ibfk_1` FOREIGN KEY (`id_cidade_partida`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE,
-  ADD CONSTRAINT `percursos_ibfk_2` FOREIGN KEY (`id_cidade_chegada`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE;
+  ADD CONSTRAINT `percursos_ibfk_2` FOREIGN KEY (`id_cidade_chegada`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE,
+  ADD CONSTRAINT `percursos_ibfk_3` FOREIGN KEY (`id_modal`) REFERENCES `modais` (`id_modal`) ON DELETE SET NULL;
 
 --
 -- Limitadores para a tabela `reservas`
