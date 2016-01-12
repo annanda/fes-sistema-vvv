@@ -88,8 +88,10 @@ public class Passageiro extends Pessoa {
 	public HashMap<String, String> toHashMap() {
 		HashMap<String, String> passageiro = new HashMap<String, String>();
 
+		Passageiro responsavel = this.getResponsavel();
+		
 		passageiro.put("id_pessoa", Integer.toString(this.getParentId()));
-		passageiro.put("id_pessoa_responsavel", Integer.toString(this.getResponsavel().getId()));
+		passageiro.put("id_passageiro_responsavel", responsavel == null ? null : Integer.toString(responsavel.getId()));
 		passageiro.put("cpf", this.getCpf());
 		passageiro.put("telefone", this.getTelefone());
 		passageiro.put("profissao", this.getProfissao());

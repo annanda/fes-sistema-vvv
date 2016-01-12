@@ -15,9 +15,11 @@ public class PassageiroController {
 			String data_de_nascimento, String responsavel) {
 		int id = 0;
 		PassageiroDAO passageiro_dao = new PassageiroDAO();
+		
+		Passageiro novo_passageiro = passageiro_dao.getPassageiroByCpf(cpf);
 
 		// testing if cpf is unique...
-		if ((passageiro_dao.getPassageiroByCpf(cpf)) == null) {
+		if (novo_passageiro == null) {
 			// treating non-String arguments...
 			Passageiro passageiro_responsavel = null;
 			if (responsavel != null && responsavel.isEmpty()) {
@@ -31,15 +33,19 @@ public class PassageiroController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	
+
+			// trying to insert a new Pessoa (if it doesn't exist before)
+			int id_pessoa = PessoaController.cadastrarPessoa(nome, endereco, codigo);
+
 			// instantiating the new object...
-			Passageiro novo_passageiro = new Passageiro(nome, endereco, codigo,
-					cpf, telefone, profissao, date_data_de_nascimento,
+			novo_passageiro = new Passageiro(0, id_pessoa, nome, endereco,
+					codigo, cpf, telefone, profissao, date_data_de_nascimento,
 					passageiro_responsavel);
 
 			// sending it to DAO class to finally insert it into BD
 			id = passageiro_dao.cadastrarPassageiro(novo_passageiro);
 		} else {
+			id = novo_passageiro.getId();
 			System.out.println("CPF ja cadastrado. Passageiro pode ja estar cadastrado no sistema");
 		}
 		
@@ -56,7 +62,6 @@ public class PassageiroController {
 		conditions.put("codigo", codigo_consultado);
 		conditions.put("data_de_nascimento", data_de_nascimento_consultado);
 
-		// sending it to DAO class to finally insert it into BD
 		PassageiroDAO passageiro_dao = new PassageiroDAO();
 
 		return passageiro_dao.listarPassageiros(conditions);
@@ -77,7 +82,6 @@ public class PassageiroController {
 		try {
 			date_data_de_nascimento = Constants.DATE_FORMAT.parse(data_de_nascimento);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
