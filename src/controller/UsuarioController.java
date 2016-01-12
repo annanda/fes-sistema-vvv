@@ -12,8 +12,10 @@ public class UsuarioController {
 		int id = 0;
 		UsuarioDAO usuario_dao = new UsuarioDAO();
 
+		Usuario novo_usuario = usuario_dao.getUsuarioByEmail(email);
+
 		// testing if email is unique...
-		if ((usuario_dao.getUsuarioByEmail(email)) == null) {
+		if (novo_usuario == null) {
 			// treating non-String arguments...
 			int int_nivel_permissao = Integer.parseInt(nivel_permissao);
 
@@ -22,12 +24,13 @@ public class UsuarioController {
 					codigo);
 
 			// instantiating the new object...
-			Usuario novo_usuario = new Usuario(0, id_pessoa, nome, endereco,
+			novo_usuario = new Usuario(0, id_pessoa, nome, endereco,
 					codigo, email, senha, int_nivel_permissao);
 
 			// sending it to DAO class to finally insert it into BD
 			id = usuario_dao.cadastrarUsuario(novo_usuario);
 		} else {
+			id = novo_usuario.getId();
 			System.out.println("Email ja cadastrado. Usuario pode ja estar cadastrado no sistema");
 		}
 		
