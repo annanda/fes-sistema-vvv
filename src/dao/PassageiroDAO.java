@@ -16,15 +16,16 @@ public class PassageiroDAO extends DAO {
 		String cpf = novo_passageiro.getCpf();
 		// INSERT INTO passageiros VALUES('int id_pessoa', 'int id_passageiro_responsavel',
 		// 'String cpf', 'String telefone', 'String profissao', 'Date data_de_nascimento');
+		Passageiro responsavel = novo_passageiro.getResponsavel();
 		String sql_query = insertFactory(
 				tabela,
 				new String[] {
 						Integer.toString(novo_passageiro.getParentId()),
-						Integer.toString(novo_passageiro.getResponsavel().getId()),
+						responsavel == null ? null : Integer.toString(responsavel.getId()),
 						novo_passageiro.getCpf(),
 						novo_passageiro.getTelefone(),
 						novo_passageiro.getProfissao(),
-						Constants.DATETIME_FORMAT.format(novo_passageiro.getDataDeNascimento())
+						Constants.DATE_FORMAT.format(novo_passageiro.getDataDeNascimento())
 				});
 		connect();
 		try {
@@ -58,9 +59,9 @@ public class PassageiroDAO extends DAO {
 			result_set = statement.executeQuery(sql_query);
 			while (result_set.next()) {
 				Passageiro responsavel = null;
-				int id_pessoa_responsavel = result_set.getInt("id_pessoa_responsavel");
-				if (id_pessoa_responsavel > 0)
-					responsavel = getPassageiroById(id_pessoa_responsavel);
+				int id_passageiro_responsavel = result_set.getInt("id_passageiro_responsavel");
+				if (id_passageiro_responsavel > 0)
+					responsavel = getPassageiroById(id_passageiro_responsavel);
 				
 				passageiros_encontrados.add(new Passageiro(
 						result_set.getInt("id_passageiro"),
@@ -97,9 +98,9 @@ public class PassageiroDAO extends DAO {
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				Passageiro responsavel = null;
-				int id_pessoa_responsavel = result_set.getInt("id_pessoa_responsavel");
-				if (id_pessoa_responsavel > 0)
-					responsavel = getPassageiroById(id_pessoa_responsavel);
+				int id_passageiro_responsavel = result_set.getInt("id_passageiro_responsavel");
+				if (id_passageiro_responsavel > 0)
+					responsavel = getPassageiroById(id_passageiro_responsavel);
 				
 				passageiro_encontrado = new Passageiro(
 						result_set.getInt("id_passageiro"),
@@ -136,9 +137,9 @@ public class PassageiroDAO extends DAO {
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				Passageiro responsavel = null;
-				int id_pessoa_responsavel = result_set.getInt("id_pessoa_responsavel");
-				if (id_pessoa_responsavel > 0)
-					responsavel = getPassageiroById(id_pessoa_responsavel);
+				int id_passageiro_responsavel = result_set.getInt("id_passageiro_responsavel");
+				if (id_passageiro_responsavel > 0)
+					responsavel = getPassageiroById(id_passageiro_responsavel);
 				
 				passageiro_encontrado = new Passageiro(
 						result_set.getInt("id_passageiro"),
@@ -175,9 +176,9 @@ public class PassageiroDAO extends DAO {
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				Passageiro responsavel = null;
-				int id_pessoa_responsavel = result_set.getInt("id_pessoa_responsavel");
-				if (id_pessoa_responsavel > 0)
-					responsavel = getPassageiroById(id_pessoa_responsavel);
+				int id_passageiro_responsavel = result_set.getInt("id_passageiro_responsavel");
+				if (id_passageiro_responsavel > 0)
+					responsavel = getPassageiroById(id_passageiro_responsavel);
 				
 				passageiro_encontrado = new Passageiro(
 						result_set.getInt("id_passageiro"),

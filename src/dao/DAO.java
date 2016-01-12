@@ -112,21 +112,21 @@ public class DAO {
 	 * @return
 	 */
 	protected String insertFactory(String tabela, String[] valores) {
-		int count = valores.length;
-		String query = "INSERT INTO " + tabela + " VALUES(0, '";
+		String query = "INSERT INTO " + tabela + " VALUES(0, ";
 
+		boolean first = true;
 		for (String valor : valores) {
-			query += valor;
+			if (first)
+				first = false;
+			else
+				query += Constants.COMMA;
 
-			if (count == 1) {
-				query += "')" + Constants.SEMICOLON;
-			} else {
-				query += Constants.SINGLE_QUOTE + Constants.COMMA
-						+ Constants.SINGLE_QUOTE;
-			}
-
-			count--;
+			if (valor == null)
+				query += "NULL";
+			else
+				query += Constants.SINGLE_QUOTE + valor + Constants.SINGLE_QUOTE;
 		}
+		query += ")" + Constants.SEMICOLON;
 
 		System.out.println(query);
 

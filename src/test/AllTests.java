@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	TestPessoa.class,
 	TestUsuario.class,
+	TestPassageiro.class,
 	TestCidade.class
 })
 public class AllTests {
