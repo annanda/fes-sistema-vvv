@@ -22,19 +22,19 @@ public class ModalDAO extends DAO {
 						novo_modal.getTipo(),
 						codigo,
 						novo_modal.getCompanhia(),
-						"" + novo_modal.getCapacidade(),
+						Integer.toString(novo_modal.getCapacidade()),
 						novo_modal.getModelo(),
-						"" + novo_modal.getAnoFabricacao(),
-						"" + novo_modal.getEmManutencao(),
-						"" + novo_modal.getEmUso(),
-						Constants.DATETIME_FORMAT.format(novo_modal
-								.getDataManutencao()) });
+						Integer.toString(novo_modal.getAnoFabricacao()),
+						Integer.toString(novo_modal.getEmManutencao()),
+						Integer.toString(novo_modal.getEmUso()),
+						Constants.DATETIME_FORMAT.format(novo_modal.getDataManutencao())
+				});
 
 		connect();
 		try {
 			statement.executeUpdate(sql_query);
 			sql_query = selectFactory(tabela, new String[] { "id_modal" },
-					"codigo = '" + codigo + Constants.SINGLE_QUOTE);
+					"codigo = " + Constants.SINGLE_QUOTE + codigo + Constants.SINGLE_QUOTE);
 			result_set = statement.executeQuery(sql_query);
 			if (result_set.first()) {
 				id = result_set.getInt("id_modal");
@@ -73,25 +73,25 @@ public class ModalDAO extends DAO {
 				ArrayList<Percurso> percursos = new ArrayList<Percurso>();
 
 				while (temp_result_set.next()) {
-					percursos.add(new Percurso(temp_result_set
-							.getInt("id_percurso"), temp_result_set
-							.getDate("hora_partida"), temp_result_set
-							.getInt("horas_duracao"), temp_result_set
-							.getString("codigo_aeroporto"), temp_result_set
-							.getInt("id_cidade_partida"), temp_result_set
-							.getInt("id_cidade_chegada")));
+					percursos.add(new Percurso(
+							temp_result_set.getInt("id_percurso"),
+							temp_result_set.getDate("hora_partida"),
+							temp_result_set.getInt("horas_duracao"),
+							temp_result_set.getString("codigo_aeroporto"),
+							temp_result_set.getInt("id_cidade_partida"),
+							temp_result_set.getInt("id_cidade_chegada")));
 				}
 
 				modais_encontrados.add(new Modal(id_modal, percursos,
-						result_set.getString("tipo"), result_set
-								.getString("codigo"), result_set
-								.getString("companhia"), result_set
-								.getInt("capacidade"), result_set
-								.getString("modelo"), result_set
-								.getInt("ano_fabricacao"), result_set
-								.getBoolean("em_manutencao"), result_set
-								.getBoolean("em_uso"), result_set
-								.getDate("data_manutencao")));
+						result_set.getString("tipo"),
+						result_set.getString("codigo"),
+						result_set.getString("companhia"),
+						result_set.getInt("capacidade"),
+						result_set.getString("modelo"),
+						result_set.getInt("ano_fabricacao"),
+						result_set.getInt("em_manutencao"),
+						result_set.getInt("em_uso"),
+						result_set.getDate("data_manutencao")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -144,13 +144,13 @@ public class ModalDAO extends DAO {
 				ArrayList<Percurso> percursos = new ArrayList<Percurso>();
 
 				while (temp_result_set.next()) {
-					percursos.add(new Percurso(temp_result_set
-							.getInt("id_percurso"), temp_result_set
-							.getDate("hora_partida"), temp_result_set
-							.getInt("horas_duracao"), temp_result_set
-							.getString("codigo_aeroporto"), temp_result_set
-							.getInt("id_cidade_partida"), temp_result_set
-							.getInt("id_cidade_chegada")));
+					percursos.add(new Percurso(
+							temp_result_set.getInt("id_percurso"),
+							temp_result_set.getDate("hora_partida"),
+							temp_result_set.getInt("horas_duracao"),
+							temp_result_set.getString("codigo_aeroporto"),
+							temp_result_set.getInt("id_cidade_partida"),
+							temp_result_set.getInt("id_cidade_chegada")));
 				}
 
 				modal_encontrado = new Modal(id, percursos,
@@ -160,8 +160,8 @@ public class ModalDAO extends DAO {
 						result_set.getInt("capacidade"),
 						result_set.getString("modelo"),
 						result_set.getInt("ano_fabricacao"),
-						result_set.getBoolean("em_manutencao"),
-						result_set.getBoolean("em_uso"),
+						result_set.getInt("em_manutencao"),
+						result_set.getInt("em_uso"),
 						result_set.getDate("data_manutencao"));
 			}
 		} catch (SQLException e) {

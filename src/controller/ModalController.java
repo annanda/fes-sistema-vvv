@@ -19,17 +19,14 @@ public class ModalController {
 		ArrayList<Percurso> percursos = new ArrayList<Percurso>();
 
 		for (String codigo_percurso : codigos_percursos) {
-			percursos.add(PercursoController
-					.getPercursoByCodigo(codigo_percurso));
+			percursos.add(PercursoController.getPercursoByCodigo(codigo_percurso));
 		}
 
 		try {
-			id = modal_dao.cadastrarModal(new Modal(percursos, tipo, codigo,
-					companhia, Integer.parseInt(capacidade), modelo, Integer
-							.parseInt(ano_fabricacao), Boolean
-							.parseBoolean(em_manutencao), Boolean
-							.parseBoolean(em_uso), Constants.DATETIME_FORMAT
-							.parse(data_manutencao)));
+			id = modal_dao.cadastrarModal(new Modal(percursos, tipo, codigo, companhia,
+					Integer.parseInt(capacidade), modelo, Integer.parseInt(ano_fabricacao),
+					Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
+					Constants.DATETIME_FORMAT.parse(data_manutencao)));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,12 +68,10 @@ public class ModalController {
 		}
 
 		try {
-			modal_dao.alterarModal(new Modal(id_modal, percursos, tipo, codigo,
-					companhia, Integer.parseInt(capacidade), modelo, Integer
-							.parseInt(ano_fabricacao), Boolean
-							.parseBoolean(em_manutencao), Boolean
-							.parseBoolean(em_uso), Constants.DATETIME_FORMAT
-							.parse(data_manutencao)));
+			modal_dao.alterarModal(new Modal(id_modal, percursos, tipo, codigo, companhia,
+					Integer.parseInt(capacidade), modelo, Integer.parseInt(ano_fabricacao),
+					Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
+					Constants.DATETIME_FORMAT.parse(data_manutencao)));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,6 +86,8 @@ public class ModalController {
 		
 		if (modal_dao.getModalById(id) != null) {
 			modal_dao.deletarModal(id);
+		} else {
+			System.out.println("Modal nao encontrado");
 		}
 	}
 }
