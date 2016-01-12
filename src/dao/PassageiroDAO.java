@@ -25,7 +25,7 @@ public class PassageiroDAO extends DAO {
 						novo_passageiro.getCpf(),
 						novo_passageiro.getTelefone(),
 						novo_passageiro.getProfissao(),
-						Constants.DATETIME_FORMAT.format(novo_passageiro.getDataDeNascimento())
+						Constants.DATE_FORMAT.format(novo_passageiro.getDataDeNascimento())
 				});
 		connect();
 		try {
