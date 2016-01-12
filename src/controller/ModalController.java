@@ -28,7 +28,7 @@ public class ModalController {
 					companhia, Integer.parseInt(capacidade), modelo, Integer
 							.parseInt(ano_fabricacao), Boolean
 							.parseBoolean(em_manutencao), Boolean
-							.parseBoolean(em_uso), Constants.DATE_FORMAT
+							.parseBoolean(em_uso), Constants.DATETIME_FORMAT
 							.parse(data_manutencao)));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -75,7 +75,7 @@ public class ModalController {
 					companhia, Integer.parseInt(capacidade), modelo, Integer
 							.parseInt(ano_fabricacao), Boolean
 							.parseBoolean(em_manutencao), Boolean
-							.parseBoolean(em_uso), Constants.DATE_FORMAT
+							.parseBoolean(em_uso), Constants.DATETIME_FORMAT
 							.parse(data_manutencao)));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -83,6 +83,14 @@ public class ModalController {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public static void deletarModal(int id) {
+		ModalDAO modal_dao = new ModalDAO();
+		
+		if (modal_dao.getModalById(id) != null) {
+			modal_dao.deletarModal(id);
 		}
 	}
 }

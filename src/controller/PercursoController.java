@@ -15,7 +15,7 @@ public class PercursoController {
 		PercursoDAO percurso_dao = new PercursoDAO();
 		try {
 			Percurso novo_percurso = new Percurso(
-					Constants.DATE_FORMAT.parse(hora_partida),
+					Constants.DATETIME_FORMAT.parse(hora_partida),
 					Integer.parseInt(horas_duracao), codigo_aeroporto,
 					CidadeController.getCidadeByCodigo(codigo_cidade_partida),
 					CidadeController.getCidadeByCodigo(codigo_cidade_destino));
@@ -38,6 +38,12 @@ public class PercursoController {
 		return percurso_dao.listarPercursos();
 	}
 
+	public static Percurso getPercursoByCodigo(String codigo) {
+		PercursoDAO percurso_dao = new PercursoDAO();
+
+		return percurso_dao.getPercursoByCodigo(codigo);
+	}
+
 	// There's no set method in Percurso Model: there's no update to Percurso;
 
 	public static void deletarPercurso(int id) {
@@ -48,11 +54,5 @@ public class PercursoController {
 		} else {
 			System.out.println("Percurso nao encontrado");
 		}
-	}
-
-	public static Percurso getPercursoByCodigo(String codigo) {
-		PercursoDAO percurso_dao = new PercursoDAO();
-
-		return percurso_dao.getPercursoByCodigo(codigo);
 	}
 }

@@ -27,7 +27,7 @@ public class ModalDAO extends DAO {
 						"" + novo_modal.getAnoFabricacao(),
 						"" + novo_modal.getEmManutencao(),
 						"" + novo_modal.getEmUso(),
-						Constants.DATE_FORMAT.format(novo_modal
+						Constants.DATETIME_FORMAT.format(novo_modal
 								.getDataManutencao()) });
 
 		connect();
@@ -64,10 +64,10 @@ public class ModalDAO extends DAO {
 		try {
 			result_set = statement.executeQuery(sql_query);
 			while (result_set.next()) {
-				int temp_id_modal = result_set.getInt("id_modal");
+				int id_modal = result_set.getInt("id_modal");
 				String temp_sql_query = selectFactory(tabela_relacionamento,
 						new String[] { Constants.ASTERISK }, "id_modal = "
-								+ temp_id_modal);
+								+ id_modal);
 				ResultSet temp_result_set = statement
 						.executeQuery(temp_sql_query);
 				ArrayList<Percurso> percursos = new ArrayList<Percurso>();
@@ -82,7 +82,7 @@ public class ModalDAO extends DAO {
 							.getInt("id_cidade_chegada")));
 				}
 
-				modais_encontrados.add(new Modal(temp_id_modal, percursos,
+				modais_encontrados.add(new Modal(id_modal, percursos,
 						result_set.getString("tipo"), result_set
 								.getString("codigo"), result_set
 								.getString("companhia"), result_set
@@ -125,5 +125,55 @@ public class ModalDAO extends DAO {
 			e.printStackTrace();
 		}
 		disconnect();
+	}
+
+	public Modal getModalById(int id) {
+		Modal modal_encontrado = null;
+		String sql_query = selectFactory(tabela,
+				new String[] { Constants.ASTERISK }, "id_modal = " + id);
+
+		connect();
+		try {
+			result_set = statement.executeQuery(sql_query);
+			if (result_set.first()) {
+				String temp_sql_query = selectFactory(tabela_relacionamento,
+						new String[] { Constants.ASTERISK }, "id_modal = " + id);
+				ResultSet temp_result_set = statement
+						.executeQuery(temp_sql_query);
+				ArrayList<Percurso> percursos = new ArrayList<Percurso>();
+
+				while (temp_result_set.next()) {
+					percursos.add(new Percurso(temp_result_set
+							.getInt("id_percurso"), temp_result_set
+							.getDate("hora_partida"), temp_result_set
+							.getInt("horas_duracao"), temp_result_set
+							.getString("codigo_aeroporto"), temp_result_set
+							.getInt("id_cidade_partida"), temp_result_set
+							.getInt("id_cidade_chegada")));
+				}
+
+				modal_encontrado = new Modal(id, percursos,
+						result_set.getString("tipo"),
+						result_set.getString("codigo"),
+						result_set.getString("companhia"),
+						result_set.getInt("capacidade"),
+						result_set.getString("modelo"),
+						result_set.getInt("ano_fabricacao"),
+						result_set.getBoolean("em_manutencao"),
+						result_set.getBoolean("em_uso"),
+						result_set.getDate("data_manutencao"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		disconnect();
+
+		return modal_encontrado;
+	}
+
+	public void deletarModal(int id) {
+		// TODO Auto-generated method stub
+
 	}
 }

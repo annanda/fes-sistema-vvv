@@ -26,7 +26,7 @@ public class PassageiroController {
 			}
 			Date date_data_de_nascimento = null;
 			try {
-				date_data_de_nascimento = Constants.DATE_FORMAT.parse(data_de_nascimento);
+				date_data_de_nascimento = Constants.DATETIME_FORMAT.parse(data_de_nascimento);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -75,7 +75,7 @@ public class PassageiroController {
 		}
 		Date date_data_de_nascimento = null;
 		try {
-			date_data_de_nascimento = Constants.DATE_FORMAT.parse(data_de_nascimento);
+			date_data_de_nascimento = Constants.DATETIME_FORMAT.parse(data_de_nascimento);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

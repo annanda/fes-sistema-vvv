@@ -16,7 +16,7 @@ public class PercursoDAO extends DAO {
 				new String[] {
 						"" + novo_percurso.getPartida().getId(),
 						"" + novo_percurso.getDestino().getId(),
-						Constants.DATE_FORMAT.format(novo_percurso
+						Constants.DATETIME_FORMAT.format(novo_percurso
 								.getHoraPartida()),
 						"" + novo_percurso.getHorasDuracaoPercurso(),
 						novo_percurso.getCodigoAeroporto(), codigo });
