@@ -13,8 +13,8 @@ public class Modal {
 	private int capacidade;
 	private String modelo;
 	private int ano_fabricacao;
-	private boolean em_manutencao;
-	private boolean em_uso;
+	private int em_manutencao;
+	private int em_uso;
 	private Date data_manutencao;
 
 	// (BEGIN) CONSTRUCTORS
@@ -23,7 +23,7 @@ public class Modal {
 	 */
 	public Modal(ArrayList<Percurso> percursos, String tipo, String codigo,
 			String companhia, int capacidade, String modelo,
-			int ano_fabricacao, boolean em_manutencao, boolean em_uso,
+			int ano_fabricacao, int em_manutencao, int em_uso,
 			Date data_manutencao) {
 		// Setting non-specified attributes...
 		this.id = 0;
@@ -45,19 +45,11 @@ public class Modal {
 	 */
 	public Modal(int id, ArrayList<Percurso> percursos, String tipo,
 			String codigo, String companhia, int capacidade, String modelo,
-			int ano_fabricacao, boolean em_manutencao, boolean em_uso,
+			int ano_fabricacao, int em_manutencao, int em_uso,
 			Date data_manutencao) {
+		this(percursos, tipo, codigo, companhia, capacidade, modelo,
+				ano_fabricacao, em_manutencao, em_uso, data_manutencao);
 		this.id = id;
-		setPercursos(percursos);
-		this.tipo = tipo;
-		this.codigo = codigo;
-		setCompanhia(companhia);
-		setCapacidade(capacidade);
-		setModelo(modelo);
-		this.ano_fabricacao = ano_fabricacao;
-		setEmManutencao(em_manutencao);
-		setEmUso(em_uso);
-		setDataManutencao(data_manutencao);
 	}
 
 	// (END) CONSTRUCTORS
@@ -99,19 +91,19 @@ public class Modal {
 		return ano_fabricacao;
 	}
 
-	public boolean getEmManutencao() {
+	public int getEmManutencao() {
 		return em_manutencao;
 	}
 
-	public void setEmManutencao(boolean em_manutencao) {
+	public void setEmManutencao(int em_manutencao) {
 		this.em_manutencao = em_manutencao;
 	}
 
-	public boolean getEmUso() {
+	public int getEmUso() {
 		return em_uso;
 	}
 
-	public void setEmUso(boolean em_uso) {
+	public void setEmUso(int em_uso) {
 		this.em_uso = em_uso;
 	}
 
