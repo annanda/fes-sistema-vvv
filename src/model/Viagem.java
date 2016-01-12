@@ -26,6 +26,26 @@ public class Viagem {
 		this.nome_do_pacote = nome_do_pacote;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public int getLotacao() {
+		return lotacao;
+	}
+
+	public void setLotacao(int lotacao) {
+		this.lotacao = lotacao;
+	}
+
+	public Date getDataPartida() {
+		return data_partida;
+	}
+
+	public Date getDataChegada() {
+		return data_chegada;
+	}
+
 	public ArrayList<Percurso> getPlanoDeViagem() {
 		return plano_de_viagem;
 	}
