@@ -21,8 +21,7 @@ public class ModalController {
 			Modal novo_modal = new Modal(null, tipo, codigo, companhia,
 					Integer.parseInt(capacidade), modelo,
 					Integer.parseInt(ano_fabricacao),
-					Boolean.parseBoolean(em_manutencao),
-					Boolean.parseBoolean(em_uso),
+					Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
 					Constants.DATETIME_FORMAT.parse(data_manutencao));
 			id = modal_dao.cadastrarModal(novo_modal);
 			for (String codigo_percurso : codigos_percursos) {
@@ -75,11 +74,10 @@ public class ModalController {
 			Modal modal_modificado = new Modal(id_modal, null, tipo, codigo,
 					companhia, Integer.parseInt(capacidade), modelo,
 					Integer.parseInt(ano_fabricacao),
-					Boolean.parseBoolean(em_manutencao),
-					Boolean.parseBoolean(em_uso),
+					Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
 					Constants.DATETIME_FORMAT.parse(data_manutencao));
 			modal_dao.alterarModal(modal_modificado);
-			
+
 			for (String codigo_percurso : codigos_percursos) {
 				Percurso temp_percurso_modificado = PercursoController
 						.getPercursoByCodigo(codigo_percurso);

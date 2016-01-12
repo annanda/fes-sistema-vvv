@@ -63,8 +63,8 @@ public class ModalDAO extends DAO {
 								.getInt("capacidade"), result_set
 								.getString("modelo"), result_set
 								.getInt("ano_fabricacao"), result_set
-								.getBoolean("em_manutencao"), result_set
-								.getBoolean("em_uso"), result_set
+								.getInt("em_manutencao"), result_set
+								.getInt("em_uso"), result_set
 								.getDate("data_manutencao")));
 			}
 		} catch (SQLException e) {
@@ -108,8 +108,8 @@ public class ModalDAO extends DAO {
 						result_set.getInt("capacidade"),
 						result_set.getString("modelo"),
 						result_set.getInt("ano_fabricacao"),
-						result_set.getBoolean("em_manutencao"),
-						result_set.getBoolean("em_uso"),
+						result_set.getInt("em_manutencao"),
+						result_set.getInt("em_uso"),
 						result_set.getDate("data_manutencao"));
 			}
 		} catch (SQLException e) {
