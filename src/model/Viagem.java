@@ -16,19 +16,18 @@ public class Viagem {
 		this.id = 0;
 
 		setNomeDoPacote(nome_do_pacote);
-		setLotacao(lotacao);
+		setLotacao(plano_de_viagem);
 		this.data_partida = this.plano_de_viagem.get(0).getHoraPartida();
 		this.data_chegada = this.plano_de_viagem.get(
 				this.plano_de_viagem.size() - 1).calcHoraChegada();
 		setPlanoDeViagem(plano_de_viagem);
 	}
 
-	public Viagem(int id, String nome_do_pacote, int lotacao,
-			Date data_partida, Date data_chegada,
-			ArrayList<Percurso> plano_de_viagem) {
+	public Viagem(int id, String nome_do_pacote, Date data_partida,
+			Date data_chegada, ArrayList<Percurso> plano_de_viagem) {
 		this.id = id;
 		setNomeDoPacote(nome_do_pacote);
-		setLotacao(lotacao);
+		setLotacao(plano_de_viagem);
 		this.data_partida = data_partida;
 		this.data_chegada = data_chegada;
 		setPlanoDeViagem(plano_de_viagem);
@@ -53,7 +52,22 @@ public class Viagem {
 		return lotacao;
 	}
 
-	public void setLotacao(int lotacao) {
+	public void setLotacao(ArrayList<Percurso> plano_de_viagem) {
+		boolean test = true;
+		int lotacao = 0;
+		int capacidade;
+
+		for (Percurso percurso : plano_de_viagem) {
+			if (test) {
+				test = false;
+				lotacao = percurso.getModal().getCapacidade();
+			} else {
+				capacidade = percurso.getModal().getCapacidade();
+				if (capacidade < lotacao) {
+					lotacao = capacidade;
+				}
+			}
+		}
 		this.lotacao = lotacao;
 	}
 
