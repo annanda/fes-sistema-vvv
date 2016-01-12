@@ -3,92 +3,91 @@ package model;
 import java.util.HashMap;
 
 public class Usuario extends Pessoa {
-	protected int id;
-	private String email;
-	private String senha;
-	private int nivel_permissao;
+  protected int id;
+  private String email;
+  private String senha;
+  private int nivel_permissao;
 
-	// (BEGIN) CONSTRUCTORS
-	/*
-	 * For logic purpose
-	 */
-	public Usuario(String nome, String endereco, String codigo, String email,
-			String senha, int nivel_permissao) {
-		super(nome, endereco, codigo);
-		// Setting non-specified attributes...
-		this.id = 0;
+  // (BEGIN) CONSTRUCTORS
+  /*
+   * For logic purpose
+   */
+  public Usuario(String nome, String endereco, String codigo, String email, String senha,
+      int nivel_permissao) {
+    super(nome, endereco, codigo);
+    // Setting non-specified attributes...
+    this.id = 0;
 
-		setEmail(email);
-		setSenha(senha);
-		setNivelPermissao(nivel_permissao);
-	}
+    setEmail(email);
+    setSenha(senha);
+    setNivelPermissao(nivel_permissao);
+  }
 
-	/*
-	 * For database returns
-	 */
-	public Usuario(int id_usuario, int id_pessoa, String nome, String endereco,
-			String codigo, String email, String senha, int nivel_permissao) {
-		super(id_pessoa, nome, endereco, codigo);
-		this.id = id_usuario;
-		setEmail(email);
-		setSenha(senha);
-		setNivelPermissao(nivel_permissao);
-	}
+  /*
+   * For database returns
+   */
+  public Usuario(int id_usuario, int id_pessoa, String nome, String endereco, String codigo,
+      String email, String senha, int nivel_permissao) {
+    super(id_pessoa, nome, endereco, codigo);
+    this.id = id_usuario;
+    setEmail(email);
+    setSenha(senha);
+    setNivelPermissao(nivel_permissao);
+  }
 
-	// (END) CONSTRUCTORS
+  // (END) CONSTRUCTORS
 
-	// (BEGIN) GETTERS & SETTERS
-	public String getEmail() {
-		return email;
-	}
+  // (BEGIN) GETTERS & SETTERS
+  public String getEmail() {
+    return email;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public String getSenha() {
-		return senha;
-	}
+  public String getSenha() {
+    return senha;
+  }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+  public void setSenha(String senha) {
+    this.senha = senha;
+  }
 
-	public int getNivelPermissao() {
-		return nivel_permissao;
-	}
+  public int getNivelPermissao() {
+    return nivel_permissao;
+  }
 
-	public void setNivelPermissao(int nivel_permissao) {
-		this.nivel_permissao = nivel_permissao;
-	}
+  public void setNivelPermissao(int nivel_permissao) {
+    this.nivel_permissao = nivel_permissao;
+  }
 
-	public int getId() {
-		return this.id;
-	}
+  public int getId() {
+    return this.id;
+  }
 
-	public int getParentId() {
-		return super.getId();
-	}
+  public int getParentId() {
+    return super.getId();
+  }
 
-	// (END) GETTERS & SETTERS
+  // (END) GETTERS & SETTERS
 
-	/*
-	 * Turns your object into a HashMap object with all columns (attributes)
-	 * (except for its own id) names as keys of type String and their values as
-	 * values also of type String
-	 */
-	public HashMap<String, String> toHashMap() {
-		HashMap<String, String> usuario = new HashMap<String, String>();
+  /*
+   * Turns your object into a HashMap object with all columns (attributes) (except for its own id)
+   * names as keys of type String and their values as values also of type String
+   */
+  public HashMap<String, String> toHashMap() {
+    HashMap<String, String> usuario = new HashMap<String, String>();
 
-		usuario.put("id_pessoa", "" + this.getParentId());
-		usuario.put("email", this.getEmail());
-		usuario.put("senha", this.getSenha());
-		usuario.put("nivel_permissao", "" + this.getNivelPermissao());
+    usuario.put("id_pessoa", "" + this.getParentId());
+    usuario.put("email", this.getEmail());
+    usuario.put("senha", this.getSenha());
+    usuario.put("nivel_permissao", "" + this.getNivelPermissao());
 
-		return usuario;
-	}
+    return usuario;
+  }
 
-	protected void fazerReserva(Reserva reserva) {
+  protected void fazerReserva(Reserva reserva) {
 
-	}
+  }
 }
