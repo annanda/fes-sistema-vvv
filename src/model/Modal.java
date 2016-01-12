@@ -146,8 +146,7 @@ public class Modal {
 		modal.put("ano_fabricacao", "" + this.getAnoFabricacao());
 		modal.put("em_manutencao", "" + this.getEmManutencao());
 		modal.put("em_uso", "" + this.getEmUso());
-		modal.put("data_manutencao",
-				(data_manutencao != null) ? data_manutencao.toString() : null);
+		modal.put("data_manutencao", Constants.DATETIME_FORMAT.format(data_manutencao));
 
 		return modal;
 	}
