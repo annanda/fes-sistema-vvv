@@ -39,7 +39,7 @@ public class TestUsuario {
 	}
 
 	@Test
-	public void listarCidades() {
+	public void listarUsuarios() {
 		UsuarioController.cadastrarUsuario("test", "test", "test",
 				"test@test.com", "test", "0");
 		ArrayList<Usuario> l = UsuarioController.listarUsuarios("test", "test",
@@ -49,7 +49,6 @@ public class TestUsuario {
 		assertNotNull(l);
 		assertEquals(l.size(), 1);
 	}
-
 
 	@Test
 	public void alterarUsuario() {
