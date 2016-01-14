@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jan-2016 às 16:09
+-- Generation Time: 14-Jan-2016 às 02:11
 -- Versão do servidor: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -258,7 +258,8 @@ CREATE TABLE `viagens` (
   `nome_do_pacote` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lotacao` int(10) UNSIGNED NOT NULL,
   `data_partida` datetime NOT NULL,
-  `data_chegada` datetime NOT NULL
+  `data_chegada` datetime NOT NULL,
+  `codigo` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -275,7 +276,8 @@ DROP TABLE IF EXISTS `viagens_percursos`;
 CREATE TABLE `viagens_percursos` (
   `id_viagem_percurso` int(11) NOT NULL,
   `id_viagem` int(11) NOT NULL,
-  `id_percurso` int(11) NOT NULL
+  `id_percurso` int(11) NOT NULL,
+  `ordem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -322,6 +324,7 @@ ALTER TABLE `passageiros`
 --
 ALTER TABLE `percursos`
   ADD PRIMARY KEY (`id_percurso`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
   ADD KEY `id_cidade_partida` (`id_cidade_partida`),
   ADD KEY `id_cidade_chegada` (`id_cidade_chegada`),
   ADD KEY `id_modal` (`id_modal`);
@@ -370,7 +373,8 @@ ALTER TABLE `usuarios`
 -- Indexes for table `viagens`
 --
 ALTER TABLE `viagens`
-  ADD PRIMARY KEY (`id_viagem`);
+  ADD PRIMARY KEY (`id_viagem`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Indexes for table `viagens_percursos`

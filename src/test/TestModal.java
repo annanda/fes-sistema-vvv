@@ -45,8 +45,7 @@ public class TestModal {
       id =
           ModalController.cadastrarModal(new String[] {}, "test", "test", "test", "111", "test",
               "2000", "0", "0", "2016-01-11 00:00:00");
-      ModalController.alterarModal(id, new String[] {}, "asdf", "asdf", "asdf", "222", "asdf",
-          "2002", "1", "1", "2016-01-12 01:01:01");
+      ModalController.alterarModal(id, new String[] {}, "asdf", "222", "1", "1", "2016-01-12 01:01:01");
     } catch (Exception e) {
       fail();
     } finally {
