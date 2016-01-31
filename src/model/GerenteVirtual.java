@@ -7,7 +7,7 @@ public class GerenteVirtual extends Usuario {
         super(nome, endereco, codigo, email, senha, nivel_permissao);
     }
 
-    private void aprovarVendas() {
+    public void aprovarVendas() {
 
     }
 }
