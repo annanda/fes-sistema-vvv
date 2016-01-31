@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 31, 2016 at 11:06 PM
+-- Generation Time: Jan 31, 2016 at 11:46 PM
 -- Server version: 10.1.11-MariaDB-log
 -- PHP Version: 7.0.2
 
@@ -130,7 +130,7 @@ CREATE TABLE `pontos_de_venda` (
 DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE `reservas` (
   `id_reserva` int(11) NOT NULL,
-  `id_pessoa` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_viagem` int(11) NOT NULL,
   `codigo` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `data_da_reserva` datetime NOT NULL,
@@ -138,6 +138,19 @@ CREATE TABLE `reservas` (
   `valor` decimal(8,2) UNSIGNED NOT NULL,
   `tipo_pagamento` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `qtd_parcelas` int(11) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservas_passageiros`
+--
+
+DROP TABLE IF EXISTS `reservas_passageiros`;
+CREATE TABLE `reservas_passageiros` (
+  `id_reserva_passageiro` int(11) NOT NULL,
+  `id_reserva` int(11) NOT NULL,
+  `id_passageiro` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -257,8 +270,16 @@ ALTER TABLE `pontos_de_venda`
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id_reserva`),
   ADD UNIQUE KEY `codigo` (`codigo`),
-  ADD KEY `id_pessoa` (`id_pessoa`),
-  ADD KEY `id_viagem` (`id_viagem`);
+  ADD KEY `id_viagem` (`id_viagem`),
+  ADD KEY `id_usuario` (`id_usuario`) USING BTREE;
+
+--
+-- Indexes for table `reservas_passageiros`
+--
+ALTER TABLE `reservas_passageiros`
+  ADD PRIMARY KEY (`id_reserva_passageiro`),
+  ADD KEY `id_reserva` (`id_reserva`),
+  ADD KEY `id_passageiro` (`id_passageiro`);
 
 --
 -- Indexes for table `tickets`
@@ -332,6 +353,11 @@ ALTER TABLE `pontos_de_venda`
 ALTER TABLE `reservas`
   MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `reservas_passageiros`
+--
+ALTER TABLE `reservas_passageiros`
+  MODIFY `id_reserva_passageiro` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
@@ -374,8 +400,15 @@ ALTER TABLE `percursos`
 -- Constraints for table `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoas` (`id_pessoa`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_viagem`) REFERENCES `viagens` (`id_viagem`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `reservas_passageiros`
+--
+ALTER TABLE `reservas_passageiros`
+  ADD CONSTRAINT `reservas_passageiros_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reservas_passageiros_ibfk_2` FOREIGN KEY (`id_passageiro`) REFERENCES `passageiros` (`id_passageiro`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tickets`
