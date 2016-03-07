@@ -29,4 +29,6 @@ public final class Constants {
     public static final String ASTERISK = "*";
 
     public static final String UNDERSCORE = "_";
+    
+    public static final String GENERATE = "gerar";
 }

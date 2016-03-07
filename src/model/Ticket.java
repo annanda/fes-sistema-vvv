@@ -1,30 +1,33 @@
 package model;
 
 public class Ticket {
-    protected int id;
+    private int id;
     private int numero;
     private String id_localizador;
+    private Reserva reserva;
+    private Percurso percurso;
 
     // (BEGIN) CONSTRUCTORS
-    /*
-     * Constructor Pattern
-     */
-    public Ticket(int numero, String id_localizador) {
+    public Ticket(int numero, String id_localizador, Reserva reserva, Percurso percurso) {
+        this.id = 0;
         this.numero = numero;
-        this.id_localizador = id_localizador;
+        this.reserva = reserva;
+        this.percurso = percurso;
+
+        if (id_localizador.equals(Constants.GENERATE)) {
+            this.id_localizador =
+                    this.id + "vvvp=" + this.percurso.getId() + "r=" + this.reserva.getId();
+        } else {
+            this.id_localizador = id_localizador;
+        }
     }
 
-    /*
-     * This constructor handles all arguments as String types and treat each of them to successfully
-     * instantiate a Ticket object. It's useful when getting values from java swing
-     */
-    public Ticket(String numero, String id_localizador) {
-        // treating...
-        int int_numero = Integer.parseInt(numero);
-
-        // instantiating...
-        this.numero = int_numero;
+    public Ticket(int id, int numero, String id_localizador, Reserva reserva, Percurso percurso) {
+        this.id = id;
+        this.numero = numero;
         this.id_localizador = id_localizador;
+        this.reserva = reserva;
+        this.percurso = percurso;
     }
 
     // (END) CONSTRUCTORS
@@ -36,6 +39,18 @@ public class Ticket {
 
     public String getIdLocalizador() {
         return id_localizador;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public Percurso getPercurso() {
+        return percurso;
+    }
+
+    public int getId() {
+        return id;
     }
 
     // (END) GETTERS & SETTERS

@@ -1,57 +1,60 @@
 package model;
 
-import static model.Constants.DATETIME_FORMAT;
-import java.text.ParseException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Reserva {
-    protected int id;
+    private int id;
     private String codigo;
     private Date data_da_reserva;
     private boolean status;
-    private float valor;
+    private double valor;
     private String tipo_pagamento;
     private int qtd_parcelas;
+    private Usuario reservante;
+    private ArrayList<Passageiro> passageiros;
+    private Viagem viagem;
 
     // (BEGIN) CONSTRUCTORS
-    /*
-     * Constructor Pattern
-     */
-    public Reserva(String codigo, Date data, boolean status, float valor, String tipo_pagamento,
-            int qtd_parcelas) {
+    public Reserva(String codigo, Date data, boolean status, double valor, String tipo_pagamento,
+            int qtd_parcelas, Usuario reservante, ArrayList<Passageiro> passageiros, Viagem viagem) {
+        this.id = 0;
         this.codigo = codigo;
         this.data_da_reserva = data;
         setStatus(status);
         setValor(valor);
         setTipoPagamento(tipo_pagamento);
         setQtdParcelas(qtd_parcelas);
+        this.reservante = reservante;
+        setPassageiros(passageiros);
+        setViagem(viagem);
     }
 
-    /*
-     * This constructor handles all arguments as String types and treat each of them to successfully
-     * instantiate a Reserva object. It's useful when getting values from java swing
-     */
-    public Reserva(String codigo, String data, String status, String valor, String tipo_pagamento,
-            String qtd_parcelas) throws ParseException {
-        // treating...
-        Date date_data = DATETIME_FORMAT.parse(data);
-        boolean boolean_status = Boolean.parseBoolean(status);
-        float float_valor = Float.parseFloat(valor);
-        int int_qtd_parcelas = Integer.parseInt(qtd_parcelas);
-
-        // instantiating...
+    public Reserva(int id, String codigo, Date data, boolean status, double valor,
+            String tipo_pagamento, int qtd_parcelas, Usuario reservante,
+            ArrayList<Passageiro> passageiros, Viagem viagem) {
+        this.id = id;
         this.codigo = codigo;
-        this.data_da_reserva = date_data;
-        setStatus(boolean_status);
-        setValor(float_valor);
+        this.data_da_reserva = data;
+        setStatus(status);
+        setValor(valor);
         setTipoPagamento(tipo_pagamento);
-        setQtdParcelas(int_qtd_parcelas);
+        setQtdParcelas(qtd_parcelas);
+        this.reservante = reservante;
+        setPassageiros(passageiros);
+        setViagem(viagem);
     }
 
     // (END) CONSTRUCTORS
 
     // (BEGIN) GETTERS & SETTERS
+    public int getId() {
+        return id;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -68,11 +71,11 @@ public class Reserva {
         this.status = status;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
@@ -92,13 +95,72 @@ public class Reserva {
         this.qtd_parcelas = qtd_parcelas;
     }
 
-    // (END) GETTERS & SETTERS
-
-    private float calcularParcelas(float valor, int qtd_parcelas) {
-        return valor;
+    public Usuario getReservante() {
+        return reservante;
     }
 
-    private ArrayList<Ticket> gerarTickets(boolean status) {
-        return null;
+    public ArrayList<Passageiro> getPassageiros() {
+        return passageiros;
+    }
+
+    public void setPassageiros(ArrayList<Passageiro> passageiros) {
+        this.passageiros = passageiros;
+    }
+
+    public Viagem getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
+    }
+
+    // (END) GETTERS & SETTERS
+
+    /*
+     * Turns your object into a HashMap object with all columns (attributes) (except for its own id)
+     * names as keys of type String and their values as values also of type String
+     */
+    public HashMap<String, String> toHashMap() {
+        HashMap<String, String> reserva = new HashMap<String, String>();
+
+        reserva.put("status", "" + this.status);
+        reserva.put("tipo_pagamento", this.tipo_pagamento);
+        reserva.put("qtd_parcelas", "" + this.qtd_parcelas);
+
+        return reserva;
+    }
+
+    public double[] calcularParcelas() {
+        double[] valores_parcelas = new double[this.qtd_parcelas];
+        DecimalFormat decimal_format = new DecimalFormat("#.00");
+        double primeiras_parcelas =
+                Double.parseDouble(decimal_format.format(this.valor / this.qtd_parcelas));
+        int qtd_primeiras_parcelas = this.qtd_parcelas - 1;
+
+        for (int i = 0; i < qtd_primeiras_parcelas; i++) {
+            valores_parcelas[i] = primeiras_parcelas;
+        }
+        valores_parcelas[qtd_primeiras_parcelas] =
+                this.valor - (primeiras_parcelas * qtd_primeiras_parcelas);
+
+        return valores_parcelas;
+    }
+
+    public ArrayList<Ticket> gerarTickets() {
+        if (this.status) {
+            ArrayList<Percurso> plano_de_viagem = this.viagem.getPlanoDeViagem();
+            ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+            Random randomizador = new Random();
+
+            for (Percurso percurso : plano_de_viagem) {
+                tickets.add(new Ticket(randomizador.nextInt(1000000000) + 100000000,
+                        Constants.GENERATE, this, percurso));
+            }
+
+            return tickets;
+        } else {
+            return null;
+        }
     }
 }
