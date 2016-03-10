@@ -115,4 +115,16 @@ public class PassageiroController {
             System.out.println("Passageiro nao encontrado para deletar");
         }
     }
+
+    public static ArrayList<Passageiro> takeListaDePassageirosById(String[] ids_passageiros) {
+        PassageiroDAO passageiro_dao = new PassageiroDAO();
+        ArrayList<Passageiro> lista_de_passageiros = new ArrayList<Passageiro>();
+
+        for (String id_passageiro : ids_passageiros) {
+            lista_de_passageiros.add(passageiro_dao.getPassageiroById(Integer
+                    .parseInt(id_passageiro)));
+        }
+
+        return lista_de_passageiros;
+    }
 }
