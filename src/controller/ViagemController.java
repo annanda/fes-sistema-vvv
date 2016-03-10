@@ -57,6 +57,12 @@ public class ViagemController {
         return viagem_dao.listarViagens(conditions);
     }
 
+    public static Viagem getViagemById(int id) {
+        ViagemDAO viagem_dao = new ViagemDAO();
+
+        return viagem_dao.getViagemById(id);
+    }
+
     public static Viagem getViagemByCodigo(String codigo) {
         ViagemDAO viagem_dao = new ViagemDAO();
 
