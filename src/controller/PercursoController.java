@@ -111,11 +111,11 @@ public class PercursoController {
         }
     }
 
-    public static ArrayList<Percurso> makePlanoDeViagemByIds(String[] id_percursos) {
+    public static ArrayList<Percurso> makePlanoDeViagemByIds(String[] ids_percursos) {
         PercursoDAO percurso_dao = new PercursoDAO();
         ArrayList<Percurso> plano_de_viagem = new ArrayList<Percurso>();
 
-        for (String id_percurso : id_percursos) {
+        for (String id_percurso : ids_percursos) {
             plano_de_viagem.add(percurso_dao.getPercursoById(Integer.parseInt(id_percurso)));
         }
 
