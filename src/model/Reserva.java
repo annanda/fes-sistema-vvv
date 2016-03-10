@@ -19,33 +19,34 @@ public class Reserva {
     private Viagem viagem;
 
     // (BEGIN) CONSTRUCTORS
-    public Reserva(String codigo, Date data, boolean status, double valor, String tipo_pagamento,
-            int qtd_parcelas, Usuario reservante, ArrayList<Passageiro> passageiros, Viagem viagem) {
+    public Reserva(String codigo, Date data_da_reserva, boolean status, double valor,
+            String tipo_pagamento, int qtd_parcelas, Usuario reservante,
+            ArrayList<Passageiro> passageiros, Viagem viagem) {
         this.id = 0;
         this.codigo = codigo;
-        this.data_da_reserva = data;
+        this.data_da_reserva = data_da_reserva;
         setStatus(status);
-        setValor(valor);
+        this.valor = valor;
         setTipoPagamento(tipo_pagamento);
         setQtdParcelas(qtd_parcelas);
         this.reservante = reservante;
-        setPassageiros(passageiros);
-        setViagem(viagem);
+        this.passageiros = passageiros;
+        this.viagem = viagem;
     }
 
-    public Reserva(int id, String codigo, Date data, boolean status, double valor,
+    public Reserva(int id, String codigo, Date data_da_reserva, boolean status, double valor,
             String tipo_pagamento, int qtd_parcelas, Usuario reservante,
             ArrayList<Passageiro> passageiros, Viagem viagem) {
         this.id = id;
         this.codigo = codigo;
-        this.data_da_reserva = data;
+        this.data_da_reserva = data_da_reserva;
         setStatus(status);
-        setValor(valor);
+        this.valor = valor;
         setTipoPagamento(tipo_pagamento);
         setQtdParcelas(qtd_parcelas);
         this.reservante = reservante;
-        setPassageiros(passageiros);
-        setViagem(viagem);
+        this.passageiros = passageiros;
+        this.viagem = viagem;
     }
 
     // (END) CONSTRUCTORS
@@ -59,7 +60,7 @@ public class Reserva {
         return codigo;
     }
 
-    public Date getData() {
+    public Date getDataDaReserva() {
         return data_da_reserva;
     }
 
@@ -73,10 +74,6 @@ public class Reserva {
 
     public double getValor() {
         return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public String getTipoPagamento() {
@@ -103,16 +100,8 @@ public class Reserva {
         return passageiros;
     }
 
-    public void setPassageiros(ArrayList<Passageiro> passageiros) {
-        this.passageiros = passageiros;
-    }
-
     public Viagem getViagem() {
         return viagem;
-    }
-
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
     }
 
     // (END) GETTERS & SETTERS
