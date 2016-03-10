@@ -88,7 +88,7 @@ public class ViagemDAO extends DAO {
             result_set = statement.executeQuery(sql_query);
 
             while (result_set.next()) {
-                int temp_id_viagem = result_set.getInt("id_viagem_percurso");
+                int temp_id_viagem = result_set.getInt("id_viagem");
                 viagens_encontradas.add(new Viagem(temp_id_viagem, result_set
                         .getString("nome_do_pacote"), result_set.getDate("data_partida"),
                         result_set.getDate("data_chegada"), ViagemController
@@ -156,9 +156,10 @@ public class ViagemDAO extends DAO {
     }
 
     public ArrayList<Percurso> getPlanoDeViagemByViagemId(int id) {
+        final String id_percurso_label = "id_percurso";
         ArrayList<Percurso> plano_de_viagem_encontrado = new ArrayList<Percurso>();
         String sql_query =
-                selectFactory(tabela_relacionamento, new String[] { "id_percurso", "ordem" },
+                selectFactory(tabela_relacionamento, new String[] { id_percurso_label, "ordem" },
                         "id_viagem = " + id);
 
         connect();
@@ -166,7 +167,7 @@ public class ViagemDAO extends DAO {
             result_set = statement.executeQuery(sql_query);
             while (result_set.next()) {
                 plano_de_viagem_encontrado.add(result_set.getInt("ordem"),
-                        PercursoController.getPercursoById(result_set.getInt("id_percurso")));
+                        PercursoController.getPercursoById(result_set.getInt(id_percurso_label)));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -202,8 +203,7 @@ public class ViagemDAO extends DAO {
     }
 
     public void deletarViagem(int id) {
-        String condition = "id_viagem = " + id;
-        String sql_query = deleteFactory(tabela, condition);
+        String sql_query = deleteFactory(tabela, "id_viagem = " + id);
 
         connect();
         try {
