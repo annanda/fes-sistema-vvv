@@ -80,7 +80,8 @@ public class UsuarioController {
                 usuario_modificado.setEndereco(endereco_modificado);
                 usuario_modificado.setNivelPermissao(int_nivel_permissao_modificado);
                 usuario_modificado.setNome(nome_modificado);
-                usuario_modificado.setSenha(senha_modificada);
+                if (senha_modificada != null)
+                    usuario_modificado.setSenha(senha_modificada);
 
                 // updating pessoa related to this usuario
                 PessoaController.alterarPessoa(usuario_modificado.getParentId(),

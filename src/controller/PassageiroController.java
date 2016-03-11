@@ -11,7 +11,7 @@ import model.Constants;
 
 public class PassageiroController {
     public static int cadastrarPassageiro(String nome, String endereco, String codigo, String cpf,
-            String telefone, String profissao, String data_de_nascimento, String responsavel) {
+            String telefone, String profissao, String data_de_nascimento, String cpf_responsavel) {
         int id = 0;
         PassageiroDAO passageiro_dao = new PassageiroDAO();
 
@@ -21,10 +21,8 @@ public class PassageiroController {
         if (novo_passageiro == null) {
             // treating non-String arguments...
             Passageiro passageiro_responsavel = null;
-            if (responsavel != null && responsavel.isEmpty()) {
-                int id_responsavel = Integer.parseInt(responsavel);
-                passageiro_responsavel = passageiro_dao.getPassageiroById(id_responsavel);
-            }
+            if (cpf_responsavel != null && cpf_responsavel.isEmpty())
+                passageiro_responsavel = passageiro_dao.getPassageiroByCpf(cpf_responsavel);
             Date date_data_de_nascimento = null;
             try {
                 date_data_de_nascimento = Constants.DATE_FORMAT.parse(data_de_nascimento);
@@ -56,6 +54,12 @@ public class PassageiroController {
 
         return passageiro_dao.getPassageiroById(id);
     }
+    
+    public static Passageiro getPassageiroByCpf(String cpf) {
+        PassageiroDAO passageiro_dao = new PassageiroDAO();
+
+        return passageiro_dao.getPassageiroByCpf(cpf);
+    }
 
     public static ArrayList<Passageiro> listarPassageiros(String nome_consultado,
             String endereco_consultado, String codigo_consultado,
@@ -74,7 +78,7 @@ public class PassageiroController {
 
     public static void alterarPassageiro(int id, String nome_modificado,
             String endereco_modificado, String telefone_modificado, String profissao_modificado,
-            String id_responsavel_modificado) {
+            String cpf_responsavel_modificado) {
         PassageiroDAO passageiro_dao = new PassageiroDAO();
 
         // instantiating the modified object...
@@ -83,10 +87,9 @@ public class PassageiroController {
         if (passageiro_modificado != null) {
             // treating non-String arguments...
             Passageiro passageiro_responsavel_modificado = null;
-            if (id_responsavel_modificado != null && id_responsavel_modificado.isEmpty()) {
-                int int_id_responsavel_modificado = Integer.parseInt(id_responsavel_modificado);
+            if (cpf_responsavel_modificado != null && cpf_responsavel_modificado.isEmpty()) {
                 passageiro_responsavel_modificado =
-                        passageiro_dao.getPassageiroById(int_id_responsavel_modificado);
+                        passageiro_dao.getPassageiroByCpf(cpf_responsavel_modificado);
             }
 
             // modifying...
