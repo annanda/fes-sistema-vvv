@@ -15,7 +15,7 @@ public class TestCidade {
     public void cadastrarCidade() {
         int id = 0;
         try {
-            id = CidadeController.cadastrarCidade("test", "tes", "test");;
+            id = CidadeController.cadastrarCidade("test", "tes", "test");
         } catch (Exception e) {
             fail();
         } finally {
