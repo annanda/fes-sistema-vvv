@@ -9,9 +9,10 @@ import model.Constants;
 import model.Modal;
 
 public class ModalDAO extends DAO {
-    private String tabela = "modais";
+    final private String tabela = "modais";
 
     public int cadastrarModal(Modal novo_modal) {
+        final String id_modal_label = "id_modal";
         int id = 0;
         String codigo = novo_modal.getCodigo();
         String sql_query =
@@ -27,11 +28,11 @@ public class ModalDAO extends DAO {
         try {
             statement.executeUpdate(sql_query);
             sql_query =
-                    selectFactory(tabela, new String[] { "id_modal" }, "codigo = '" + codigo
+                    selectFactory(tabela, new String[] { id_modal_label }, "codigo = '" + codigo
                             + Constants.SINGLE_QUOTE);
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
-                id = result_set.getInt("id_modal");
+                id = result_set.getInt(id_modal_label);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
