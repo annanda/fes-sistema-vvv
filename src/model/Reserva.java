@@ -24,7 +24,7 @@ public class Reserva {
             ArrayList<Passageiro> passageiros, Viagem viagem) {
         this.id = 0;
         this.codigo = codigo;
-        this.data_da_reserva = data_da_reserva;
+        this.data_da_reserva = (data_da_reserva == null) ? new Date() : data_da_reserva;
         setStatus(status);
         this.valor = valor;
         setTipoPagamento(tipo_pagamento);
@@ -39,7 +39,7 @@ public class Reserva {
             ArrayList<Passageiro> passageiros, Viagem viagem) {
         this.id = id;
         this.codigo = codigo;
-        this.data_da_reserva = data_da_reserva;
+        this.data_da_reserva = (data_da_reserva == null) ? new Date() : data_da_reserva;
         setStatus(status);
         this.valor = valor;
         setTipoPagamento(tipo_pagamento);

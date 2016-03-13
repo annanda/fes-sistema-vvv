@@ -9,15 +9,17 @@ import dao.ReservaDAO;
 
 public class ReservaController {
     public static HashMap<String, Integer> cadastrarReserva(String codigo, int qtd_parcelas,
-            String tipo_pagamento, double valor, boolean status, String[] ids_passageiros) {
+            String tipo_pagamento, double valor, boolean status, String[] ids_passageiros,
+            int id_reservante, int id_viagem) {
         int id_reserva = 0;
         HashMap<String, Integer> ids_map = new HashMap<String, Integer>();
         ReservaDAO reserva_dao = new ReservaDAO();
         ArrayList<Passageiro> lista_de_passageiros =
                 PassageiroController.takeListaDePassageirosById(ids_passageiros);
         Reserva nova_reserva =
-                new Reserva(codigo, null, status, valor, tipo_pagamento, id_reserva, null,
-                        lista_de_passageiros, null);
+                new Reserva(codigo, null, status, valor, tipo_pagamento, qtd_parcelas,
+                        UsuarioController.getUsuarioById(id_reservante), lista_de_passageiros,
+                        ViagemController.getViagemById(id_viagem));
 
         if (reserva_dao.getReservaByCodigo(nova_reserva.getCodigo()) == null) {
             id_reserva = reserva_dao.cadastrarReserva(nova_reserva);
@@ -73,10 +75,10 @@ public class ReservaController {
 
         return reserva_dao.getReservaByCodigo(codigo);
     }
-    
+
     public static ArrayList<Passageiro> getListaDePassageirosById(int id_reserva) {
         ReservaDAO reserva_dao = new ReservaDAO();
-        
+
         return reserva_dao.getListaDePassageirosById(id_reserva);
     }
 
@@ -89,7 +91,7 @@ public class ReservaController {
             reserva_modificada.setQtdParcelas(qtd_parcelas_modificada);
             reserva_modificada.setStatus(status_modificado);
             reserva_modificada.setTipoPagamento(tipo_pagamento_modificado);
-            
+
             reserva_dao.alterarReserva(reserva_modificada);
         } else {
             System.out.println("Reserva nao encontrada para alteracao");
