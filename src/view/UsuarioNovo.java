@@ -1,37 +1,27 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 import controller.UsuarioController;
 
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPasswordField;
-import java.awt.Rectangle;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("serial")
 public class UsuarioNovo extends JInternalFrame {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -303966158760444015L;
     private JTextField txtNome;
     private JTextField txtEndereco;
     private JTextField txtEmail;
     private JTextField txtCodigo;
-    private JLabel lblNivelPermissao;
     private JPasswordField txtSenha;
     private JComboBox<String> cboNivelPermissao;
 
@@ -39,46 +29,55 @@ public class UsuarioNovo extends JInternalFrame {
      * Create the frame.
      */
     public UsuarioNovo() {
-        setVisible(true);
         setBounds(100, 100, 430, 320);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setClosable(true);
-        setMaximizable(false);
         
         JPanel panel = new JPanel();
         getContentPane().add(panel, BorderLayout.CENTER);
         
         JLabel lblNome = new JLabel("Nome");
+        lblNome.setBounds(52, 12, 40, 15);
         
         txtNome = new JTextField();
+        txtNome.setBounds(52, 33, 310, 19);
         txtNome.setColumns(10);
         
         JLabel lblEndereco = new JLabel("Endereco");
+        lblEndereco.setBounds(52, 58, 66, 15);
         
         txtEndereco = new JTextField();
+        txtEndereco.setBounds(52, 79, 310, 19);
         txtEndereco.setColumns(10);
         
         JLabel lblEmail = new JLabel("Email");
+        lblEmail.setBounds(52, 104, 37, 15);
         
         txtEmail = new JTextField();
+        txtEmail.setBounds(52, 125, 310, 19);
         txtEmail.setColumns(10);
         
         JLabel lblSenha = new JLabel("Senha");
+        lblSenha.setBounds(52, 150, 45, 15);
         
         JLabel lblCodigo = new JLabel("Codigo");
+        lblCodigo.setBounds(52, 196, 49, 15);
         
         txtCodigo = new JTextField();
+        txtCodigo.setBounds(52, 220, 114, 19);
         txtCodigo.setColumns(10);
         
-        lblNivelPermissao = new JLabel("Nivel de Permissao");
+        JLabel lblNivelPermissao = new JLabel("Nivel de Permissao");
+        lblNivelPermissao.setBounds(228, 196, 134, 15);
         
         cboNivelPermissao = new JComboBox<String>();
+        cboNivelPermissao.setBounds(228, 217, 134, 24);
         cboNivelPermissao.setModel(new DefaultComboBoxModel<String>(new String[] {"0 - Admin", "1 - Usuario"}));
         cboNivelPermissao.setSelectedIndex(1);
         
         txtSenha = new JPasswordField();
+        txtSenha.setBounds(52, 171, 310, 19);
         
         JButton btnSalvar = new JButton("Salvar");
+        btnSalvar.setBounds(52, 247, 78, 25);
         btnSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 UsuarioController.cadastrarUsuario(
@@ -92,68 +91,20 @@ public class UsuarioNovo extends JInternalFrame {
                 clear();
             }
         });
-        
-        GroupLayout gl_panel = new GroupLayout(panel);
-        gl_panel.setHorizontalGroup(
-            gl_panel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel.createSequentialGroup()
-                    .addGap(52)
-                    .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel.createSequentialGroup()
-                            .addComponent(btnSalvar)
-                            .addContainerGap())
-                        .addGroup(gl_panel.createSequentialGroup()
-                            .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                                .addComponent(lblSenha)
-                                .addComponent(lblEmail)
-                                .addComponent(lblEndereco)
-                                .addComponent(lblNome)
-                                .addComponent(txtSenha, 310, 310, 310)
-                                .addComponent(txtEndereco, 310, 310, 310)
-                                .addComponent(txtEmail, 310, 310, 310)
-                                .addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(gl_panel.createSequentialGroup()
-                                    .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(lblCodigo)
-                                        .addComponent(txtCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                                    .addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-                                        .addComponent(cboNivelPermissao, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblNivelPermissao, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addContainerGap(58, Short.MAX_VALUE))))
-        );
-        gl_panel.setVerticalGroup(
-            gl_panel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblNome)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(lblEndereco)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(txtEndereco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(lblEmail)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(lblSenha)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(txtSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(lblCodigo)
-                        .addComponent(lblNivelPermissao))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(txtCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cboNivelPermissao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(btnSalvar)
-                    .addContainerGap(16, Short.MAX_VALUE))
-        );
-        panel.setLayout(gl_panel);
+        panel.setLayout(null);
+        panel.add(btnSalvar);
+        panel.add(lblSenha);
+        panel.add(lblEmail);
+        panel.add(lblEndereco);
+        panel.add(lblNome);
+        panel.add(txtSenha);
+        panel.add(txtEndereco);
+        panel.add(txtEmail);
+        panel.add(txtNome);
+        panel.add(lblCodigo);
+        panel.add(txtCodigo);
+        panel.add(cboNivelPermissao);
+        panel.add(lblNivelPermissao);
     }
     
     public void clear() {
