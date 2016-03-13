@@ -24,18 +24,20 @@ public class ModalController {
                         new Modal(null, tipo, codigo, companhia, Integer.parseInt(capacidade),
                                 modelo, Integer.parseInt(ano_fabricacao),
                                 Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
-                                Constants.DATETIME_FORMAT.parse(data_manutencao));
+                                Constants.DATE_FORMAT.parse(data_manutencao));
 
                 // sending it to DAO class to finally insert it into BD
                 id = modal_dao.cadastrarModal(novo_modal);
 
                 // setting all percursos chosen to be made by this modal with it's id...
-                for (String codigo_percurso : codigos_percursos) {
-                    Percurso temp_percurso_modificado =
-                            PercursoController.getPercursoByCodigo(codigo_percurso);
-                    PercursoController.alterarPercurso(temp_percurso_modificado.getId(), "" + id,
-                            "" + temp_percurso_modificado.getHorasDuracaoPercurso(),
-                            temp_percurso_modificado.getCodigoAeroporto());
+                if (codigos_percursos != null) {
+                    for (String codigo_percurso : codigos_percursos) {
+                        Percurso temp_percurso_modificado =
+                                PercursoController.getPercursoByCodigo(codigo_percurso);
+                        PercursoController.alterarPercurso(temp_percurso_modificado.getId(), "" + id,
+                                "" + temp_percurso_modificado.getHorasDuracaoPercurso(),
+                                temp_percurso_modificado.getCodigoAeroporto());
+                    }
                 }
             } catch (NumberFormatException e) {
                 // TODO Auto-generated catch block
@@ -98,12 +100,14 @@ public class ModalController {
 
                 modal_dao.alterarModal(modal_modificado);
 
-                for (String codigo_percurso_modificado : codigos_percursos_modificados) {
-                    Percurso percurso_modificado =
-                            PercursoController.getPercursoByCodigo(codigo_percurso_modificado);
-                    PercursoController.alterarPercurso(percurso_modificado.getId(), "" + id, ""
-                            + percurso_modificado.getHorasDuracaoPercurso(),
-                            percurso_modificado.getCodigoAeroporto());
+                if (codigos_percursos_modificados != null) {
+                    for (String codigo_percurso_modificado : codigos_percursos_modificados) {
+                        Percurso percurso_modificado =
+                                PercursoController.getPercursoByCodigo(codigo_percurso_modificado);
+                        PercursoController.alterarPercurso(percurso_modificado.getId(), "" + id, ""
+                                + percurso_modificado.getHorasDuracaoPercurso(),
+                                percurso_modificado.getCodigoAeroporto());
+                    }
                 }
             } catch (ParseException e) {
                 // TODO Auto-generated catch block
