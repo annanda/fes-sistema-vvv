@@ -12,12 +12,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+@SuppressWarnings("serial")
 public class Main extends JFrame {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3403133465852562090L;
     private JDesktopPane contentPane;
 
     /**
@@ -49,13 +46,59 @@ public class Main extends JFrame {
         JMenu mnUsuario = new JMenu("Usuario");
         menuBar.add(mnUsuario);
         
-        JMenuItem mntmNovo = new JMenuItem("Novo");
-        mntmNovo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        JMenuItem mntmNovoUsuario = new JMenuItem("Novo");
+        mntmNovoUsuario.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 showInternalFrame(new UsuarioNovo());
             }
         });
-        mnUsuario.add(mntmNovo);
+        mnUsuario.add(mntmNovoUsuario);
+        
+        JMenuItem mntmListarUsuario = new JMenuItem("Listar");
+        mntmListarUsuario.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new UsuarioListar());
+            }
+        });
+        mnUsuario.add(mntmListarUsuario);
+        
+        JMenu mnPassageiro = new JMenu("Passageiro");
+        menuBar.add(mnPassageiro);
+        
+        JMenuItem mntmNovoPassageiro = new JMenuItem("Novo");
+        mntmNovoPassageiro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new PassageiroNovo());
+            }
+        });
+        mnPassageiro.add(mntmNovoPassageiro);
+        
+        JMenuItem mntmListarPassageiro = new JMenuItem("Listar");
+        mntmListarPassageiro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new PassageiroListar());
+            }
+        });
+        mnPassageiro.add(mntmListarPassageiro);
+        
+        JMenu mnModal = new JMenu("Modal");
+        menuBar.add(mnModal);
+        
+        JMenuItem mntmNovoModal = new JMenuItem("Novo");
+        mntmNovoModal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new ModalNovo());
+            }
+        });
+        mnModal.add(mntmNovoModal);
+        
+        JMenuItem mntmListarModal = new JMenuItem("Listar");
+        mntmListarModal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showInternalFrame(new ModalListar());
+            }
+        });
+        mnModal.add(mntmListarModal);
         contentPane = new JDesktopPane();
         setContentPane(contentPane);
     }
@@ -63,6 +106,10 @@ public class Main extends JFrame {
     private void showInternalFrame(JInternalFrame iFrame) {
         contentPane.removeAll();
         contentPane.add(iFrame);
+        iFrame.setVisible(true);
+        iFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        iFrame.setClosable(true);
+        iFrame.setMaximizable(false);
         try {
             iFrame.setMaximum(true);
         } catch (PropertyVetoException e) {
@@ -70,5 +117,4 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
     }
-
 }
