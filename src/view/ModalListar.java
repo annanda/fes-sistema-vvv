@@ -57,7 +57,6 @@ public class ModalListar extends JInternalFrame {
                 int row = Integer.valueOf(e.getActionCommand());
                 ModalController.alterarModal(
                         (int) table.getValueAt(row, 0),
-                        null,
                         table.getValueAt(row, 3).toString(),
                         table.getValueAt(row, 6).toString(),
                         table.getValueAt(row, 7).toString(),

@@ -98,7 +98,6 @@ public class ModalNovo extends JInternalFrame {
         btnSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ModalController.cadastrarModal(
-                        null,
                         cboTipo.getSelectedItem().toString(),
                         txtCodigo.getText(),
                         txtCompanhia.getText(),
