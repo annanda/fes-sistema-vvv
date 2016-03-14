@@ -6,11 +6,10 @@ import java.util.HashMap;
 
 import model.Constants;
 import model.Modal;
-import model.Percurso;
 import dao.ModalDAO;
 
 public class ModalController {
-    public static int cadastrarModal(String[] codigos_percursos, String tipo, String codigo,
+    public static int cadastrarModal(String tipo, String codigo,
             String companhia, String capacidade, String modelo, String ano_fabricacao,
             String em_manutencao, String em_uso, String data_manutencao) {
         int id = 0;
@@ -20,23 +19,12 @@ public class ModalController {
         // testing if codigo is unique...
         if (novo_modal == null) {
             try {
-                novo_modal =
-                        new Modal(null, tipo, codigo, companhia, Integer.parseInt(capacidade),
-                                modelo, Integer.parseInt(ano_fabricacao),
-                                Integer.parseInt(em_manutencao), Integer.parseInt(em_uso),
-                                Constants.DATETIME_FORMAT.parse(data_manutencao));
+                novo_modal = new Modal(tipo, codigo, companhia, Integer.parseInt(capacidade),
+                        modelo, Integer.parseInt(ano_fabricacao), Integer.parseInt(em_manutencao),
+                        Integer.parseInt(em_uso), Constants.DATE_FORMAT.parse(data_manutencao));
 
                 // sending it to DAO class to finally insert it into BD
                 id = modal_dao.cadastrarModal(novo_modal);
-
-                // setting all percursos chosen to be made by this modal with it's id...
-                for (String codigo_percurso : codigos_percursos) {
-                    Percurso temp_percurso_modificado =
-                            PercursoController.getPercursoByCodigo(codigo_percurso);
-                    PercursoController.alterarPercurso(temp_percurso_modificado.getId(), "" + id,
-                            "" + temp_percurso_modificado.getHorasDuracaoPercurso(),
-                            temp_percurso_modificado.getCodigoAeroporto());
-                }
             } catch (NumberFormatException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -80,7 +68,7 @@ public class ModalController {
         return modal_dao.getModalByCodigo(codigo);
     }
 
-    public static void alterarModal(int id, String[] codigos_percursos_modificados,
+    public static void alterarModal(int id,
             String companhia_modificada, String capacidade_modificada,
             String em_manutencao_modificado, String em_uso_modificado,
             String data_manutencao_modificada) {
@@ -97,14 +85,6 @@ public class ModalController {
                 modal_modificado.setEmUso(Integer.parseInt(em_uso_modificado));
 
                 modal_dao.alterarModal(modal_modificado);
-
-                for (String codigo_percurso_modificado : codigos_percursos_modificados) {
-                    Percurso percurso_modificado =
-                            PercursoController.getPercursoByCodigo(codigo_percurso_modificado);
-                    PercursoController.alterarPercurso(percurso_modificado.getId(), "" + id, ""
-                            + percurso_modificado.getHorasDuracaoPercurso(),
-                            percurso_modificado.getCodigoAeroporto());
-                }
             } catch (ParseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

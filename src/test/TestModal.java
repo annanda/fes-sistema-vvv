@@ -16,7 +16,7 @@ public class TestModal {
     int id = 0;
     try {
       id =
-          ModalController.cadastrarModal(new String[] {}, "test", "test", "test", "111", "test",
+          ModalController.cadastrarModal("test", "test", "test", "111", "test",
               "2000", "0", "0", "2016-01-11 00:00:00");
     } catch (Exception e) {
       fail();
@@ -29,7 +29,7 @@ public class TestModal {
   @Test
   public void listarModais() {
     int id =
-        ModalController.cadastrarModal(new String[] {}, "test", "test", "test", "111", "test",
+        ModalController.cadastrarModal("test", "test", "test", "111", "test",
             "2000", "0", "0", "2016-01-11 00:00:00");
     ArrayList<Modal> l =
         ModalController.listarModais("test", "test", "test", "111", "test", "2000");
@@ -43,9 +43,9 @@ public class TestModal {
     int id = 0;
     try {
       id =
-          ModalController.cadastrarModal(new String[] {}, "test", "test", "test", "111", "test",
+          ModalController.cadastrarModal("test", "test", "test", "111", "test",
               "2000", "0", "0", "2016-01-11 00:00:00");
-      ModalController.alterarModal(id, new String[] {}, "asdf", "222", "1", "1", "2016-01-12 01:01:01");
+      ModalController.alterarModal(id, "asdf", "222", "1", "1", "2016-01-12 01:01:01");
     } catch (Exception e) {
       fail();
     } finally {
@@ -58,7 +58,7 @@ public class TestModal {
   public void deletarModal() {
     try {
       int id =
-          ModalController.cadastrarModal(new String[] {}, "test", "test", "test", "111", "test",
+          ModalController.cadastrarModal("test", "test", "test", "111", "test",
               "2000", "0", "0", "2016-01-11 00:00:00");
       ModalController.deletarModal(id);
     } catch (Exception e) {

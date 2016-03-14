@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import controller.PercursoController;
 import model.Constants;
 import model.Modal;
 
@@ -53,12 +52,11 @@ public class ModalDAO extends DAO {
             result_set = statement.executeQuery(sql_query);
             while (result_set.next()) {
                 int id_modal = result_set.getInt("id_modal");
-                modais_encontrados.add(new Modal(id_modal, PercursoController
-                        .getPercursoByModal(id_modal), result_set.getString("tipo"), result_set
-                        .getString("codigo"), result_set.getString("companhia"), result_set
-                        .getInt("capacidade"), result_set.getString("modelo"), result_set
-                        .getInt("ano_fabricacao"), result_set.getInt("em_manutencao"), result_set
-                        .getInt("em_uso"), result_set.getDate("data_manutencao")));
+                modais_encontrados.add(new Modal(id_modal, result_set.getString("tipo"),
+                        result_set.getString("codigo"), result_set.getString("companhia"),
+                        result_set.getInt("capacidade"), result_set.getString("modelo"),
+                        result_set.getInt("ano_fabricacao"), result_set.getInt("em_manutencao"),
+                        result_set.getInt("em_uso"), result_set.getDate("data_manutencao")));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -92,14 +90,11 @@ public class ModalDAO extends DAO {
         try {
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
-                modal_encontrado =
-                        new Modal(id, PercursoController.getPercursoByModal(id),
-                                result_set.getString("tipo"), result_set.getString("codigo"),
-                                result_set.getString("companhia"), result_set.getInt("capacidade"),
-                                result_set.getString("modelo"),
-                                result_set.getInt("ano_fabricacao"),
-                                result_set.getInt("em_manutencao"), result_set.getInt("em_uso"),
-                                result_set.getDate("data_manutencao"));
+                modal_encontrado = new Modal(id, result_set.getString("tipo"),
+                        result_set.getString("codigo"), result_set.getString("companhia"),
+                        result_set.getInt("capacidade"), result_set.getString("modelo"),
+                        result_set.getInt("ano_fabricacao"), result_set.getInt("em_manutencao"),
+                        result_set.getInt("em_uso"), result_set.getDate("data_manutencao"));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -120,14 +115,11 @@ public class ModalDAO extends DAO {
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
                 int id = result_set.getInt("id_modal");
-                modal_encontrado =
-                        new Modal(id, PercursoController.getPercursoByModal(id),
-                                result_set.getString("tipo"), codigo,
-                                result_set.getString("companhia"), result_set.getInt("capacidade"),
-                                result_set.getString("modelo"),
-                                result_set.getInt("ano_fabricacao"),
-                                result_set.getInt("em_manutencao"), result_set.getInt("em_uso"),
-                                result_set.getDate("data_manutencao"));
+                modal_encontrado = new Modal(id, result_set.getString("tipo"), codigo,
+                        result_set.getString("companhia"), result_set.getInt("capacidade"),
+                        result_set.getString("modelo"), result_set.getInt("ano_fabricacao"),
+                        result_set.getInt("em_manutencao"), result_set.getInt("em_uso"),
+                        result_set.getDate("data_manutencao"));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

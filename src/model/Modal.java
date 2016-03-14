@@ -1,12 +1,10 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 public class Modal {
     private int id;
-    private ArrayList<Percurso> percursos;
     private String tipo;
     private String codigo;
     private String companhia;
@@ -21,13 +19,12 @@ public class Modal {
     /*
      * Constructor Pattern
      */
-    public Modal(ArrayList<Percurso> percursos, String tipo, String codigo, String companhia,
+    public Modal(String tipo, String codigo, String companhia,
             int capacidade, String modelo, int ano_fabricacao, int em_manutencao, int em_uso,
             Date data_manutencao) {
         // Setting non-specified attributes...
         this.id = 0;
 
-        setPercursos(percursos);
         this.tipo = tipo;
         this.codigo = codigo;
         setCompanhia(companhia);
@@ -42,10 +39,10 @@ public class Modal {
     /*
      * For database returns
      */
-    public Modal(int id, ArrayList<Percurso> percursos, String tipo, String codigo,
+    public Modal(int id, String tipo, String codigo,
             String companhia, int capacidade, String modelo, int ano_fabricacao, int em_manutencao,
             int em_uso, Date data_manutencao) {
-        this(percursos, tipo, codigo, companhia, capacidade, modelo, ano_fabricacao, em_manutencao,
+        this(tipo, codigo, companhia, capacidade, modelo, ano_fabricacao, em_manutencao,
                 em_uso, data_manutencao);
         this.id = id;
     }
@@ -113,6 +110,7 @@ public class Modal {
         return id;
     }
 
+    /*
     public ArrayList<Percurso> getPercursos() {
         return percursos;
     }
@@ -120,6 +118,7 @@ public class Modal {
     public void setPercursos(ArrayList<Percurso> percursos) {
         this.percursos = percursos;
     }
+    */
 
     // (END) GETTERS & SETTERS
 
