@@ -1,12 +1,37 @@
 package model;
 
+import java.util.HashMap;
+
 public class PontoDeVenda {
-    protected int id;
+    private int id;
     private String nome;
     private String endereco;
     private String telefone;
-    private int codigo;
+    private String codigo;
     private String cnpj;
+
+    public PontoDeVenda(String nome, String endereco, String telefone, String codigo, String cnpj) {
+        this.id = 0;
+        setNome(nome);
+        setEndereco(endereco);
+        setTelefone(telefone);
+        this.codigo = codigo;
+        this.cnpj = cnpj;
+    }
+
+    public PontoDeVenda(int id, String nome, String endereco, String telefone, String codigo,
+            String cnpj) {
+        this.id = id;
+        setNome(nome);
+        setEndereco(endereco);
+        setTelefone(telefone);
+        this.codigo = codigo;
+        this.cnpj = cnpj;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -32,11 +57,21 @@ public class PontoDeVenda {
         this.telefone = telefone;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
     public String getCnpj() {
         return cnpj;
+    }
+
+    public HashMap<String, String> toHashMap() {
+        HashMap<String, String> ponto_de_venda = new HashMap<String, String>();
+
+        ponto_de_venda.put("nome", this.getNome());
+        ponto_de_venda.put("endereco", this.getEndereco());
+        ponto_de_venda.put("telefone", this.getTelefone());
+
+        return ponto_de_venda;
     }
 }
