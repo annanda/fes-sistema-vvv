@@ -117,4 +117,17 @@ public class TicketDAO extends DAO {
         return ticket_encontrado;
     }
 
+    public void deletarTicket(int id) {
+        String sql_query = deleteFactory(tabela, "id_ticket = " + id);
+
+        connect();
+        try {
+            statement.executeUpdate(sql_query);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        disconnect();
+    }
+
 }

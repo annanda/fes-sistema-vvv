@@ -62,7 +62,9 @@ public class TestUsuario {
             fail();
         } finally {
             if (id > 0) {
-                Pessoa p = pessoa_dao.getPessoaByCodigo("asdf");
+                Pessoa p =
+                        pessoa_dao
+                                .getPessoaByCodigo(PessoaController.getPessoaById(id).getCodigo());
                 PessoaController.deletarPessoa(p.getId());
             }
         }

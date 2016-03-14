@@ -52,5 +52,13 @@ public class TicketController {
 
     // Tickets nao podem ser alterados
 
-    // Tickets nao podem ser deletados
+    public static void deletarTicket(int id) {
+        TicketDAO ticket_dao = new TicketDAO();
+
+        if (ticket_dao.getTicketById(id) != null) {
+            ticket_dao.deletarTicket(id);
+        } else {
+            System.out.println("Ticket nao encontrado para deletar");
+        }
+    }
 }

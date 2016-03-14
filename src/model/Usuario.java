@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import controller.ReservaController;
 
 public class Usuario extends Pessoa {
     protected int id;
@@ -87,6 +90,23 @@ public class Usuario extends Pessoa {
     }
 
     protected void fazerReserva(Reserva reserva) {
+        ArrayList<Passageiro> lista_passageiros = reserva.getPassageiros();
+        ArrayList<String> lista_ids_passageiros = new ArrayList<String>();
 
+        for (Passageiro passageiro : lista_passageiros) {
+            lista_ids_passageiros.add("" + passageiro.getId());
+        }
+
+        HashMap<String, Integer> hm =
+                ReservaController.cadastrarReserva(reserva.getCodigo(), reserva.getQtdParcelas(),
+                        reserva.getTipoPagamento(), reserva.getValor(), reserva.getStatus(),
+                        lista_ids_passageiros.toArray(new String[lista_ids_passageiros.size()]),
+                        this.getId(), reserva.getViagem().getId());
+
+        if (hm.get("id_reserva") > 0) {
+            System.out.println("Reserva feita com sucesso");
+        } else {
+            System.out.println("Erro ao criar Reserva");
+        }
     }
 }
