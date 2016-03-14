@@ -11,59 +11,59 @@ import model.Modal;
 
 public class TestModal {
 
-  @Test
-  public void cadastrarModal() {
-    int id = 0;
-    try {
-      id =
-          ModalController.cadastrarModal("test", "test", "test", "111", "test",
-              "2000", "0", "0", "2016-01-11 00:00:00");
-    } catch (Exception e) {
-      fail();
-    } finally {
-      if (id > 0)
+    @Test
+    public void cadastrarModal() {
+        int id = 0;
+        try {
+            id =
+                    ModalController.cadastrarModal("test", "test", "test", "111", "test", "2000",
+                            "0", "0", "2016-01-11 00:00:00");
+        } catch (Exception e) {
+            fail();
+        } finally {
+            if (id > 0)
+                ModalController.deletarModal(id);
+        }
+    }
+
+    @Test
+    public void listarModais() {
+        int id =
+                ModalController.cadastrarModal("test", "test", "test", "111", "test", "2000", "0",
+                        "0", "2016-01-11 00:00:00");
+        ArrayList<Modal> l =
+                ModalController.listarModais("test", "test", "test", "111", "test", "2000");
         ModalController.deletarModal(id);
+        assertNotNull(l);
+        assertEquals(l.size(), 1);
     }
-  }
 
-  @Test
-  public void listarModais() {
-    int id =
-        ModalController.cadastrarModal("test", "test", "test", "111", "test",
-            "2000", "0", "0", "2016-01-11 00:00:00");
-    ArrayList<Modal> l =
-        ModalController.listarModais("test", "test", "test", "111", "test", "2000");
-    ModalController.deletarModal(id);
-    assertNotNull(l);
-    assertEquals(l.size(), 1);
-  }
-
-  @Test
-  public void alterarModal() {
-    int id = 0;
-    try {
-      id =
-          ModalController.cadastrarModal("test", "test", "test", "111", "test",
-              "2000", "0", "0", "2016-01-11 00:00:00");
-      ModalController.alterarModal(id, "asdf", "222", "1", "1", "2016-01-12 01:01:01");
-    } catch (Exception e) {
-      fail();
-    } finally {
-      if (id > 0)
-        ModalController.deletarModal(id);
+    @Test
+    public void alterarModal() {
+        int id = 0;
+        try {
+            id =
+                    ModalController.cadastrarModal("test", "test", "test", "111", "test", "2000",
+                            "0", "0", "2016-01-11 00:00:00");
+            ModalController.alterarModal(id, "asdf", "222", "1", "1", "2016-01-12 01:01:01");
+        } catch (Exception e) {
+            fail();
+        } finally {
+            if (id > 0)
+                ModalController.deletarModal(id);
+        }
     }
-  }
 
-  @Test
-  public void deletarModal() {
-    try {
-      int id =
-          ModalController.cadastrarModal("test", "test", "test", "111", "test",
-              "2000", "0", "0", "2016-01-11 00:00:00");
-      ModalController.deletarModal(id);
-    } catch (Exception e) {
-      fail();
+    @Test
+    public void deletarModal() {
+        try {
+            int id =
+                    ModalController.cadastrarModal("test", "test", "test", "111", "test", "2000",
+                            "0", "0", "2016-01-11 00:00:00");
+            ModalController.deletarModal(id);
+        } catch (Exception e) {
+            fail();
+        }
     }
-  }
 
 }

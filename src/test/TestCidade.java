@@ -19,8 +19,9 @@ public class TestCidade {
         } catch (Exception e) {
             fail();
         } finally {
-            if (id > 0)
+            if (id > 0) {
                 CidadeController.deletarCidade(id);
+            }
         }
     }
 
@@ -42,8 +43,9 @@ public class TestCidade {
         } catch (Exception e) {
             fail();
         } finally {
-            if (id > 0)
+            if (id > 0) {
                 CidadeController.deletarCidade(id);
+            }
         }
     }
 
