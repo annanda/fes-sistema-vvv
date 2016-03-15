@@ -87,7 +87,7 @@ public class PassageiroController {
         if (passageiro_modificado != null) {
             // treating non-String arguments...
             Passageiro passageiro_responsavel_modificado = null;
-            if (cpf_responsavel_modificado != null && cpf_responsavel_modificado.isEmpty()) {
+            if (cpf_responsavel_modificado != null && !cpf_responsavel_modificado.isEmpty()) {
                 passageiro_responsavel_modificado =
                         passageiro_dao.getPassageiroByCpf(cpf_responsavel_modificado);
             }

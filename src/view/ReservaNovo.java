@@ -28,6 +28,8 @@ import model.Viagem;
 
 @SuppressWarnings("serial")
 public class ReservaNovo extends JInternalFrame {
+
+    @SuppressWarnings("unused")
     private int id_usuario;
     private JList<String> lstViagem;
     private JList<String> lstPassageiros;
