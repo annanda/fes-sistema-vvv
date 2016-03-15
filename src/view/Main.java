@@ -138,13 +138,13 @@ public class Main extends JFrame {
         });
         mnViagem.add(mntmNovoViagem);
         
-        JMenuItem mntmListarViagem = new JMenuItem("Listar");
-        mntmListarViagem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+//        JMenuItem mntmListarViagem = new JMenuItem("Listar");
+//        mntmListarViagem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
 //                showInternalFrame(new ViagemListar());
-            }
-        });
-        mnViagem.add(mntmListarViagem);
+//            }
+//        });
+//        mnViagem.add(mntmListarViagem);
         
         JMenu mnReserva = new JMenu("Reserva");
         menuBar.add(mnReserva);

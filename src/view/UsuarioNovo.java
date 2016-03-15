@@ -95,7 +95,7 @@ public class UsuarioNovo extends JInternalFrame {
                         txtEndereco.getText(),
                         txtCodigo.getText(),
                         txtEmail.getText(),
-                        txtSenha.getPassword().toString(),
+                        new String(txtSenha.getPassword()),
                         Integer.toString(cboNivelPermissao.getSelectedIndex())
                 );
                 clear();
