@@ -89,9 +89,10 @@ public class Viagem {
         for (Percurso percurso : this.plano_de_viagem) {
             if (test) {
                 test = false;
-                lotacao = percurso.getModal().getCapacidade();
+                lotacao = (percurso.getModal() != null) ? percurso.getModal().getCapacidade() : 0;
             } else {
-                capacidade = percurso.getModal().getCapacidade();
+                capacidade =
+                        (percurso.getModal() != null) ? percurso.getModal().getCapacidade() : 0;
                 if (capacidade < lotacao) {
                     lotacao = capacidade;
                 }

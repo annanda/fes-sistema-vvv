@@ -49,6 +49,7 @@ public class ReservaDAO extends DAO {
 
     public int cadastrarReservaPassageiro(int id_reserva, int id_passageiro) {
         int id = 0;
+        final String id_reserva_passageiro_label = "id_reserva_passageiro";
         String sql_query =
                 insertFactory(tabela_relacionamento, new String[] { "" + id_reserva,
                         "" + id_passageiro });
@@ -57,11 +58,12 @@ public class ReservaDAO extends DAO {
         try {
             statement.executeUpdate(sql_query);
             sql_query =
-                    selectFactory(tabela_relacionamento, new String[] { "id_reserva_passageiro" },
-                            "id_reserva = " + id_reserva + " AND id_passageiro = " + id_passageiro);
+                    selectFactory(tabela_relacionamento,
+                            new String[] { id_reserva_passageiro_label }, "id_reserva = "
+                                    + id_reserva + " AND id_passageiro = " + id_passageiro);
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
-                id = result_set.getInt(id);
+                id = result_set.getInt(id_reserva_passageiro_label);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

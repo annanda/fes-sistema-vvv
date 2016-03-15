@@ -59,6 +59,7 @@ public class TestViagem {
         try {
             id = ViagemController.cadastrarViagem("pacote maneiro", ids_percursos).get("id_viagem");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         } finally {
             if (id > 0) {
