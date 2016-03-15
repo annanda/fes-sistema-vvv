@@ -3,8 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -13,18 +11,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.PassageiroController;
-import model.Passageiro;
+import controller.PercursoController;
+import model.Percurso;
 
 @SuppressWarnings("serial")
-public class PassageiroListar extends JInternalFrame {
+public class PercursoListar extends JInternalFrame {
 
     private JTable table;
 
     /**
      * Create the frame.
      */
-    public PassageiroListar() {
+    public PercursoListar() {
         setBounds(100, 100, 450, 300);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -35,14 +33,11 @@ public class PassageiroListar extends JInternalFrame {
             getData(),
             new String[] {
                 "Id",
-                "Codigo",
-                "Nome",
-                "Endereco",
-                "CPF",
-                "Data de Nascimento",
-                "Telefone",
-                "Profissao",
-                "Responsavel",
+                "Modal",
+                "Origem",
+                "Destino",
+                "Hora da Partida",
+                "Duracao",
                 "Excluir"
             }
         ));
@@ -54,7 +49,7 @@ public class PassageiroListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
-                PassageiroController.deletarPassageiro((int) table.getValueAt(row, 0));
+                PercursoController.deletarPercurso((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
@@ -64,27 +59,17 @@ public class PassageiroListar extends JInternalFrame {
     }
     
     private Object[][] getData() {
-        ArrayList<Passageiro> passageiros = PassageiroController.listarPassageiros("", "", "", "");
-        Collections.sort(passageiros, new Comparator<Passageiro>() {
-            public int compare(Passageiro a, Passageiro b) {
-                return a.getCodigo().compareTo(b.getCodigo());
-            }
-        });
-
-        Object[][] data = new Object[passageiros.size()][];
-        for (int i = 0; i < passageiros.size(); i++) {
-            Passageiro p = passageiros.get(i);
-            Passageiro r = p.getResponsavel();
+        ArrayList<Percurso> percursos = PercursoController.listarPercursos("", "", "", "");
+        Object[][] data = new Object[percursos.size()][];
+        for (int i = 0; i < percursos.size(); i++) {
+            Percurso p = percursos.get(i);
             Object[] obj = {
                 p.getId(),
-                p.getCodigo(),
-                p.getNome(),
-                p.getEndereco(),
-                p.getCpf(),
-                p.getDataDeNascimento(),
-                p.getTelefone(),
-                p.getProfissao(),
-                r != null ? r.getCpf() : "",
+                p.getModal().getCodigo(),
+                p.getPartida().getIdentificador(),
+                p.getDestino().getIdentificador(),
+                p.getHoraPartida(),
+                p.getHorasDuracaoPercurso(),
                 "Excluir",
             };
             data[i] = obj;

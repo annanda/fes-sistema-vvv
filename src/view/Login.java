@@ -76,7 +76,7 @@ public class Login {
                 Usuario usuario = UsuarioController.getUsuarioByEmail(txtEmail.getText());
                 if (usuario != null && usuario.getSenha().equals(senha)) {
                     frame.dispose();
-                    (new Main()).setVisible(true);
+                    (new Main(usuario)).setVisible(true);
                 }
                 else {
                     lblErro.setText(erro);

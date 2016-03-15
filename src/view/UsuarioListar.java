@@ -34,7 +34,7 @@ public class UsuarioListar extends JInternalFrame {
         table.setModel(new DefaultTableModel(
             getData(),
             new String[] {
-                "Id", "Codigo", "Nome", "Endereco", "Email", "Nivel de Permissao", ""
+                "Id", "Codigo", "Nome", "Endereco", "Email", "Nivel de Permissao", "Excluir"
             }
         ));
         table.getColumnModel().getColumn(0).setMinWidth(0);
@@ -45,14 +45,7 @@ public class UsuarioListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
-                UsuarioController.alterarUsuario(
-                    (int) table.getValueAt(row, 0),
-                    table.getValueAt(row, 2).toString(),
-                    table.getValueAt(row, 3).toString(),
-                    table.getValueAt(row, 4).toString(),
-                    null,
-                    table.getValueAt(row, 5).toString()
-                );
+                UsuarioController.deletarUsuario((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
@@ -79,7 +72,7 @@ public class UsuarioListar extends JInternalFrame {
                 usu.getEndereco(),
                 usu.getEmail(),
                 usu.getNivelPermissao(),
-                "Salvar",
+                "Excluir",
             };
             data[i] = obj;
         }

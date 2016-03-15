@@ -22,12 +22,12 @@ public class PassageiroNovo extends JInternalFrame {
 
     private JTextField txtNome;
     private JTextField txtEndereco;
-    private JTextField txtCpf;
     private JTextField txtDataNascimento;
+    private JTextField txtCpf;
     private JTextField txtTelefone;
     private JTextField txtProfissao;
-    private JTextField txtCodigo;
     private JComboBox<String> cboResponsavel;
+    private JTextField txtCodigo;
 
     /**
      * Create the frame.
@@ -45,7 +45,6 @@ public class PassageiroNovo extends JInternalFrame {
 
         txtNome = new JTextField();
         txtNome.setBounds(52, 33, 310, 19);
-        txtNome.setColumns(10);
         panel.add(txtNome);
 
         JLabel lblEndereco = new JLabel("Endereco");
@@ -54,8 +53,15 @@ public class PassageiroNovo extends JInternalFrame {
 
         txtEndereco = new JTextField();
         txtEndereco.setBounds(52, 79, 310, 19);
-        txtEndereco.setColumns(10);
         panel.add(txtEndereco);
+        
+        JLabel lblDataNascimento = new JLabel("Data de Nascimento");
+        lblDataNascimento.setBounds(52, 104, 150, 15);
+        panel.add(lblDataNascimento);
+        
+        txtDataNascimento = new JTextField();
+        txtDataNascimento.setBounds(52, 125, 114, 19);
+        panel.add(txtDataNascimento);
 
         JLabel lblCpf = new JLabel("CPF");
         lblCpf.setBounds(248, 104, 37, 15);
@@ -63,21 +69,23 @@ public class PassageiroNovo extends JInternalFrame {
 
         txtCpf = new JTextField();
         txtCpf.setBounds(248, 125, 114, 19);
-        txtCpf.setColumns(10);
         panel.add(txtCpf);
 
         JLabel lblTelefone = new JLabel("Telefone");
         lblTelefone.setBounds(52, 150, 66, 15);
         panel.add(lblTelefone);
-        
-        JLabel lblCodigo = new JLabel("Codigo");
-        lblCodigo.setBounds(52, 196, 49, 15);
-        panel.add(lblCodigo);
 
-        txtCodigo = new JTextField();
-        txtCodigo.setBounds(52, 220, 114, 19);
-        txtCodigo.setColumns(10);
-        panel.add(txtCodigo);
+        txtTelefone = new JTextField();
+        txtTelefone.setBounds(52, 171, 114, 19);
+        panel.add(txtTelefone);
+
+        JLabel lblProfissao = new JLabel("Profissao");
+        lblProfissao.setBounds(248, 150, 72, 15);
+        panel.add(lblProfissao);
+        
+        txtProfissao = new JTextField();
+        txtProfissao.setBounds(248, 171, 114, 19);
+        panel.add(txtProfissao);
 
         JLabel lblResponsavel = new JLabel("Responsavel");
         lblResponsavel.setBounds(228, 196, 134, 15);
@@ -97,10 +105,6 @@ public class PassageiroNovo extends JInternalFrame {
         cboResponsavel.setSelectedIndex(0);
         panel.add(cboResponsavel);
 
-        txtTelefone = new JTextField();
-        txtTelefone.setBounds(52, 171, 114, 19);
-        panel.add(txtTelefone);
-
         JButton btnSalvar = new JButton("Salvar");
         btnSalvar.setBounds(52, 247, 78, 25);
         btnSalvar.addActionListener(new ActionListener() {
@@ -118,34 +122,26 @@ public class PassageiroNovo extends JInternalFrame {
                 clear();
             }
         });
+        
+        JLabel lblCodigo = new JLabel("Codigo");
+        lblCodigo.setBounds(52, 196, 49, 15);
+        panel.add(lblCodigo);
+        
+        txtCodigo = new JTextField();
+        txtCodigo.setBounds(52, 220, 114, 19);
+        txtCodigo.setColumns(10);
+        panel.add(txtCodigo);
         panel.add(btnSalvar);
-        
-        JLabel lblDataNascimento = new JLabel("Data de Nascimento");
-        lblDataNascimento.setBounds(52, 104, 150, 15);
-        panel.add(lblDataNascimento);
-        
-        txtDataNascimento = new JTextField();
-        txtDataNascimento.setColumns(10);
-        txtDataNascimento.setBounds(52, 125, 114, 19);
-        panel.add(txtDataNascimento);
-        
-        txtProfissao = new JTextField();
-        txtProfissao.setBounds(248, 171, 114, 19);
-        panel.add(txtProfissao);
-        
-        JLabel lblProfissao = new JLabel("Profissao");
-        lblProfissao.setBounds(248, 150, 72, 15);
-        panel.add(lblProfissao);
     }
     
     public void clear() {
         txtNome.setText("");
         txtEndereco.setText("");
+        txtDataNascimento.setText("");
         txtCpf.setText("");
         txtTelefone.setText("");
-        txtDataNascimento.setText("");
         txtProfissao.setText("");
-        txtCodigo.setText("");
         cboResponsavel.setSelectedIndex(0);
+        txtCodigo.setText("");
     }
 }
