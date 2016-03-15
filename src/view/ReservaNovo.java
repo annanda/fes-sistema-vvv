@@ -111,7 +111,7 @@ public class ReservaNovo extends JInternalFrame {
         panel.add(rdbtnAVista);
 
         rdbtnParcelado = new JRadioButton("Parcelado");
-        rdbtnAVista.addActionListener(new ActionListener() {
+        rdbtnParcelado.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cboParcelas.setEnabled(true);
             }
