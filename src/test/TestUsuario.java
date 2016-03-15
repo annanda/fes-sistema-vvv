@@ -62,9 +62,10 @@ public class TestUsuario {
             fail();
         } finally {
             if (id > 0) {
+                System.out.println("UEPA!");
                 Pessoa p =
-                        pessoa_dao
-                                .getPessoaByCodigo(PessoaController.getPessoaById(id).getCodigo());
+                        pessoa_dao.getPessoaByCodigo(UsuarioController.getUsuarioById(id)
+                                .getCodigo());
                 PessoaController.deletarPessoa(p.getId());
             }
         }
