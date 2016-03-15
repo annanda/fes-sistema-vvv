@@ -113,7 +113,7 @@ public class Reserva {
     public HashMap<String, String> toHashMap() {
         HashMap<String, String> reserva = new HashMap<String, String>();
 
-        reserva.put("status", "" + this.status);
+        reserva.put("status", this.status ? "1" : "0");
         reserva.put("tipo_pagamento", this.tipo_pagamento);
         reserva.put("qtd_parcelas", "" + this.qtd_parcelas);
 
