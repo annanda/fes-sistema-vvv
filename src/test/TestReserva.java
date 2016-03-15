@@ -13,15 +13,18 @@ import controller.CidadeController;
 import controller.ModalController;
 import controller.PassageiroController;
 import controller.PercursoController;
+import controller.PessoaController;
 import controller.ReservaController;
 import controller.UsuarioController;
 import controller.ViagemController;
+import dao.PessoaDAO;
 
 public class TestReserva {
 
     String[] ids_passageiros;
     int id_reservante, id_viagem;
     Cidade partida, chegada;
+    PessoaDAO pessoa_dao;
 
     @Before
     public void init() {
@@ -65,14 +68,14 @@ public class TestReserva {
 
     @After
     public void finish() {
-        UsuarioController.deletarUsuario(id_reservante);
+        pessoa_dao = new PessoaDAO();
+        PessoaController.deletarPessoa(pessoa_dao.getPessoaByCodigo("qualquerunzis").getId());
         for (int i = 0; i < 3; i++) {
-            PassageiroController.deletarPassageiro(Integer.parseInt(ids_passageiros[i]));
+            PessoaController.deletarPessoa(pessoa_dao.getPessoaByCodigo("pass" + i + "code")
+                    .getId());
         }
-        System.out.println();
         ModalController.deletarModal(ViagemController.getViagemById(id_viagem).getPlanoDeViagem()
                 .get(0).getModal().getId());
-        System.out.println();
         PercursoController.deletarPercurso(ViagemController.getViagemById(id_viagem)
                 .getPlanoDeViagem().get(0).getId());
         ViagemController.deletarViagem(id_viagem);
