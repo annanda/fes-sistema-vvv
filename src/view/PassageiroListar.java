@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,12 +20,16 @@ import model.Passageiro;
 @SuppressWarnings("serial")
 public class PassageiroListar extends JInternalFrame {
 
+    @SuppressWarnings("unused")
+    private JFrame frame;
     private JTable table;
 
     /**
      * Create the frame.
      */
-    public PassageiroListar() {
+    public PassageiroListar(JFrame frame) {
+        this.frame = frame;
+        
         setBounds(100, 100, 450, 300);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -43,7 +48,8 @@ public class PassageiroListar extends JInternalFrame {
                 "Telefone",
                 "Profissao",
                 "Responsavel",
-                "Excluir"
+                "Editar",
+                "Excluir",
             }
         ));
         table.getColumnModel().getColumn(0).setMinWidth(0);
@@ -54,11 +60,23 @@ public class PassageiroListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
+                int id = (int) table.getValueAt(row, 0);
+                PassageiroEditar editView = new PassageiroEditar(frame, id);
+                editView.setVisible(true);
+            }
+        };
+        @SuppressWarnings("unused")
+        ButtonColumn editBtnCol = new ButtonColumn(table, editAction, table.getColumnCount() - 2);
+
+        Action deleteAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
                 PassageiroController.deletarPassageiro((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
-        ButtonColumn buttonCol = new ButtonColumn(table, editAction, table.getColumnCount() - 1);
+        ButtonColumn deleteBtnCol = new ButtonColumn(table, deleteAction, table.getColumnCount() - 1);
 
         scrollPane.setViewportView(table);
     }
@@ -85,6 +103,7 @@ public class PassageiroListar extends JInternalFrame {
                 p.getTelefone(),
                 p.getProfissao(),
                 r != null ? r.getCpf() : "",
+                "Editar",
                 "Excluir",
             };
             data[i] = obj;

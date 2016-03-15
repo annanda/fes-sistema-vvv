@@ -17,7 +17,9 @@ import model.Usuario;
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
+    @SuppressWarnings("unused")
     private Usuario usuario;
+    private JFrame frame;
     private JDesktopPane contentPane;
 
     /**
@@ -40,6 +42,7 @@ public class Main extends JFrame {
      * Create the frame.
      */
     public Main(Usuario usuario) {
+        this.frame = this;
         this.usuario = usuario;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +65,7 @@ public class Main extends JFrame {
         JMenuItem mntmListarUsuario = new JMenuItem("Listar");
         mntmListarUsuario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                showInternalFrame(new UsuarioListar());
+                showInternalFrame(new UsuarioListar(frame));
             }
         });
         mnUsuario.add(mntmListarUsuario);
@@ -81,7 +84,7 @@ public class Main extends JFrame {
         JMenuItem mntmListarPassageiro = new JMenuItem("Listar");
         mntmListarPassageiro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                showInternalFrame(new PassageiroListar());
+                showInternalFrame(new PassageiroListar(frame));
             }
         });
         mnPassageiro.add(mntmListarPassageiro);
