@@ -26,7 +26,7 @@ public class ReservaDAO extends DAO {
                         new String[] { "" + nova_reserva.getReservante().getId(),
                                 "" + nova_reserva.getViagem().getId(), codigo,
                                 Constants.DATE_FORMAT.format(nova_reserva.getDataDaReserva()),
-                                "" + nova_reserva.getStatus(), "" + nova_reserva.getValor(),
+                                nova_reserva.getStatus() ? "1" : "0", "" + nova_reserva.getValor(),
                                 nova_reserva.getTipoPagamento(), "" + nova_reserva.getQtdParcelas() });
 
         connect();
