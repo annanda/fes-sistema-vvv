@@ -44,7 +44,7 @@ public class ModalListar extends JInternalFrame {
                 "Em Manutencao",
                 "Em Uso",
                 "Data de Manutencao",
-                ""
+                "Excluir"
             }
         ));
         table.getColumnModel().getColumn(0).setMinWidth(0);
@@ -55,14 +55,7 @@ public class ModalListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
-                ModalController.alterarModal(
-                        (int) table.getValueAt(row, 0),
-                        table.getValueAt(row, 3).toString(),
-                        table.getValueAt(row, 6).toString(),
-                        table.getValueAt(row, 7).toString(),
-                        table.getValueAt(row, 8).toString(),
-                        table.getValueAt(row, 9).toString()
-                );
+                ModalController.deletarModal((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
@@ -93,7 +86,7 @@ public class ModalListar extends JInternalFrame {
                 p.getEmManutencao(),
                 p.getEmUso(),
                 p.getDataManutencao(),
-                "Salvar",
+                "Excluir",
             };
             data[i] = obj;
         }

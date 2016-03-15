@@ -32,49 +32,59 @@ public class UsuarioNovo extends JInternalFrame {
         setBounds(100, 100, 430, 320);
         
         JPanel panel = new JPanel();
+        panel.setLayout(null);
         getContentPane().add(panel, BorderLayout.CENTER);
         
         JLabel lblNome = new JLabel("Nome");
         lblNome.setBounds(52, 12, 40, 15);
+        panel.add(lblNome);
         
         txtNome = new JTextField();
         txtNome.setBounds(52, 33, 310, 19);
-        txtNome.setColumns(10);
+        panel.add(txtNome);
         
         JLabel lblEndereco = new JLabel("Endereco");
         lblEndereco.setBounds(52, 58, 66, 15);
+        panel.add(lblEndereco);
         
         txtEndereco = new JTextField();
         txtEndereco.setBounds(52, 79, 310, 19);
-        txtEndereco.setColumns(10);
+        panel.add(txtEndereco);
         
         JLabel lblEmail = new JLabel("Email");
         lblEmail.setBounds(52, 104, 37, 15);
+        panel.add(lblEmail);
         
         txtEmail = new JTextField();
         txtEmail.setBounds(52, 125, 310, 19);
-        txtEmail.setColumns(10);
+        panel.add(txtEmail);
         
         JLabel lblSenha = new JLabel("Senha");
         lblSenha.setBounds(52, 150, 45, 15);
+        panel.add(lblSenha);
         
-        JLabel lblCodigo = new JLabel("Codigo");
-        lblCodigo.setBounds(52, 196, 49, 15);
-        
-        txtCodigo = new JTextField();
-        txtCodigo.setBounds(52, 220, 114, 19);
-        txtCodigo.setColumns(10);
+        txtSenha = new JPasswordField();
+        txtSenha.setBounds(52, 171, 310, 19);
+        panel.add(txtSenha);
         
         JLabel lblNivelPermissao = new JLabel("Nivel de Permissao");
         lblNivelPermissao.setBounds(228, 196, 134, 15);
+        panel.add(lblNivelPermissao);
         
         cboNivelPermissao = new JComboBox<String>();
         cboNivelPermissao.setBounds(228, 217, 134, 24);
         cboNivelPermissao.setModel(new DefaultComboBoxModel<String>(new String[] {"0 - Admin", "1 - Usuario"}));
         cboNivelPermissao.setSelectedIndex(1);
+        panel.add(cboNivelPermissao);
         
-        txtSenha = new JPasswordField();
-        txtSenha.setBounds(52, 171, 310, 19);
+        JLabel lblCodigo = new JLabel("Codigo");
+        lblCodigo.setBounds(52, 196, 49, 15);
+        panel.add(lblCodigo);
+        
+        txtCodigo = new JTextField();
+        txtCodigo.setBounds(52, 220, 114, 19);
+        txtCodigo.setColumns(10);
+        panel.add(txtCodigo);
         
         JButton btnSalvar = new JButton("Salvar");
         btnSalvar.setBounds(52, 247, 78, 25);
@@ -91,20 +101,7 @@ public class UsuarioNovo extends JInternalFrame {
                 clear();
             }
         });
-        panel.setLayout(null);
         panel.add(btnSalvar);
-        panel.add(lblSenha);
-        panel.add(lblEmail);
-        panel.add(lblEndereco);
-        panel.add(lblNome);
-        panel.add(txtSenha);
-        panel.add(txtEndereco);
-        panel.add(txtEmail);
-        panel.add(txtNome);
-        panel.add(lblCodigo);
-        panel.add(txtCodigo);
-        panel.add(cboNivelPermissao);
-        panel.add(lblNivelPermissao);
     }
     
     public void clear() {

@@ -12,9 +12,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import model.Usuario;
+
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
+    private Usuario usuario;
     private JDesktopPane contentPane;
 
     /**
@@ -24,7 +27,7 @@ public class Main extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Main frame = new Main();
+                    Main frame = new Main(new Usuario(null, null, null, null, null, 0));
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -36,7 +39,9 @@ public class Main extends JFrame {
     /**
      * Create the frame.
      */
-    public Main() {
+    public Main(Usuario usuario) {
+        this.usuario = usuario;
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 430, 380);
         
@@ -99,6 +104,74 @@ public class Main extends JFrame {
             }
         });
         mnModal.add(mntmListarModal);
+        
+        JMenu mnPercurso = new JMenu("Percurso");
+        menuBar.add(mnPercurso);
+        
+        JMenuItem mntmNovoPercurso = new JMenuItem("Novo");
+        mntmNovoPercurso.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new PercursoNovo());
+            }
+        });
+        mnPercurso.add(mntmNovoPercurso);
+        
+        JMenuItem mntmListarPercurso = new JMenuItem("Listar");
+        mntmListarPercurso.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showInternalFrame(new PercursoListar());
+            }
+        });
+        mnPercurso.add(mntmListarPercurso);
+        
+        JMenu mnViagem = new JMenu("Viagem");
+        menuBar.add(mnViagem);
+        
+        JMenuItem mntmNovoViagem = new JMenuItem("Novo");
+        mntmNovoViagem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new ViagemNovo());
+            }
+        });
+        mnViagem.add(mntmNovoViagem);
+        
+        JMenuItem mntmListarViagem = new JMenuItem("Listar");
+        mntmListarViagem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                showInternalFrame(new ViagemListar());
+            }
+        });
+        mnViagem.add(mntmListarViagem);
+        
+        JMenu mnReserva = new JMenu("Reserva");
+        menuBar.add(mnReserva);
+        
+        JMenuItem mntmNovoReserva = new JMenuItem("Novo");
+        mntmNovoReserva.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showInternalFrame(new ReservaNovo(usuario.getId()));
+            }
+        });
+        mnReserva.add(mntmNovoReserva);
+        
+        JMenuItem mntmListarReserva = new JMenuItem("Listar");
+        mntmListarReserva.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showInternalFrame(new ReservaListar());
+            }
+        });
+        mnReserva.add(mntmListarReserva);
+        
+        if (usuario.getNivelPermissao() == 0) {
+            JMenuItem mntmConfirmarReserva = new JMenuItem("Confirmar");
+            mntmConfirmarReserva.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    showInternalFrame(new ReservaConfirmar());
+                }
+            });
+            mnReserva.add(mntmConfirmarReserva);
+        }
+        
         contentPane = new JDesktopPane();
         setContentPane(contentPane);
     }

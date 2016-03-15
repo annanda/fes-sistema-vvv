@@ -3,8 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -13,18 +11,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.PassageiroController;
-import model.Passageiro;
+import controller.ReservaController;
+import model.Reserva;
 
 @SuppressWarnings("serial")
-public class PassageiroListar extends JInternalFrame {
+public class ReservaListar extends JInternalFrame {
 
     private JTable table;
 
     /**
      * Create the frame.
      */
-    public PassageiroListar() {
+    public ReservaListar() {
         setBounds(100, 100, 450, 300);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -36,14 +34,10 @@ public class PassageiroListar extends JInternalFrame {
             new String[] {
                 "Id",
                 "Codigo",
-                "Nome",
-                "Endereco",
-                "CPF",
-                "Data de Nascimento",
-                "Telefone",
-                "Profissao",
-                "Responsavel",
-                "Excluir"
+                "Viagem",
+                "Valor",
+                "Data da Reserva",
+                "Excluir",
             }
         ));
         table.getColumnModel().getColumn(0).setMinWidth(0);
@@ -54,7 +48,7 @@ public class PassageiroListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
-                PassageiroController.deletarPassageiro((int) table.getValueAt(row, 0));
+                ReservaController.deletarReserva((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
@@ -64,27 +58,16 @@ public class PassageiroListar extends JInternalFrame {
     }
     
     private Object[][] getData() {
-        ArrayList<Passageiro> passageiros = PassageiroController.listarPassageiros("", "", "", "");
-        Collections.sort(passageiros, new Comparator<Passageiro>() {
-            public int compare(Passageiro a, Passageiro b) {
-                return a.getCodigo().compareTo(b.getCodigo());
-            }
-        });
-
-        Object[][] data = new Object[passageiros.size()][];
-        for (int i = 0; i < passageiros.size(); i++) {
-            Passageiro p = passageiros.get(i);
-            Passageiro r = p.getResponsavel();
-            Object[] obj = {
-                p.getId(),
-                p.getCodigo(),
-                p.getNome(),
-                p.getEndereco(),
-                p.getCpf(),
-                p.getDataDeNascimento(),
-                p.getTelefone(),
-                p.getProfissao(),
-                r != null ? r.getCpf() : "",
+        ArrayList<Reserva> reservas = ReservaController.listarReservas("", "", "", "", "");
+        Object[][] data = new Object[reservas.size()][];
+        for (int i = 0; i < reservas.size(); i++) {
+            Reserva r = reservas.get(i);
+            Object[] obj = new Object[] {
+                r.getId(),
+                r.getCodigo(),
+                r.getViagem().getNomeDoPacote(),
+                r.getValor(),
+                r.getDataDaReserva().toString(),
                 "Excluir",
             };
             data[i] = obj;
