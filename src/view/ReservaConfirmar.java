@@ -44,17 +44,18 @@ public class ReservaConfirmar extends JInternalFrame {
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setWidth(0);
 
-        Action editAction = new AbstractAction() {
+        Action confirmarAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
                 int id_reserva = (int) table.getValueAt(row, 0);
                 Reserva reserva = ReservaController.getReservaById(id_reserva);
                 ReservaController.alterarReserva(id_reserva, true, reserva.getTipoPagamento(), reserva.getQtdParcelas());
+                reserva.gerarTickets();
             }
         };
         @SuppressWarnings("unused")
-        ButtonColumn buttonCol = new ButtonColumn(table, editAction, table.getColumnCount() - 1);
+        ButtonColumn confirmarBtnCol = new ButtonColumn(table, confirmarAction, table.getColumnCount() - 1);
 
         scrollPane.setViewportView(table);
     }

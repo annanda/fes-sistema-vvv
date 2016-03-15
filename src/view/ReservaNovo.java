@@ -67,7 +67,7 @@ public class ReservaNovo extends JInternalFrame {
             strViagens[i] = String.join(" - ", Integer.toString(v.getId()), v.getCodigo(), v.getNomeDoPacote());
         }
 
-        lstViagem = new JList<String>();
+        lstViagem = new JList<String>(strViagens);
         lstViagem.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lstViagem.setBounds(52, 33, 310, 48);
         panel.add(lstViagem);
@@ -88,7 +88,7 @@ public class ReservaNovo extends JInternalFrame {
             strPassageiros[i] = String.join(" - ", Integer.toString(p.getId()), p.getNome());
         }
 
-        lstPassageiros = new JList<String>();
+        lstPassageiros = new JList<String>(strPassageiros);
         lstPassageiros.setBounds(52, 110, 310, 48);
         panel.add(lstPassageiros);
 

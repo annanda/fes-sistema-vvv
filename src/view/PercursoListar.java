@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,12 +18,16 @@ import model.Percurso;
 @SuppressWarnings("serial")
 public class PercursoListar extends JInternalFrame {
 
+    @SuppressWarnings("unused")
+    private JFrame frame;
     private JTable table;
 
     /**
      * Create the frame.
      */
-    public PercursoListar() {
+    public PercursoListar(JFrame frame) {
+        this.frame = frame;
+        
         setBounds(100, 100, 450, 300);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -38,7 +43,8 @@ public class PercursoListar extends JInternalFrame {
                 "Destino",
                 "Hora da Partida",
                 "Duracao",
-                "Excluir"
+                "Editar",
+                "Excluir",
             }
         ));
         table.getColumnModel().getColumn(0).setMinWidth(0);
@@ -49,11 +55,23 @@ public class PercursoListar extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 JTable table = (JTable) e.getSource();
                 int row = Integer.valueOf(e.getActionCommand());
+                int id = (int) table.getValueAt(row, 0);
+                PercursoEditar editView = new PercursoEditar(frame, id);
+                editView.setVisible(true);
+            }
+        };
+        @SuppressWarnings("unused")
+        ButtonColumn editBtnCol = new ButtonColumn(table, editAction, table.getColumnCount() - 2);
+
+        Action deleteAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                JTable table = (JTable) e.getSource();
+                int row = Integer.valueOf(e.getActionCommand());
                 PercursoController.deletarPercurso((int) table.getValueAt(row, 0));
             }
         };
         @SuppressWarnings("unused")
-        ButtonColumn buttonCol = new ButtonColumn(table, editAction, table.getColumnCount() - 1);
+        ButtonColumn deleteBtnCol = new ButtonColumn(table, deleteAction, table.getColumnCount() - 1);
 
         scrollPane.setViewportView(table);
     }
@@ -70,6 +88,7 @@ public class PercursoListar extends JInternalFrame {
                 p.getDestino().getIdentificador(),
                 p.getHoraPartida(),
                 p.getHorasDuracaoPercurso(),
+                "Editar",
                 "Excluir",
             };
             data[i] = obj;

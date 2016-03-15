@@ -73,8 +73,8 @@ public class UsuarioNovo extends JInternalFrame {
         
         cboNivelPermissao = new JComboBox<String>();
         cboNivelPermissao.setBounds(228, 217, 134, 24);
-        cboNivelPermissao.setModel(new DefaultComboBoxModel<String>(new String[] {"0 - Admin", "1 - Usuario"}));
-        cboNivelPermissao.setSelectedIndex(1);
+        cboNivelPermissao.setModel(new DefaultComboBoxModel<String>(new String[] {"0 - Usuario", "1 - Admin"}));
+        cboNivelPermissao.setSelectedIndex(0);
         panel.add(cboNivelPermissao);
         
         JLabel lblCodigo = new JLabel("Codigo");
@@ -110,6 +110,6 @@ public class UsuarioNovo extends JInternalFrame {
         txtEmail.setText("");
         txtSenha.setText("");
         txtCodigo.setText("");
-        cboNivelPermissao.setSelectedIndex(1);
+        cboNivelPermissao.setSelectedIndex(0);
     }
 }

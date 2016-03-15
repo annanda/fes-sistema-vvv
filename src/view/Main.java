@@ -103,7 +103,7 @@ public class Main extends JFrame {
         JMenuItem mntmListarModal = new JMenuItem("Listar");
         mntmListarModal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showInternalFrame(new ModalListar());
+                showInternalFrame(new ModalListar(frame));
             }
         });
         mnModal.add(mntmListarModal);
@@ -122,7 +122,7 @@ public class Main extends JFrame {
         JMenuItem mntmListarPercurso = new JMenuItem("Listar");
         mntmListarPercurso.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showInternalFrame(new PercursoListar());
+                showInternalFrame(new PercursoListar(frame));
             }
         });
         mnPercurso.add(mntmListarPercurso);
@@ -165,7 +165,7 @@ public class Main extends JFrame {
         });
         mnReserva.add(mntmListarReserva);
         
-        if (usuario.getNivelPermissao() == 0) {
+        if (usuario.getNivelPermissao() == 1) {
             JMenuItem mntmConfirmarReserva = new JMenuItem("Confirmar");
             mntmConfirmarReserva.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
