@@ -36,7 +36,7 @@ public class ViagemDAO extends DAO {
 
             // query to retrieve the new id inserted in viagens table
             sql_query =
-                    selectFactory(tabela, new String[] { id_viagem_label }, "codigo = " + codigo);
+                    selectFactory(tabela, new String[] { id_viagem_label }, "codigo = '" + codigo + "'");
             // retrieving the new id inserted in viagens table
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) { // testing if the Viagem object was successfully inserted
@@ -67,7 +67,7 @@ public class ViagemDAO extends DAO {
                                     + " AND ordem = " + ordem);
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
-                id = result_set.getInt(id);
+                id = result_set.getInt("id_viagem_percurso");
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -107,7 +107,7 @@ public class ViagemDAO extends DAO {
     public Viagem getViagemByCodigo(String codigo) {
         Viagem viagem_encontrada = null;
         String sql_query =
-                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = " + codigo);
+                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = '" + codigo + "'");
 
         connect();
         try {

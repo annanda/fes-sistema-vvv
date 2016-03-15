@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.Constants;
+import model.Modal;
 import model.Percurso;
 import dao.PercursoDAO;
 
 public class PercursoController {
-    public static int cadastrarPercurso(String id_modal, String codigo_cidade_partida,
+    public static int cadastrarPercurso(String codigo_modal, String codigo_cidade_partida,
             String codigo_cidade_destino, String hora_partida, String horas_duracao,
             String codigo_aeroporto) {
         int id = 0;
@@ -19,7 +20,7 @@ public class PercursoController {
         // instantiate novo_percurso before
         try {
             Percurso novo_percurso =
-                    new Percurso(ModalController.getModalById(Integer.parseInt(id_modal)),
+                    new Percurso(ModalController.getModalByCodigo(codigo_modal),
                             Constants.DATETIME_FORMAT.parse(hora_partida),
                             Integer.parseInt(horas_duracao), codigo_aeroporto,
                             CidadeController.getCidadeByCodigo(codigo_cidade_partida),
@@ -49,7 +50,7 @@ public class PercursoController {
 
         conditions.put("id_cidade_partida", id_cidade_partida_consultada);
         conditions.put("id_cidade_chegada", id_cidade_chegada_consultada);
-        conditions.put("codigo_aeroporto", codigo_aeroporto_consultado);
+        // conditions.put("codigo_aeroporto", codigo_aeroporto_consultado);
         conditions.put("hora_partida", hora_partida_consultada);
 
         return percurso_dao.listarPercursos(conditions);
@@ -73,17 +74,19 @@ public class PercursoController {
         return percurso_dao.getPercursoById(id);
     }
 
-    public static void alterarPercurso(int id_percurso, String id_modal_modificado,
+    public static void alterarPercurso(int id_percurso, String codigo_modal_modificado,
             String horas_duracao_modificada, String codigo_aeroporto_modificado) {
         PercursoDAO percurso_dao = new PercursoDAO();
         Percurso percurso_modificado = getPercursoById(id_percurso);
 
         if (percurso_modificado != null) {
             String codigo_antigo = percurso_modificado.getCodigo();
+            
+            Modal novo_modal = ModalController.getModalByCodigo(codigo_modal_modificado);
             // instantiating a new object based on the retrieved by id to avoid problems with the
             // auto-generation of codigo
             percurso_modificado =
-                    new Percurso(id_percurso, Integer.parseInt(id_modal_modificado),
+                    new Percurso(id_percurso, novo_modal.getId(),
                             percurso_modificado.getHoraPartida(),
                             Integer.parseInt(horas_duracao_modificada),
                             codigo_aeroporto_modificado, percurso_modificado.getPartida().getId(),

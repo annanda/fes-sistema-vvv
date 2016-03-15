@@ -51,11 +51,12 @@ public class PercursoDAO extends DAO {
         try {
             result_set = statement.executeQuery(sql_query);
             while (result_set.next()) {
-                percursos_encontrados.add(new Percurso(result_set.getInt("id_percurso"), result_set
-                        .getInt("id_modal"), result_set.getDate("hora_partida"), result_set
-                        .getInt("horas_duracao"), result_set.getString("codigo_aeroporto"),
-                        result_set.getInt("id_cidade_partida"), result_set
-                                .getInt("id_cidade_chegada"), result_set.getString("codigo")));
+                percursos_encontrados.add(new Percurso(result_set.getInt("id_percurso"),
+                        result_set.getInt("id_modal"), result_set.getTimestamp("hora_partida"),
+                        result_set.getInt("horas_duracao"),
+                        result_set.getString("codigo_aeroporto"),
+                        result_set.getInt("id_cidade_partida"),
+                        result_set.getInt("id_cidade_chegada"), result_set.getString("codigo")));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
