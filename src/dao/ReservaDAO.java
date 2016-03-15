@@ -56,6 +56,10 @@ public class ReservaDAO extends DAO {
         connect();
         try {
             statement.executeUpdate(sql_query);
+            sql_query =
+                    selectFactory(tabela_relacionamento, new String[] { "id_reserva_passageiro" },
+                            "id_reserva = " + id_reserva + " AND id_passageiro = " + id_passageiro);
+            result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
                 id = result_set.getInt(id);
             }
