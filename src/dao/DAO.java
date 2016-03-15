@@ -63,9 +63,13 @@ public class DAO {
             else
                 query += Constants.COMMA;
 
-            query +=
-                    entry.getKey() + " = " + Constants.SINGLE_QUOTE + entry.getValue()
-                            + Constants.SINGLE_QUOTE;
+            if (entry.getValue() != null) {
+                query += entry.getKey() + " = " + Constants.SINGLE_QUOTE + entry.getValue()
+                        + Constants.SINGLE_QUOTE;
+            }
+            else {
+                query += entry.getKey() + " = NULL";
+            }
         }
         query += " WHERE " + conditions + Constants.SEMICOLON;
 
