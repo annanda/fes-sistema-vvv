@@ -54,28 +54,30 @@ public class TestReserva {
                         "pacote muito louco vei",
                         new String[] { ""
                                 + PercursoController.cadastrarPercurso(
-                                        ""
-                                                + ModalController.cadastrarModal("onibus",
-                                                        "busao1", "delta_transportadoras", "10",
-                                                        "busao normal", "1803", "false", "false",
-                                                        "1900-01-01"), partida.getCodigo(), chegada
-                                                .getCodigo(), "2012-12-21 12:21:12", "6", "") })
-                        .get("id_viagem");
+                                        ModalController.getModalById(
+                                                ModalController.cadastrarModal("onibus", "busao1",
+                                                        "delta_transportadoras", "10",
+                                                        "busao normal", "1803", "0", "0",
+                                                        "1900-01-01")).getCodigo(), partida
+                                                .getCodigo(), chegada.getCodigo(),
+                                        "2012-12-21 12:21:12", "6", "") }).get("id_viagem");
     }
 
     @After
     public void finish() {
-        CidadeController.deletarCidade(partida.getId());
-        CidadeController.deletarCidade(chegada.getId());
         UsuarioController.deletarUsuario(id_reservante);
         for (int i = 0; i < 3; i++) {
             PassageiroController.deletarPassageiro(Integer.parseInt(ids_passageiros[i]));
         }
+        System.out.println();
         ModalController.deletarModal(ViagemController.getViagemById(id_viagem).getPlanoDeViagem()
                 .get(0).getModal().getId());
+        System.out.println();
         PercursoController.deletarPercurso(ViagemController.getViagemById(id_viagem)
                 .getPlanoDeViagem().get(0).getId());
         ViagemController.deletarViagem(id_viagem);
+        CidadeController.deletarCidade(partida.getId());
+        CidadeController.deletarCidade(chegada.getId());
     }
 
     @Test
@@ -101,7 +103,7 @@ public class TestReserva {
                         ids_passageiros, id_reservante, id_viagem).get("id_reserva");
         ArrayList<Reserva> l =
                 ReservaController.listarReservas("" + id_viagem, "" + id_reservante, ""
-                        + ReservaController.getReservaById(id).getDataDaReserva(), "false", "amex");
+                        + ReservaController.getReservaById(id).getDataDaReserva(), "0", "amex");
         ReservaController.deletarReserva(id);
         assertNotNull(l);
         assertEquals(l.size(), 1);

@@ -32,16 +32,16 @@ public class TestViagem {
         ids_percursos = new String[3];
 
         for (int i = 0; i < 3; i++) {
+            String temp_codigo_modal =
+                    ModalController.getModalById(
+                            ModalController.cadastrarModal("onibus", "busao" + i,
+                                    "delta_transportadoras", "" + (10 + i * 10), "busao normal",
+                                    "180" + i, "0", "0", "1900-01-0" + (i + 1))).getCodigo();
             ids_percursos[i] =
                     ""
-                            + PercursoController.cadastrarPercurso(
-                                    ""
-                                            + ModalController.cadastrarModal("onibus", "busao" + i,
-                                                    "delta_transportadoras", "" + (10 + i * 10),
-                                                    "busao normal", "180" + i, "0", "0",
-                                                    "1900-01-0" + (i + 1)), partida.getCodigo(),
-                                    chegada.getCodigo(), "2012-12-2" + i + " 12:21:12", "6", "");
-            System.out.println("ids_percursos[" + i + "] = " + ids_percursos[i]);
+                            + PercursoController.cadastrarPercurso(temp_codigo_modal,
+                                    partida.getCodigo(), chegada.getCodigo(), "2012-12-2" + i
+                                            + " 12:21:12", "6", "");
         }
     }
 
@@ -69,7 +69,7 @@ public class TestViagem {
             fail();
         } finally {
             if (id > 0) {
-                // ViagemController.deletarViagem(id);
+                ViagemController.deletarViagem(id);
             }
         }
     }
@@ -77,12 +77,12 @@ public class TestViagem {
     @Test
     public void listarViagens() {
         int id = ViagemController.cadastrarViagem("pacote maneiro", ids_percursos).get("id_viagem");
+        System.out.println();
         ArrayList<Viagem> l =
-                ViagemController.listarViagens(
-                        "pacote maneiro",
-                        "2012-12-20 12:21:12",
-                        Constants.DATETIME_FORMAT.format(PercursoController.getPercursoById(
-                                Integer.parseInt(ids_percursos[2])).calcHoraChegada()));
+                ViagemController.listarViagens("pacote maneiro", "2012-12-20 12:21:12",
+                        Constants.DATETIME_FORMAT.format(ViagemController.getViagemById(id)
+                                .getDataChegada()));
+        System.out.println();
         ViagemController.deletarViagem(id);
         assertNotNull(l);
         assertEquals(l.size(), 1);

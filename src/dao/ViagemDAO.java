@@ -26,8 +26,9 @@ public class ViagemDAO extends DAO {
                         tabela,
                         new String[] { nova_viagem.getNomeDoPacote(),
                                 "" + nova_viagem.getLotacao(),
-                                Constants.DATE_FORMAT.format(nova_viagem.getDataPartida()),
-                                Constants.DATE_FORMAT.format(nova_viagem.getDataChegada()), codigo });
+                                Constants.DATETIME_FORMAT.format(nova_viagem.getDataPartida()),
+                                Constants.DATETIME_FORMAT.format(nova_viagem.getDataChegada()),
+                                codigo });
 
         connect();
         try {
@@ -91,8 +92,8 @@ public class ViagemDAO extends DAO {
             while (result_set.next()) {
                 int temp_id_viagem = result_set.getInt("id_viagem");
                 viagens_encontradas.add(new Viagem(temp_id_viagem, result_set
-                        .getString("nome_do_pacote"), result_set.getDate("data_partida"),
-                        result_set.getDate("data_chegada"), ViagemController
+                        .getString("nome_do_pacote"), result_set.getTimestamp("data_partida"),
+                        result_set.getTimestamp("data_chegada"), ViagemController
                                 .getPlanoDeViagemByViagemId(temp_id_viagem), result_set
                                 .getString("codigo")));
             }
@@ -118,8 +119,8 @@ public class ViagemDAO extends DAO {
                 int temp_id_viagem = result_set.getInt("id_viagem");
                 viagem_encontrada =
                         new Viagem(temp_id_viagem, result_set.getString("nome_do_pacote"),
-                                result_set.getDate("data_partida"),
-                                result_set.getDate("data_chegada"),
+                                result_set.getTimestamp("data_partida"),
+                                result_set.getTimestamp("data_chegada"),
                                 ViagemController.getPlanoDeViagemByViagemId(temp_id_viagem),
                                 result_set.getString("codigo"));
             }
@@ -143,8 +144,8 @@ public class ViagemDAO extends DAO {
             if (result_set.first()) {
                 viagem_encontrada =
                         new Viagem(id, result_set.getString("nome_do_pacote"),
-                                result_set.getDate("data_partida"),
-                                result_set.getDate("data_chegada"),
+                                result_set.getTimestamp("data_partida"),
+                                result_set.getTimestamp("data_chegada"),
                                 ViagemController.getPlanoDeViagemByViagemId(id),
                                 result_set.getString("codigo"));
             }

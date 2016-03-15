@@ -33,7 +33,8 @@ public class ReservaDAO extends DAO {
         try {
             statement.executeUpdate(sql_query);
             sql_query =
-                    selectFactory(tabela, new String[] { id_reserva_label }, "codigo = " + codigo);
+                    selectFactory(tabela, new String[] { id_reserva_label }, "codigo = '" + codigo
+                            + Constants.SINGLE_QUOTE);
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
                 id = result_set.getInt(id_reserva_label);
@@ -105,7 +106,8 @@ public class ReservaDAO extends DAO {
     public Reserva getReservaByCodigo(String codigo) {
         Reserva reserva_encontrada = null;
         String sql_query =
-                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = " + codigo);
+                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = '" + codigo
+                        + Constants.SINGLE_QUOTE);
 
         connect();
         try {

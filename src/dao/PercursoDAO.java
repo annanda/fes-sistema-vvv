@@ -78,7 +78,7 @@ public class PercursoDAO extends DAO {
             result_set = statement.executeQuery(sql_query);
             while (result_set.next()) {
                 percursos_encontrados.add(new Percurso(result_set.getInt("id_percurso"), result_set
-                        .getInt("id_modal"), result_set.getDate("hora_partida"), result_set
+                        .getInt("id_modal"), result_set.getTimestamp("hora_partida"), result_set
                         .getInt("horas_duracao"), result_set.getString("codigo_aeroporto"),
                         result_set.getInt("id_cidade_partida"), result_set
                                 .getInt("id_cidade_chegada"), result_set.getString("codigo")));
@@ -104,7 +104,8 @@ public class PercursoDAO extends DAO {
             if (result_set.first()) {
                 percurso_encontrado =
                         new Percurso(result_set.getInt("id_percurso"),
-                                result_set.getInt("id_modal"), result_set.getDate("hora_partida"),
+                                result_set.getInt("id_modal"),
+                                result_set.getTimestamp("hora_partida"),
                                 result_set.getInt("horas_duracao"),
                                 result_set.getString("codigo_aeroporto"),
                                 result_set.getInt("id_cidade_partida"),
@@ -131,7 +132,8 @@ public class PercursoDAO extends DAO {
             if (result_set.first()) {
                 percurso_encontrado =
                         new Percurso(result_set.getInt("id_percurso"),
-                                result_set.getInt("id_modal"), result_set.getDate("hora_partida"),
+                                result_set.getInt("id_modal"),
+                                result_set.getTimestamp("hora_partida"),
                                 result_set.getInt("horas_duracao"),
                                 result_set.getString("codigo_aeroporto"),
                                 result_set.getInt("id_cidade_partida"),
