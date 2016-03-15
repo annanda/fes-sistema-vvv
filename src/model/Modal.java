@@ -19,9 +19,8 @@ public class Modal {
     /*
      * Constructor Pattern
      */
-    public Modal(String tipo, String codigo, String companhia,
-            int capacidade, String modelo, int ano_fabricacao, int em_manutencao, int em_uso,
-            Date data_manutencao) {
+    public Modal(String tipo, String codigo, String companhia, int capacidade, String modelo,
+            int ano_fabricacao, int em_manutencao, int em_uso, Date data_manutencao) {
         // Setting non-specified attributes...
         this.id = 0;
 
@@ -39,11 +38,10 @@ public class Modal {
     /*
      * For database returns
      */
-    public Modal(int id, String tipo, String codigo,
-            String companhia, int capacidade, String modelo, int ano_fabricacao, int em_manutencao,
-            int em_uso, Date data_manutencao) {
-        this(tipo, codigo, companhia, capacidade, modelo, ano_fabricacao, em_manutencao,
-                em_uso, data_manutencao);
+    public Modal(int id, String tipo, String codigo, String companhia, int capacidade,
+            String modelo, int ano_fabricacao, int em_manutencao, int em_uso, Date data_manutencao) {
+        this(tipo, codigo, companhia, capacidade, modelo, ano_fabricacao, em_manutencao, em_uso,
+                data_manutencao);
         this.id = id;
     }
 
@@ -111,14 +109,10 @@ public class Modal {
     }
 
     /*
-    public ArrayList<Percurso> getPercursos() {
-        return percursos;
-    }
-
-    public void setPercursos(ArrayList<Percurso> percursos) {
-        this.percursos = percursos;
-    }
-    */
+     * public ArrayList<Percurso> getPercursos() { return percursos; }
+     * 
+     * public void setPercursos(ArrayList<Percurso> percursos) { this.percursos = percursos; }
+     */
 
     // (END) GETTERS & SETTERS
 

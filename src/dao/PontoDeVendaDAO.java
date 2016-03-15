@@ -22,8 +22,8 @@ public class PontoDeVendaDAO extends DAO {
         try {
             statement.executeUpdate(sql_query);
             sql_query =
-                    selectFactory(tabela, new String[] { }, "codigo = '" + codigo
-                            + Constants.SINGLE_QUOTE);
+                    selectFactory(tabela, new String[] { "id_ponto_de_venda" }, "codigo = '"
+                            + codigo + Constants.SINGLE_QUOTE);
             result_set = statement.executeQuery(sql_query);
             if (result_set.first()) {
                 id = result_set.getInt("id_ponto_de_venda");
@@ -38,7 +38,8 @@ public class PontoDeVendaDAO extends DAO {
     }
 
     public ArrayList<PontoDeVenda> listarPontosDeVenda(HashMap<String, String> conditions) {
-        String sql_query = selectFactory(tabela, new String[] { }, likeFactory(conditions));
+        String sql_query =
+                selectFactory(tabela, new String[] { Constants.ASTERISK }, likeFactory(conditions));
         ArrayList<PontoDeVenda> pontos_de_venda_encontrados = new ArrayList<PontoDeVenda>();
 
         connect();

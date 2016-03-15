@@ -69,6 +69,7 @@ public class TestPercurso {
                             chegada.getCodigo(), "2012-12-21 12:21:12", "5", "");
             PercursoController.alterarPercurso(id, "0", "1", "aeroporto123");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         } finally {
             if (id > 0) {

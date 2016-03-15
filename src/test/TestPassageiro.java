@@ -58,6 +58,8 @@ public class TestPassageiro {
             if (id > 0) {
                 Pessoa p = pessoa_dao.getPessoaByCodigo("test");
                 PessoaController.deletarPessoa(p.getId());
+                p = pessoa_dao.getPessoaByCodigo("asdf");
+                PessoaController.deletarPessoa(p.getId());
             }
         }
     }
@@ -86,7 +88,9 @@ public class TestPassageiro {
             fail();
         } finally {
             if (id > 0) {
-                Pessoa p = pessoa_dao.getPessoaByCodigo("asdf");
+                Pessoa p =
+                        pessoa_dao.getPessoaByCodigo(PassageiroController.getPassageiroById(id)
+                                .getCodigo());
                 PessoaController.deletarPessoa(p.getId());
             }
         }

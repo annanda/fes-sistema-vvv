@@ -111,7 +111,8 @@ public class ModalDAO extends DAO {
     public Modal getModalByCodigo(String codigo) {
         Modal modal_encontrado = null;
         String sql_query =
-                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = " + codigo);
+                selectFactory(tabela, new String[] { Constants.ASTERISK }, "codigo = '" + codigo
+                        + Constants.SINGLE_QUOTE);
 
         connect();
         try {

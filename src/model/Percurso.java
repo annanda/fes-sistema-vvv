@@ -105,7 +105,7 @@ public class Percurso {
     public HashMap<String, String> toHashMap() {
         HashMap<String, String> percurso = new HashMap<String, String>();
 
-        percurso.put("id_modal", "" + this.getModal().getId());
+        percurso.put("id_modal", "" + ((this.getModal() != null) ? this.getModal().getId() : 0));
         percurso.put("horas_duracao", "" + this.getHorasDuracaoPercurso());
         percurso.put("codigo_aeroporto", this.getCodigoAeroporto());
 

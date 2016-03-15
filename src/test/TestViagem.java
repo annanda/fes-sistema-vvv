@@ -35,7 +35,7 @@ public class TestViagem {
                                     ""
                                             + ModalController.cadastrarModal("onibus", "busao" + i,
                                                     "delta_transportadoras", "" + (10 + i * 10),
-                                                    "busao normal", "180" + i, "false", "false",
+                                                    "busao normal", "180" + i, "0", "0",
                                                     "1900-01-0" + (i + 1)), partida.getCodigo(),
                                     chegada.getCodigo(), "2012-12-2" + i + " 12:21:12", "6", "");
         }

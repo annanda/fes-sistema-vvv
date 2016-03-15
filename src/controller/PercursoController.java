@@ -81,12 +81,12 @@ public class PercursoController {
 
         if (percurso_modificado != null) {
             String codigo_antigo = percurso_modificado.getCodigo();
-            
+
             Modal novo_modal = ModalController.getModalByCodigo(codigo_modal_modificado);
             // instantiating a new object based on the retrieved by id to avoid problems with the
             // auto-generation of codigo
             percurso_modificado =
-                    new Percurso(id_percurso, novo_modal.getId(),
+                    new Percurso(id_percurso, (novo_modal != null) ? novo_modal.getId() : 0,
                             percurso_modificado.getHoraPartida(),
                             Integer.parseInt(horas_duracao_modificada),
                             codigo_aeroporto_modificado, percurso_modificado.getPartida().getId(),
